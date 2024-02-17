@@ -23,7 +23,6 @@ using Terms.UI.Tools.Views;
 using Terms.Windows.Display;
 using Terms.Windows.List;
 using Terms.Windows.Management;
-using Terms.Windows.Report;
 using Terms.Windows.Tools;
 
 namespace Terms;
@@ -76,7 +75,6 @@ public partial class Main
         m_windowDisplay = new WindowDisplay(this)
         {
             OnBeforeWindowShown = InitializeBeforeWindowShownActions,
-            OnAfterWindowShown = InitializeAfterWindowShownActions,
             IncrimentOpacity = fadeInOut
         };
 
@@ -133,16 +131,6 @@ public partial class Main
             {
                 ListViewAction.FocusSelectedItem(lstvConnections, lstvConnections.SelectedIndex);
             }
-        }
-    }
-
-    private void InitializeAfterWindowShownActions()
-    {
-        int checkToSeeIfNewUpdatesAreAvailable = Convert.ToInt32(m_settings.Read(Settings.MainWindow.StartUp, nameof(Settings.MainWindow.CheckToSeeIfNewUpdatesAreAvailable), Settings.MainWindow.CheckToSeeIfNewUpdatesAreAvailable, m_xmlDocument));
-
-        if (checkToSeeIfNewUpdatesAreAvailable > 0 && IsVisible)
-        {
-            About.CheckForUpdates(this);
         }
     }
 
@@ -719,23 +707,6 @@ public partial class Main
         };
 
         connectionStatuses.ShowDialog();
-    }
-
-    private void Button_About_OnClick(object sender, RoutedEventArgs e)
-    {
-        About about = new(m_settings)
-        {
-            Topmost = Topmost,
-            Owner = this
-        };
-
-        about.ShowDialog();
-
-        if (WindowState != WindowState.Minimized && IsVisible)
-        {
-            BringIntoView();
-            Focus();
-        }
     }
 
     private void Button_Minimize_OnClick(object sender, RoutedEventArgs e)

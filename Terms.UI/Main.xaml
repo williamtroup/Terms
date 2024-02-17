@@ -216,15 +216,6 @@
                         Orientation="Horizontal">
 
                         <Button
-                            Click="Button_About_OnClick"
-                            Style="{DynamicResource BaseWindowNavigationButton}"
-                            ToolTip="About">
-                            <StackPanel>
-                                <Image Source="Images/Buttons/QUESTION.png" Style="{DynamicResource BaseWindowNavigationButtonImage}" />
-                            </StackPanel>
-                        </Button>
-
-                        <Button
                             Name="bMinimize"
                             Click="Button_Minimize_OnClick"
                             Style="{DynamicResource BaseWindowNavigationButton}"
