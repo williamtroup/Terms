@@ -6,91 +6,90 @@ using System.Threading;
 using Terms.Tools.Settings;
 using Terms.Tools.Settings.Interfaces;
 
-namespace Terms.UI.Tools.Actions
-{
-    public class CheckForUpdates(string updateXmlFilename, int waitBeforeCheckingTimeout = 1000)
-    {
-        private readonly string m_updateXmlFilename = updateXmlFilename;
-        private readonly int m_waitBeforeCheckingTimeout = waitBeforeCheckingTimeout;
+namespace Terms.UI.Tools.Actions;
 
-        public void Start()
+public class CheckForUpdates(string updateXmlFilename, int waitBeforeCheckingTimeout = 1000)
+{
+    private readonly string m_updateXmlFilename = updateXmlFilename;
+    private readonly int m_waitBeforeCheckingTimeout = waitBeforeCheckingTimeout;
+
+    public void Start()
+    {
+        Thread thread = new(StartChecking);
+        thread.SetApartmentState(ApartmentState.STA);
+        thread.Start();
+    }
+
+    private void StartChecking()
+    {
+        Thread.Sleep(m_waitBeforeCheckingTimeout);
+
+        if (File.Exists(m_updateXmlFilename))
         {
-            Thread thread = new(StartChecking);
-            thread.SetApartmentState(ApartmentState.STA);
-            thread.Start();
+            File.Delete(m_updateXmlFilename);
         }
 
-        private void StartChecking()
+        try
         {
-            Thread.Sleep(m_waitBeforeCheckingTimeout);
-
-            if (File.Exists(m_updateXmlFilename))
+            using (WebClient client = new())
             {
-                File.Delete(m_updateXmlFilename);
+                client.DownloadFile($"http://www.bunoon.com/updates/{m_updateXmlFilename}", m_updateXmlFilename);
             }
+
+            CheckUpdateFile();
+        }
+        catch
+        {
+            BackgroundAction.Run(() => { UpdateNotFound?.Invoke(); });
+        }
+    }
+
+    private void CheckUpdateFile()
+    {
+        if (File.Exists(m_updateXmlFilename))
+        {
+            bool updateFound = true;
 
             try
             {
-                using (WebClient client = new())
-                {
-                    client.DownloadFile($"http://www.bunoon.com/updates/{m_updateXmlFilename}", m_updateXmlFilename);
-                }
+                IXmlSettings updateConfiguration = new XmlSettings(m_updateXmlFilename);
 
-                CheckUpdateFile();
+                Version version = Version.Parse(updateConfiguration.Read("Current", "Version", ""));
+                Version currentVersion = Version.Parse(AssemblyVersion);
+
+                string released = updateConfiguration.Read("Current", "Released", "");
+                string downloadLink = updateConfiguration.Read("Current", "DownloadLink", "");
+
+                if (version > currentVersion)
+                {
+                    Released = released;
+                    NewVersion = version.ToString();
+                    DownloadLink = downloadLink;
+
+                    BackgroundAction.Run(() => { UpdateFound?.Invoke(); });
+                }
+                else
+                {
+                    updateFound = false;
+                }
             }
             catch
+            {
+                updateFound = false;
+            }
+
+            if (!updateFound)
             {
                 BackgroundAction.Run(() => { UpdateNotFound?.Invoke(); });
             }
         }
-
-        private void CheckUpdateFile()
-        {
-            if (File.Exists(m_updateXmlFilename))
-            {
-                bool updateFound = true;
-
-                try
-                {
-                    IXmlSettings updateConfiguration = new XmlSettings(m_updateXmlFilename);
-
-                    Version version = Version.Parse(updateConfiguration.Read("Current", "Version", ""));
-                    Version currentVersion = Version.Parse(AssemblyVersion);
-
-                    string released = updateConfiguration.Read("Current", "Released", "");
-                    string downloadLink = updateConfiguration.Read("Current", "DownloadLink", "");
-
-                    if (version > currentVersion)
-                    {
-                        Released = released;
-                        NewVersion = version.ToString();
-                        DownloadLink = downloadLink;
-
-                        BackgroundAction.Run(() => { UpdateFound?.Invoke(); });
-                    }
-                    else
-                    {
-                        updateFound = false;
-                    }
-                }
-                catch
-                {
-                    updateFound = false;
-                }
-
-                if (!updateFound)
-                {
-                    BackgroundAction.Run(() => { UpdateNotFound?.Invoke(); });
-                }
-            }
-        }
-
-        public Action UpdateFound { set; get; }
-        public Action UpdateNotFound { set; get; }
-        public string DownloadLink { get; private set; }
-        public string Released { get; private set; }
-        public string NewVersion { get; private set; }
-
-        private static string AssemblyVersion => Assembly.GetExecutingAssembly().GetName().Version.ToString();
     }
+
+    public Action UpdateFound { set; get; }
+    public Action UpdateNotFound { set; get; }
+    public string DownloadLink { get; private set; }
+    public string Released { get; private set; }
+    public string NewVersion { get; private set; }
+
+    private static string AssemblyVersion => Assembly.GetExecutingAssembly().GetName().Version.ToString();
 }

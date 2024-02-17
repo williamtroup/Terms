@@ -1,63 +1,62 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 
-namespace Terms.UI.Tools.Actions
+namespace Terms.UI.Tools.Actions;
+
+public static class ListAction
 {
-    public static class ListAction
+    public static void FocusSelectedItem(ListBox listBox, int listIndex)
     {
-        public static void FocusSelectedItem(ListBox listBox, int listIndex)
-        {
-            ItemContainerGenerator itemContainerGenerator = listBox.ItemContainerGenerator;
-            DependencyObject dependencyObject = itemContainerGenerator.ContainerFromIndex(listIndex);
+        ItemContainerGenerator itemContainerGenerator = listBox.ItemContainerGenerator;
+        DependencyObject dependencyObject = itemContainerGenerator.ContainerFromIndex(listIndex);
 
-            if (dependencyObject != null)
-            {
-                ListBoxItem listViewItem = (ListBoxItem) dependencyObject;
-                listViewItem.Focus();
-            }
+        if (dependencyObject != null)
+        {
+            ListBoxItem listViewItem = (ListBoxItem) dependencyObject;
+            listViewItem.Focus();
         }
+    }
 
-        public static void FindOnKeydown(string keydown, ListBox listBox)
+    public static void FindOnKeydown(string keydown, ListBox listBox)
+    {
+        bool firstTry = true;
+
+        while (true)
         {
-            bool firstTry = true;
+            int listIndex = 0;
+            int startIndex = firstTry ? listBox.SelectedIndex : 0;
 
-            while (true)
+            if (listBox.Items.Count > 0 && startIndex > -1)
             {
-                int listIndex = 0;
-                int startIndex = firstTry ? listBox.SelectedIndex : 0;
+                keydown = keydown.ToLower();
 
-                if (listBox.Items.Count > 0 && startIndex > -1)
+                bool found = false;
+
+                foreach (object item in listBox.Items)
                 {
-                    keydown = keydown.ToLower();
-
-                    bool found = false;
-
-                    foreach (object item in listBox.Items)
+                    if (!firstTry || listIndex > startIndex)
                     {
-                        if (!firstTry || listIndex > startIndex)
+                        ListBoxItem listBoxItem = (ListBoxItem) item;
+
+                        if (listBoxItem.Content.ToString().ToLower().StartsWith(keydown))
                         {
-                            ListBoxItem listBoxItem = (ListBoxItem) item;
-
-                            if (listBoxItem.Content.ToString().ToLower().StartsWith(keydown))
-                            {
-                                FocusSelectedItem(listBox, listIndex);
-                                found = true;
-                                break;
-                            }
+                            FocusSelectedItem(listBox, listIndex);
+                            found = true;
+                            break;
                         }
-
-                        listIndex++;
                     }
 
-                    if (!found && firstTry)
-                    {
-                        firstTry = false;
-                        continue;
-                    }
+                    listIndex++;
                 }
 
-                break;
+                if (!found && firstTry)
+                {
+                    firstTry = false;
+                    continue;
+                }
             }
+
+            break;
         }
     }
 }

@@ -1,9 +1,8 @@
-﻿namespace Terms.UI.Tools.Enums
+﻿namespace Terms.UI.Tools.Enums;
+
+public enum ServicesMode
 {
-    public enum ServicesMode
-    {
-        Start,
-        Stop,
-        Status
-    }
+    Start,
+    Stop,
+    Status
 }

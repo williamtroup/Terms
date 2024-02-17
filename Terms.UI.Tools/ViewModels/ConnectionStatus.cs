@@ -3,92 +3,91 @@ using System.Windows;
 using System.Windows.Media;
 using Terms.UI.Tools.ViewModels.Base;
 
-namespace Terms.UI.Tools.ViewModels
+namespace Terms.UI.Tools.ViewModels;
+
+public class ConnectionStatus : Observable, IDataModel
 {
-    public class ConnectionStatus : Observable, IDataModel
+    private string m_name = string.Empty;
+
+    public string Name
     {
-        private string m_name = string.Empty;
-
-        public string Name
+        get => m_name;
+        set
         {
-            get => m_name;
-            set
-            {
-                m_name = value;
-                OnPropertyChanged(nameof(Name));
-            }
+            m_name = value;
+            OnPropertyChanged(nameof(Name));
         }
+    }
 
-        private string m_address = string.Empty;
+    private string m_address = string.Empty;
 
-        public string Address
+    public string Address
+    {
+        get => m_address;
+        set
         {
-            get => m_address;
-            set
-            {
-                m_address = value;
-                OnPropertyChanged(nameof(Address));
-            }
+            m_address = value;
+            OnPropertyChanged(nameof(Address));
         }
+    }
 
-        private string m_status = string.Empty;
+    private string m_status = string.Empty;
 
-        public string Status
+    public string Status
+    {
+        get => m_status;
+        set
         {
-            get => m_status;
-            set
-            {
-                m_status = value;
-                OnPropertyChanged(nameof(Status));
-            }
+            m_status = value;
+            OnPropertyChanged(nameof(Status));
         }
+    }
 
-        private string m_dateTime = System.DateTime.Now.ToString(CultureInfo.InvariantCulture);
+    private string m_dateTime = System.DateTime.Now.ToString(CultureInfo.InvariantCulture);
 
-        public string DateTime
+    public string DateTime
+    {
+        get => m_dateTime;
+        set
         {
-            get => m_dateTime;
-            set
-            {
-                m_dateTime = value;
-                OnPropertyChanged(nameof(DateTime));
-            }
+            m_dateTime = value;
+            OnPropertyChanged(nameof(DateTime));
         }
+    }
 
-        private Visibility m_visibility = Visibility.Visible;
+    private Visibility m_visibility = Visibility.Visible;
 
-        public Visibility Visibility
+    public Visibility Visibility
+    {
+        get => m_visibility;
+        set
         {
-            get => m_visibility;
-            set
-            {
-                m_visibility = value;
-                OnPropertyChanged(nameof(Visibility));
-            }
+            m_visibility = value;
+            OnPropertyChanged(nameof(Visibility));
         }
+    }
 
-        private SolidColorBrush m_foreColor = Brushes.Black;
+    private SolidColorBrush m_foreColor = Brushes.Black;
 
-        public SolidColorBrush ForeColor
+    public SolidColorBrush ForeColor
+    {
+        get => m_foreColor;
+        set
         {
-            get => m_foreColor;
-            set
-            {
-                m_foreColor = value;
-                OnPropertyChanged(nameof(ForeColor));
-            }
+            m_foreColor = value;
+            OnPropertyChanged(nameof(ForeColor));
         }
+    }
 
-        private FontStyle m_fontStyle = FontStyles.Normal;
+    private FontStyle m_fontStyle = FontStyles.Normal;
 
-        public FontStyle FontStyle
+    public FontStyle FontStyle
+    {
+        get => m_fontStyle;
+        set
         {
-            get => m_fontStyle;
-            set
-            {
-                m_fontStyle = value;
-                OnPropertyChanged(nameof(FontStyle));
-            }
+            m_fontStyle = value;
+            OnPropertyChanged(nameof(FontStyle));
         }
     }
 }

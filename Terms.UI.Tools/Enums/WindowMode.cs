@@ -1,8 +1,7 @@
-﻿namespace Terms.UI.Tools.Enums
+﻿namespace Terms.UI.Tools.Enums;
+
+public enum WindowMode
 {
-    public enum WindowMode
-    {
-        Load,
-        Close
-    }
+    Load,
+    Close
 }

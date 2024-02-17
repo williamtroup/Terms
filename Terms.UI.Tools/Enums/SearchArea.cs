@@ -1,9 +1,8 @@
-﻿namespace Terms.UI.Tools.Enums
+﻿namespace Terms.UI.Tools.Enums;
+
+public enum SearchArea
 {
-    public enum SearchArea
-    {
-        Groups,
-        Connections,
-        Both
-    }
+    Groups,
+    Connections,
+    Both
 }

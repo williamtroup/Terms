@@ -4,168 +4,167 @@ using System.Collections.Generic;
 using System.Xml;
 using Terms.UI.Tools.ViewModels;
 
-namespace Terms.UI.Tools.Data
+namespace Terms.UI.Tools.Data;
+
+public class TerminalsXml
 {
-    public class TerminalsXml
+    private string m_filename;
+    private Group m_ungroupedEntriesGroupViewModel;
+
+    public bool Read(string filter, string title, List<Group> groups)
     {
-        private string m_filename;
-        private Group m_ungroupedEntriesGroupViewModel;
+        bool hasBeenRead = false;
 
-        public bool Read(string filter, string title, List<Group> groups)
+        OpenFileDialog openFileDialog = new()
         {
-            bool hasBeenRead = false;
+            Filter = filter,
+            Title = title
+        };
 
-            OpenFileDialog openFileDialog = new()
+        bool? result = openFileDialog.ShowDialog();
+        if (result != null && result.Value)
+        {
+            CreateUngroupedGroup();
+
+            m_filename = openFileDialog.FileName;
+
+            ReadFavourates(groups);
+
+            if (m_ungroupedEntriesGroupViewModel.Connections.Count > 0)
             {
-                Filter = filter,
-                Title = title
-            };
-
-            bool? result = openFileDialog.ShowDialog();
-            if (result != null && result.Value)
-            {
-                CreateUngroupedGroup();
-
-                m_filename = openFileDialog.FileName;
-
-                ReadFavourates(groups);
-
-                if (m_ungroupedEntriesGroupViewModel.Connections.Count > 0)
-                {
-                    groups.Add(m_ungroupedEntriesGroupViewModel);
-                }
-
-                hasBeenRead = true;
+                groups.Add(m_ungroupedEntriesGroupViewModel);
             }
 
-            return hasBeenRead;
+            hasBeenRead = true;
         }
 
-        private void ReadFavourates(ICollection<Group> groups)
-        {
-            XmlDocument xmlDocument = LoadDocument(m_filename);
-            XmlNodeList xmlNodeList = xmlDocument.DocumentElement?.SelectNodes("/favorites/favorite");
+        return hasBeenRead;
+    }
 
-            if (xmlNodeList != null)
+    private void ReadFavourates(ICollection<Group> groups)
+    {
+        XmlDocument xmlDocument = LoadDocument(m_filename);
+        XmlNodeList xmlNodeList = xmlDocument.DocumentElement?.SelectNodes("/favorites/favorite");
+
+        if (xmlNodeList != null)
+        {
+            foreach (XmlNode xmlNode in xmlNodeList)
             {
-                foreach (XmlNode xmlNode in xmlNodeList)
+                if (xmlNode != null)
                 {
-                    if (xmlNode != null)
-                    {
-                        ReadFavourate(xmlNode, groups);
-                    }
+                    ReadFavourate(xmlNode, groups);
                 }
             }
         }
+    }
 
-        private void ReadFavourate(XmlNode xmlNode, ICollection<Group> groups)
+    private void ReadFavourate(XmlNode xmlNode, ICollection<Group> groups)
+    {
+        XmlNode xmlServerNameNode = null;
+        XmlNode xmlNameNode = null;
+        XmlNode xmlTagsNode = null;
+
+        foreach (XmlNode childNode in xmlNode.ChildNodes)
         {
-            XmlNode xmlServerNameNode = null;
-            XmlNode xmlNameNode = null;
-            XmlNode xmlTagsNode = null;
-
-            foreach (XmlNode childNode in xmlNode.ChildNodes)
+            switch (childNode.Name)
             {
-                switch (childNode.Name)
-                {
-                    case "serverName" when xmlServerNameNode == null:
-                        xmlServerNameNode = childNode;
-                        break;
-
-                    case "name" when xmlNameNode == null:
-                        xmlNameNode = childNode;
-                        break;
-
-                    case "tags" when xmlTagsNode == null:
-                        xmlTagsNode = childNode;
-                        break;
-                }
-            }
-
-            if (xmlServerNameNode != null && xmlNameNode != null && xmlTagsNode != null)
-            {
-                string serverName = xmlServerNameNode.InnerText;
-                string name = xmlNameNode.InnerText;
-                string tags = xmlTagsNode.InnerText;
-
-                Connection connection = new()
-                {
-                    Name = name,
-                    Address = serverName,
-                    AskForCredentials = true
-                };
-
-                if (!string.IsNullOrEmpty(serverName) && !string.IsNullOrEmpty(name) && !string.IsNullOrEmpty(tags))
-                {
-                    bool addUnderNewGroup = true;
-
-                    foreach (Group group in groups)
-                    {
-                        if (string.Equals(group.Name, tags, StringComparison.CurrentCultureIgnoreCase))
-                        {
-                            AddToGroup(connection, group);
-
-                            addUnderNewGroup = false;
-                            break;
-                        }
-                    }
-
-                    if (addUnderNewGroup)
-                    {
-                        Group group = new()
-                        {
-                            Name = tags
-                        };
-
-                        group.Connections.Add(connection);
-                        groups.Add(group);
-                    }
-                }
-                else
-                {
-                    if (string.IsNullOrEmpty(tags))
-                    {
-                        AddToGroup(connection, m_ungroupedEntriesGroupViewModel);
-                    }
-                }
-            }
-        }
-
-        private static void AddToGroup(Connection connection, Group group)
-        {
-            bool connectionFound = false;
-
-            foreach (Connection searchConnectionViewModel in group.Connections)
-            {
-                if (string.Equals(searchConnectionViewModel.Name, connection.Name, StringComparison.CurrentCultureIgnoreCase))
-                {
-                    connectionFound = true;
+                case "serverName" when xmlServerNameNode == null:
+                    xmlServerNameNode = childNode;
                     break;
+
+                case "name" when xmlNameNode == null:
+                    xmlNameNode = childNode;
+                    break;
+
+                case "tags" when xmlTagsNode == null:
+                    xmlTagsNode = childNode;
+                    break;
+            }
+        }
+
+        if (xmlServerNameNode != null && xmlNameNode != null && xmlTagsNode != null)
+        {
+            string serverName = xmlServerNameNode.InnerText;
+            string name = xmlNameNode.InnerText;
+            string tags = xmlTagsNode.InnerText;
+
+            Connection connection = new()
+            {
+                Name = name,
+                Address = serverName,
+                AskForCredentials = true
+            };
+
+            if (!string.IsNullOrEmpty(serverName) && !string.IsNullOrEmpty(name) && !string.IsNullOrEmpty(tags))
+            {
+                bool addUnderNewGroup = true;
+
+                foreach (Group group in groups)
+                {
+                    if (string.Equals(group.Name, tags, StringComparison.CurrentCultureIgnoreCase))
+                    {
+                        AddToGroup(connection, group);
+
+                        addUnderNewGroup = false;
+                        break;
+                    }
+                }
+
+                if (addUnderNewGroup)
+                {
+                    Group group = new()
+                    {
+                        Name = tags
+                    };
+
+                    group.Connections.Add(connection);
+                    groups.Add(group);
                 }
             }
-
-            if (!connectionFound)
+            else
             {
-                group.Connections.Add(connection);
+                if (string.IsNullOrEmpty(tags))
+                {
+                    AddToGroup(connection, m_ungroupedEntriesGroupViewModel);
+                }
+            }
+        }
+    }
+
+    private static void AddToGroup(Connection connection, Group group)
+    {
+        bool connectionFound = false;
+
+        foreach (Connection searchConnectionViewModel in group.Connections)
+        {
+            if (string.Equals(searchConnectionViewModel.Name, connection.Name, StringComparison.CurrentCultureIgnoreCase))
+            {
+                connectionFound = true;
+                break;
             }
         }
 
-        private void CreateUngroupedGroup()
+        if (!connectionFound)
         {
-            string ungroupEntriesName = $"Ungrouped_{DateTime.Now:HH_mm_ss_yyyy_MM_dd}";
-
-            m_ungroupedEntriesGroupViewModel = new Group
-            {
-                Name = ungroupEntriesName
-            };
+            group.Connections.Add(connection);
         }
+    }
 
-        private static XmlDocument LoadDocument(string filename)
+    private void CreateUngroupedGroup()
+    {
+        string ungroupEntriesName = $"Ungrouped_{DateTime.Now:HH_mm_ss_yyyy_MM_dd}";
+
+        m_ungroupedEntriesGroupViewModel = new Group
         {
-            XmlDocument xmlDocument = new();
-            xmlDocument.Load(filename);
+            Name = ungroupEntriesName
+        };
+    }
 
-            return xmlDocument;
-        }
+    private static XmlDocument LoadDocument(string filename)
+    {
+        XmlDocument xmlDocument = new();
+        xmlDocument.Load(filename);
+
+        return xmlDocument;
     }
 }

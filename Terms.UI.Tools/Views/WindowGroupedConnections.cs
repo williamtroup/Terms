@@ -4,61 +4,60 @@ using System.Windows.Controls;
 using Terms.UI.Tools.ViewModels;
 using Terms.UI.Tools.ViewModels.Storage;
 
-namespace Terms.UI.Tools.Views
+namespace Terms.UI.Tools.Views;
+
+public class WindowGroupedConnections(ListView groupList, ListView connectionsList)
 {
-    public class WindowGroupedConnections(ListView groupList, ListView connectionsList)
+    private readonly ListView m_groupList = groupList;
+    private readonly ListView m_connectionsList = connectionsList;
+
+    public void Load(string filename = Connections.DefaultFilename, bool clearItems = true, Action afterLoadingAction = null)
     {
-        private readonly ListView m_groupList = groupList;
-        private readonly ListView m_connectionsList = connectionsList;
+        Connections connections = new();
+        connections.Load(filename);
 
-        public void Load(string filename = Connections.DefaultFilename, bool clearItems = true, Action afterLoadingAction = null)
+        if (clearItems)
         {
-            Connections connections = new();
-            connections.Load(filename);
-
-            if (clearItems)
-            {
-                m_groupList.Items.Clear();
-                m_connectionsList.Items.Clear();
-            }
-
-            foreach (Group group in connections.Groups)
-            {
-                m_groupList.Items.Add(group);
-            }
-
-            m_groupList.UpdateLayout();
-
-            afterLoadingAction?.Invoke();
+            m_groupList.Items.Clear();
+            m_connectionsList.Items.Clear();
         }
 
-        public void Save(string filename = Connections.DefaultFilename)
+        foreach (Group group in connections.Groups)
         {
-            Connections connections = new();
-
-            foreach (object item in m_groupList.Items)
-            {
-                Group group = (Group) item;
-
-                connections.Groups.Add(group);
-            }
-
-            connections.Save(filename);
+            m_groupList.Items.Add(group);
         }
 
-        public void ShowGroupItems(IEnumerable<Connection> connections)
+        m_groupList.UpdateLayout();
+
+        afterLoadingAction?.Invoke();
+    }
+
+    public void Save(string filename = Connections.DefaultFilename)
+    {
+        Connections connections = new();
+
+        foreach (object item in m_groupList.Items)
         {
-            if (m_connectionsList.Items.Count > 0)
-            {
-                m_connectionsList.Items.Clear();
-            }
+            Group group = (Group) item;
 
-            foreach (Connection connection in connections)
-            {
-                m_connectionsList.Items.Add(connection);
-            }
-
-            m_connectionsList.UpdateLayout();
+            connections.Groups.Add(group);
         }
+
+        connections.Save(filename);
+    }
+
+    public void ShowGroupItems(IEnumerable<Connection> connections)
+    {
+        if (m_connectionsList.Items.Count > 0)
+        {
+            m_connectionsList.Items.Clear();
+        }
+
+        foreach (Connection connection in connections)
+        {
+            m_connectionsList.Items.Add(connection);
+        }
+
+        m_connectionsList.UpdateLayout();
     }
 }

@@ -1,31 +1,30 @@
 ﻿using Terms.UI.Tools.ViewModels.Base;
 
-namespace Terms.UI.Tools.ViewModels
+namespace Terms.UI.Tools.ViewModels;
+
+public class WmiProcess : Observable, IDataModel
 {
-    public class WmiProcess : Observable, IDataModel
+    private string m_id = string.Empty;
+
+    public string Id
     {
-        private string m_id = string.Empty;
-
-        public string Id
+        get => m_id;
+        set
         {
-            get => m_id;
-            set
-            {
-                m_id = value;
-                OnPropertyChanged(nameof(Id));
-            }
+            m_id = value;
+            OnPropertyChanged(nameof(Id));
         }
+    }
 
-        private string m_name = string.Empty;
+    private string m_name = string.Empty;
 
-        public string Name
+    public string Name
+    {
+        get => m_name;
+        set
         {
-            get => m_name;
-            set
-            {
-                m_name = value;
-                OnPropertyChanged(nameof(Name));
-            }
+            m_name = value;
+            OnPropertyChanged(nameof(Name));
         }
     }
 }

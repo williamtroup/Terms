@@ -1,31 +1,30 @@
 ﻿using Terms.UI.Tools.ViewModels.Base;
 
-namespace Terms.UI.Tools.ViewModels
+namespace Terms.UI.Tools.ViewModels;
+
+public class WmiDetail : Observable, IDataModel
 {
-    public class WmiDetail : Observable, IDataModel
+    private string m_name = string.Empty;
+
+    public string Name
     {
-        private string m_name = string.Empty;
-
-        public string Name
+        get => m_name;
+        set
         {
-            get => m_name;
-            set
-            {
-                m_name = value;
-                OnPropertyChanged(nameof(Name));
-            }
+            m_name = value;
+            OnPropertyChanged(nameof(Name));
         }
+    }
 
-        private string m_value = string.Empty;
+    private string m_value = string.Empty;
 
-        public string Value
+    public string Value
+    {
+        get => m_value;
+        set
         {
-            get => m_value;
-            set
-            {
-                m_value = value;
-                OnPropertyChanged(nameof(Value));
-            }
+            m_value = value;
+            OnPropertyChanged(nameof(Value));
         }
     }
 }

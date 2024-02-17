@@ -2,42 +2,41 @@
 using Terms.Tools.Actions;
 using Terms.UI.Tools.Views;
 
-namespace Terms.Windows.Management
+namespace Terms.Windows.Management;
+
+public partial class ChangePasswords
 {
-    public partial class ChangePasswords
+    private readonly Main m_main;
+
+    public ChangePasswords(Main main)
     {
-        private readonly Main m_main;
+        InitializeComponent();
 
-        public ChangePasswords(Main main)
-        {
-            InitializeComponent();
+        WindowLayout.Setup(this, WindowBorder);
 
-            WindowLayout.Setup(this, WindowBorder);
+        m_main = main;
 
-            m_main = main;
+        SetupDisplay();
+    }
 
-            SetupDisplay();
-        }
+    private void SetupDisplay()
+    {
+        txtPassword.Focus();
 
-        private void SetupDisplay()
-        {
-            txtPassword.Focus();
+        Password_OnPasswordChanged(null, null);
+    }
 
-            Password_OnPasswordChanged(null, null);
-        }
+    private void Button_Change_OnClick(object sender, RoutedEventArgs e)
+    {
+        string newPassword = Cypher.Encrypt(txtPassword.Password);
 
-        private void Button_Change_OnClick(object sender, RoutedEventArgs e)
-        {
-            string newPassword = Cypher.Encrypt(txtPassword.Password);
+        m_main.ChangeAllPasswords(newPassword);
 
-            m_main.ChangeAllPasswords(newPassword);
+        Close();
+    }
 
-            Close();
-        }
-
-        private void Password_OnPasswordChanged(object sender, RoutedEventArgs e)
-        {
-            bChange.IsEnabled = txtPassword.Password.Length > 0;
-        }
+    private void Password_OnPasswordChanged(object sender, RoutedEventArgs e)
+    {
+        bChange.IsEnabled = txtPassword.Password.Length > 0;
     }
 }

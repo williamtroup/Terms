@@ -8,131 +8,130 @@ using Terms.UI.Tools.Actions;
 using Terms.UI.Tools.Views;
 using Terms.Windows.Display;
 
-namespace Terms.Windows.Report
+namespace Terms.Windows.Report;
+
+public partial class About
 {
-    public partial class About
+    private readonly IXmlSettings m_settings;
+
+    public About(IXmlSettings settings = null, bool viewable = true)
     {
-        private readonly IXmlSettings m_settings;
-
-        public About(IXmlSettings settings = null, bool viewable = true)
+        if (viewable)
         {
-            if (viewable)
-            {
-                InitializeComponent();
+            InitializeComponent();
 
-                m_settings = settings;
+            m_settings = settings;
 
-                WindowLayout.Setup(this, WindowBorder);
+            WindowLayout.Setup(this, WindowBorder);
 
-                SetupDisplay();
-            }
+            SetupDisplay();
         }
+    }
 
-        public static void CheckForUpdates(Window owner)
+    public static void CheckForUpdates(Window owner)
+    {
+        About about = new(viewable: false);
+        about.StartCheckForUpdates(owner, false);
+    }
+
+    private void SetupDisplay()
+    {
+        lblVersion.Text = $"Version {AssemblyVersion}";
+        lblCopyright.Text = AssemblyCopyright;
+        txtDescription.Text = AssemblyDescription;
+    }
+
+    private void StartCheckForUpdates(Window owner, bool updateLabels = true)
+    {
+        CheckForUpdates checkForUpdates = new("terms.xml");
+
+        checkForUpdates.UpdateFound = () =>
         {
-            About about = new(viewable: false);
-            about.StartCheckForUpdates(owner, false);
-        }
-
-        private void SetupDisplay()
-        {
-            lblVersion.Text = $"Version {AssemblyVersion}";
-            lblCopyright.Text = AssemblyCopyright;
-            txtDescription.Text = AssemblyDescription;
-        }
-
-        private void StartCheckForUpdates(Window owner, bool updateLabels = true)
-        {
-            CheckForUpdates checkForUpdates = new("terms.xml");
-
-            checkForUpdates.UpdateFound = () =>
-            {
-                if (updateLabels)
-                {
-                    lblCheckForUpdates.Text = Terms.Resources.UIMessages.CheckForUpdates;
-                }
-
-                string message = string.Format(Terms.Resources.UIMessages.NewUpdateAvailable, checkForUpdates.NewVersion, checkForUpdates.Released);
-
-                MessageQuestion messageBox = new(m_settings, message)
-                {
-                    Topmost = Topmost,
-                    Owner = owner
-                };
-
-                bool? result = messageBox.ShowDialog();
-
-                if (result != null && result.Value && !string.IsNullOrEmpty(checkForUpdates.DownloadLink))
-                {
-                    Processes.Start(checkForUpdates.DownloadLink);
-                }
-            };
-
             if (updateLabels)
             {
-                lblCheckForUpdates.Text = Terms.Resources.UIMessages.CheckingForUpdates;
-
-                checkForUpdates.UpdateNotFound = () =>
-                {
-                    lblCheckForUpdates.Text = Terms.Resources.UIMessages.NoUpdatesAvailable;
-                };
+                lblCheckForUpdates.Text = Terms.Resources.UIMessages.CheckForUpdates;
             }
 
-            checkForUpdates.Start();
+            string message = string.Format(Terms.Resources.UIMessages.NewUpdateAvailable, checkForUpdates.NewVersion, checkForUpdates.Released);
+
+            MessageQuestion messageBox = new(m_settings, message)
+            {
+                Topmost = Topmost,
+                Owner = owner
+            };
+
+            bool? result = messageBox.ShowDialog();
+
+            if (result != null && result.Value && !string.IsNullOrEmpty(checkForUpdates.DownloadLink))
+            {
+                Processes.Start(checkForUpdates.DownloadLink);
+            }
+        };
+
+        if (updateLabels)
+        {
+            lblCheckForUpdates.Text = Terms.Resources.UIMessages.CheckingForUpdates;
+
+            checkForUpdates.UpdateNotFound = () =>
+            {
+                lblCheckForUpdates.Text = Terms.Resources.UIMessages.NoUpdatesAvailable;
+            };
         }
 
-        private void CheckForUpdatesLink_MouseDown(object sender, MouseButtonEventArgs e)
+        checkForUpdates.Start();
+    }
+
+    private void CheckForUpdatesLink_MouseDown(object sender, MouseButtonEventArgs e)
+    {
+        if (e.ChangedButton == MouseButton.Left)
         {
-            if (e.ChangedButton == MouseButton.Left)
-            {
-                StartCheckForUpdates(this);
-            }
+            StartCheckForUpdates(this);
         }
+    }
 
-        private void CompanyLink_MouseDown(object sender, MouseButtonEventArgs e)
+    private void CompanyLink_MouseDown(object sender, MouseButtonEventArgs e)
+    {
+        if (e.ChangedButton == MouseButton.Left)
         {
-            if (e.ChangedButton == MouseButton.Left)
-            {
-                TextBlock textBlock = (TextBlock) sender;
+            TextBlock textBlock = (TextBlock) sender;
 
-                Processes.Start(textBlock.Text);
+            Processes.Start(textBlock.Text);
 
-                Close();
-            }
+            Close();
         }
+    }
 
-        private static string AssemblyVersion => Assembly.GetExecutingAssembly().GetName().Version.ToString();
+    private static string AssemblyVersion => Assembly.GetExecutingAssembly().GetName().Version.ToString();
 
-        private static string AssemblyDescription
+    private static string AssemblyDescription
+    {
+        get
         {
-            get
+            object[] attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyDescriptionAttribute), false);
+            string description = string.Empty;
+
+            if (attributes.Length != 0)
             {
-                object[] attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyDescriptionAttribute), false);
-                string description = string.Empty;
-
-                if (attributes.Length != 0)
-                {
-                    description = ((AssemblyDescriptionAttribute)attributes[0]).Description;
-                }
-
-                return description;
+                description = ((AssemblyDescriptionAttribute)attributes[0]).Description;
             }
+
+            return description;
         }
+    }
 
-        private static string AssemblyCopyright
+    private static string AssemblyCopyright
+    {
+        get
         {
-            get
+            object[] attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyCopyrightAttribute), false);
+            string copyright = string.Empty;
+
+            if (attributes.Length != 0)
             {
-                object[] attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyCopyrightAttribute), false);
-                string copyright = string.Empty;
-
-                if (attributes.Length != 0)
-                {
-                    copyright = ((AssemblyCopyrightAttribute)attributes[0]).Copyright;
-                }
-
-                return copyright;
+                copyright = ((AssemblyCopyrightAttribute)attributes[0]).Copyright;
             }
+
+            return copyright;
         }
     }
 }

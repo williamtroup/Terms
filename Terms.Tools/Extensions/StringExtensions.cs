@@ -1,10 +1,9 @@
-﻿namespace Terms.Tools.Extensions
+﻿namespace Terms.Tools.Extensions;
+
+public static class StringExtensions
 {
-    public static class StringExtensions
+    public static bool ToBoolean(this string value)
     {
-        public static bool ToBoolean(this string value)
-        {
-            return value == "1";
-        }
+        return value == "1";
     }
 }

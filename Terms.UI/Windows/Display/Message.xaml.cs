@@ -1,21 +1,20 @@
 ﻿using Terms.UI.Tools.Views;
 
-namespace Terms.Windows.Display
+namespace Terms.Windows.Display;
+
+public partial class Message
 {
-    public partial class Message
+    public Message(string message)
     {
-        public Message(string message)
-        {
-            InitializeComponent();
+        InitializeComponent();
 
-            WindowLayout.Setup(this, WindowBorder);
+        WindowLayout.Setup(this, WindowBorder);
 
-            SetupDisplay(message);
-        }
+        SetupDisplay(message);
+    }
 
-        private void SetupDisplay(string message)
-        {
-            lblMessage.Text = message;
-        }
+    private void SetupDisplay(string message)
+    {
+        lblMessage.Text = message;
     }
 }

@@ -8,159 +8,158 @@ using Terms.UI.Tools.Extensions;
 using Terms.UI.Tools.ViewModels;
 using Terms.UI.Tools.Views;
 
-namespace Terms.Windows.Management
+namespace Terms.Windows.Management;
+
+public partial class AddCredential
 {
-    public partial class AddCredential
+    private readonly IXmlSettings m_settings;
+    private readonly EditCredentials m_credentials;
+    private readonly int m_selectedIndex;
+    private readonly Credential m_userCredentialViewModel;
+
+    public AddCredential(IXmlSettings settings, EditCredentials credentials, int selectedIndex = -1, Credential credential = null)
     {
-        private readonly IXmlSettings m_settings;
-        private readonly EditCredentials m_credentials;
-        private readonly int m_selectedIndex;
-        private readonly Credential m_userCredentialViewModel;
+        InitializeComponent();
 
-        public AddCredential(IXmlSettings settings, EditCredentials credentials, int selectedIndex = -1, Credential credential = null)
+        WindowLayout.Setup(this, WindowBorder);
+
+        m_settings = settings;
+        m_credentials = credentials;
+        m_selectedIndex = selectedIndex;
+        m_userCredentialViewModel = credential;
+
+        SetupDisplay();
+    }
+
+    private void SetupDisplay()
+    {
+        int closeWindowAfterAdding = Convert.ToInt32(m_settings.Read(Settings.AddNewUserCredentialWindow.AddNewUserCredentialOptions, nameof(Settings.AddNewUserCredentialWindow.CloseWindowAfterAdding), Settings.AddNewUserCredentialWindow.CloseWindowAfterAdding));
+
+        chkCloseWindowAfterAdding.IsChecked = closeWindowAfterAdding > 0;
+
+        lblErrorMessage.Visibility = Visibility.Hidden;
+
+        rbCredentials.IsChecked = true;
+
+        if (m_selectedIndex > -1)
         {
-            InitializeComponent();
+            chkCloseWindowAfterAdding.IsChecked = true;
+            chkCloseWindowAfterAdding.Visibility = Visibility.Collapsed;
 
-            WindowLayout.Setup(this, WindowBorder);
+            bAdd.Content = Terms.Resources.UIMessages.EditButtonText;
 
-            m_settings = settings;
-            m_credentials = credentials;
-            m_selectedIndex = selectedIndex;
-            m_userCredentialViewModel = credential;
-
-            SetupDisplay();
+            txtName.Text = m_userCredentialViewModel.Name;
+            txtUsername.Text = m_userCredentialViewModel.Username;
+            txtPassword.Password = Cypher.Decrypt(m_userCredentialViewModel.Password);
+            txtNotes.Text = m_userCredentialViewModel.Notes;
+            chkEnabled.IsChecked = m_userCredentialViewModel.Enabled;
         }
 
-        private void SetupDisplay()
+        txtName.Focus();
+        txtName.SelectAll();
+    }
+
+    private void Window_OnClosing(object sender, System.ComponentModel.CancelEventArgs e)
+    {
+        if (chkCloseWindowAfterAdding.IsVisible)
         {
-            int closeWindowAfterAdding = Convert.ToInt32(m_settings.Read(Settings.AddNewUserCredentialWindow.AddNewUserCredentialOptions, nameof(Settings.AddNewUserCredentialWindow.CloseWindowAfterAdding), Settings.AddNewUserCredentialWindow.CloseWindowAfterAdding));
+            m_settings.Write(Settings.AddNewUserCredentialWindow.AddNewUserCredentialOptions, nameof(Settings.AddNewUserCredentialWindow.CloseWindowAfterAdding), chkCloseWindowAfterAdding.IsReallyChecked().ToNumericString());
+        }
+    }
 
-            chkCloseWindowAfterAdding.IsChecked = closeWindowAfterAdding > 0;
+    private void Button_Add_OnClick(object sender, RoutedEventArgs e)
+    {
+        string newName = txtName.Text.Trim();
 
-            lblErrorMessage.Visibility = Visibility.Hidden;
+        if (string.IsNullOrEmpty(newName))
+        {
+            SetErrorMessage(Terms.Resources.UIMessages.ANameHasNotBeenEntered);
 
             rbCredentials.IsChecked = true;
 
-            if (m_selectedIndex > -1)
-            {
-                chkCloseWindowAfterAdding.IsChecked = true;
-                chkCloseWindowAfterAdding.Visibility = Visibility.Collapsed;
+            txtName.Focus();
+        }
+        else if (m_credentials.DoesUserCredentialExist(newName, m_selectedIndex))
+        {
+            SetErrorMessage(Terms.Resources.UIMessages.UserCredentialNameAlreadyExist);
 
-                bAdd.Content = Terms.Resources.UIMessages.EditButtonText;
-
-                txtName.Text = m_userCredentialViewModel.Name;
-                txtUsername.Text = m_userCredentialViewModel.Username;
-                txtPassword.Password = Cypher.Decrypt(m_userCredentialViewModel.Password);
-                txtNotes.Text = m_userCredentialViewModel.Notes;
-                chkEnabled.IsChecked = m_userCredentialViewModel.Enabled;
-            }
+            rbCredentials.IsChecked = true;
 
             txtName.Focus();
-            txtName.SelectAll();
         }
-
-        private void Window_OnClosing(object sender, System.ComponentModel.CancelEventArgs e)
+        else if (string.IsNullOrEmpty(txtUsername.Text.Trim()))
         {
-            if (chkCloseWindowAfterAdding.IsVisible)
-            {
-                m_settings.Write(Settings.AddNewUserCredentialWindow.AddNewUserCredentialOptions, nameof(Settings.AddNewUserCredentialWindow.CloseWindowAfterAdding), chkCloseWindowAfterAdding.IsReallyChecked().ToNumericString());
-            }
+            SetErrorMessage(Terms.Resources.UIMessages.AUsernameHasNotBeenEntered);
+
+            rbCredentials.IsChecked = true;
+
+            txtUsername.Focus();
         }
-
-        private void Button_Add_OnClick(object sender, RoutedEventArgs e)
+        else if (string.IsNullOrEmpty(txtPassword.Password.Trim()))
         {
-            string newName = txtName.Text.Trim();
+            SetErrorMessage(Terms.Resources.UIMessages.APasswordHasNotBeenEntered);
 
-            if (string.IsNullOrEmpty(newName))
+            rbCredentials.IsChecked = true;
+
+            txtPassword.Focus();
+        }
+        else
+        {
+            m_credentials.AddUserCredential(new Credential
             {
-                SetErrorMessage(Terms.Resources.UIMessages.ANameHasNotBeenEntered);
+                Name = txtName.Text,
+                Username = txtUsername.Text,
+                Password = Cypher.Encrypt(txtPassword.Password),
+                Notes = txtNotes.Text,
+                Enabled = chkEnabled.IsReallyChecked()
+            }, m_selectedIndex);
 
-                rbCredentials.IsChecked = true;
-
-                txtName.Focus();
-            }
-            else if (m_credentials.DoesUserCredentialExist(newName, m_selectedIndex))
+            if (chkCloseWindowAfterAdding.IsReallyChecked())
             {
-                SetErrorMessage(Terms.Resources.UIMessages.UserCredentialNameAlreadyExist);
-
-                rbCredentials.IsChecked = true;
-
-                txtName.Focus();
-            }
-            else if (string.IsNullOrEmpty(txtUsername.Text.Trim()))
-            {
-                SetErrorMessage(Terms.Resources.UIMessages.AUsernameHasNotBeenEntered);
-
-                rbCredentials.IsChecked = true;
-
-                txtUsername.Focus();
-            }
-            else if (string.IsNullOrEmpty(txtPassword.Password.Trim()))
-            {
-                SetErrorMessage(Terms.Resources.UIMessages.APasswordHasNotBeenEntered);
-
-                rbCredentials.IsChecked = true;
-
-                txtPassword.Focus();
+                Close();
             }
             else
             {
-                m_credentials.AddUserCredential(new Credential
-                {
-                    Name = txtName.Text,
-                    Username = txtUsername.Text,
-                    Password = Cypher.Encrypt(txtPassword.Password),
-                    Notes = txtNotes.Text,
-                    Enabled = chkEnabled.IsReallyChecked()
-                }, m_selectedIndex);
+                txtName.Text = string.Empty;
+                txtUsername.Text = string.Empty;
+                txtPassword.Password = string.Empty;
+                txtNotes.Text = string.Empty;
 
-                if (chkCloseWindowAfterAdding.IsReallyChecked())
-                {
-                    Close();
-                }
-                else
-                {
-                    txtName.Text = string.Empty;
-                    txtUsername.Text = string.Empty;
-                    txtPassword.Password = string.Empty;
-                    txtNotes.Text = string.Empty;
+                chkEnabled.IsChecked = true;
 
-                    chkEnabled.IsChecked = true;
+                rbCredentials.IsChecked = true;
 
-                    rbCredentials.IsChecked = true;
+                lblErrorMessage.Visibility = Visibility.Hidden;
 
-                    lblErrorMessage.Visibility = Visibility.Hidden;
-
-                    txtName.Focus();
-                }
+                txtName.Focus();
             }
         }
+    }
 
-        private void SetErrorMessage(string message)
-        {
-            lblErrorMessage.Content = message;
-            lblErrorMessage.Visibility = Visibility.Visible;
-        }
+    private void SetErrorMessage(string message)
+    {
+        lblErrorMessage.Content = message;
+        lblErrorMessage.Visibility = Visibility.Visible;
+    }
 
-        private void Tab_OnChecked(object sender, RoutedEventArgs e)
+    private void Tab_OnChecked(object sender, RoutedEventArgs e)
+    {
+        if (gCredentials != null)
         {
-            if (gCredentials != null)
+            gCredentials.Visibility = Visibility.Collapsed;
+            gNotes.Visibility = Visibility.Collapsed;
+
+            if (rbCredentials.IsReallyChecked())
             {
-                gCredentials.Visibility = Visibility.Collapsed;
-                gNotes.Visibility = Visibility.Collapsed;
+                gCredentials.Visibility = Visibility.Visible;
 
-                if (rbCredentials.IsReallyChecked())
-                {
-                    gCredentials.Visibility = Visibility.Visible;
+                txtName.Focus();
+            }
+            else if (rbNotes.IsReallyChecked())
+            {
+                gNotes.Visibility = Visibility.Visible;
 
-                    txtName.Focus();
-                }
-                else if (rbNotes.IsReallyChecked())
-                {
-                    gNotes.Visibility = Visibility.Visible;
-
-                    txtNotes.Focus();
-                }
+                txtNotes.Focus();
             }
         }
     }

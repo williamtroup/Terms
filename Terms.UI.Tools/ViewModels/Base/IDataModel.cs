@@ -1,7 +1,6 @@
-﻿namespace Terms.UI.Tools.ViewModels.Base
+﻿namespace Terms.UI.Tools.ViewModels.Base;
+
+public interface IDataModel
 {
-    public interface IDataModel
-    {
-        string Name { get; set; }
-    }
+    string Name { get; set; }
 }

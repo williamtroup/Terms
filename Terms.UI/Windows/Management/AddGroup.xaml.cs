@@ -7,151 +7,150 @@ using Terms.UI.Tools.Extensions;
 using Terms.UI.Tools.ViewModels;
 using Terms.UI.Tools.Views;
 
-namespace Terms.Windows.Management
+namespace Terms.Windows.Management;
+
+public partial class AddGroup
 {
-    public partial class AddGroup
+    private readonly IXmlSettings m_settings;
+    private readonly Main m_main;
+    private readonly int m_selectedIndex;
+    private readonly Group m_groupViewModel;
+
+    public AddGroup(IXmlSettings settings, Main main, int selectedIndex = -1, Group group = null)
     {
-        private readonly IXmlSettings m_settings;
-        private readonly Main m_main;
-        private readonly int m_selectedIndex;
-        private readonly Group m_groupViewModel;
+        InitializeComponent();
 
-        public AddGroup(IXmlSettings settings, Main main, int selectedIndex = -1, Group group = null)
+        WindowLayout.Setup(this, WindowBorder);
+
+        m_settings = settings;
+        m_main = main;
+        m_selectedIndex = selectedIndex;
+        m_groupViewModel = group;
+
+        SetupDisplay();
+    }
+
+    private void SetupDisplay()
+    {
+        int closeWindowAfterAdding = Convert.ToInt32(m_settings.Read(Settings.AddNewGroupWindow.AddNewGroupOptions, nameof(Settings.AddNewGroupWindow.CloseWindowAfterAdding), Settings.AddNewGroupWindow.CloseWindowAfterAdding));
+
+        chkCloseWindowAfterAdding.IsChecked = closeWindowAfterAdding > 0;
+
+        lblErrorMessage.Visibility = Visibility.Hidden;
+
+        rbGroup.IsChecked = true;
+
+        if (m_selectedIndex > -1)
         {
-            InitializeComponent();
+            chkCloseWindowAfterAdding.IsChecked = true;
+            chkCloseWindowAfterAdding.Visibility = Visibility.Collapsed;
 
-            WindowLayout.Setup(this, WindowBorder);
+            bAdd.Content = Terms.Resources.UIMessages.EditButtonText;
 
-            m_settings = settings;
-            m_main = main;
-            m_selectedIndex = selectedIndex;
-            m_groupViewModel = group;
-
-            SetupDisplay();
+            txtName.Text = m_groupViewModel.Name;
+            txtNotes.Text = m_groupViewModel.Notes;
+            chkAllowMultipleConnectionManagement.IsChecked = m_groupViewModel.AllowMultipleConnectionManagement;
+            chkAllowAllPasswordsToBeChanged.IsChecked = m_groupViewModel.AllowAllPasswordsToBeChanged;
+        }
+        else
+        {
+            SetupDefaults();
         }
 
-        private void SetupDisplay()
+        txtName.Focus();
+        txtName.SelectAll();
+    }
+
+    private void Window_OnClosing(object sender, System.ComponentModel.CancelEventArgs e)
+    {
+        if (chkCloseWindowAfterAdding.IsVisible)
         {
-            int closeWindowAfterAdding = Convert.ToInt32(m_settings.Read(Settings.AddNewGroupWindow.AddNewGroupOptions, nameof(Settings.AddNewGroupWindow.CloseWindowAfterAdding), Settings.AddNewGroupWindow.CloseWindowAfterAdding));
+            m_settings.Write(Settings.AddNewGroupWindow.AddNewGroupOptions, nameof(Settings.AddNewGroupWindow.CloseWindowAfterAdding), chkCloseWindowAfterAdding.IsReallyChecked().ToNumericString());
+        }
+    }
 
-            chkCloseWindowAfterAdding.IsChecked = closeWindowAfterAdding > 0;
+    private void Button_Add_OnClick(object sender, RoutedEventArgs e)
+    {
+        string newName = txtName.Text.Trim();
 
-            lblErrorMessage.Visibility = Visibility.Hidden;
+        if (string.IsNullOrEmpty(newName))
+        {
+            SetErrorMessage(Terms.Resources.UIMessages.ANameHasNotBeenEntered);
 
             rbGroup.IsChecked = true;
 
-            if (m_selectedIndex > -1)
+            txtName.Focus();
+        }
+        else if (m_main.DoesGroupExist(newName, m_selectedIndex))
+        {
+            SetErrorMessage(Terms.Resources.UIMessages.GroupNameAlreadyExists);
+
+            rbGroup.IsChecked = true;
+
+            txtName.Focus();
+        }
+        else
+        {
+            m_main.AddGroup(new Group
             {
-                chkCloseWindowAfterAdding.IsChecked = true;
-                chkCloseWindowAfterAdding.Visibility = Visibility.Collapsed;
+                Name = txtName.Text,
+                Notes = txtNotes.Text,
+                AllowMultipleConnectionManagement = chkAllowMultipleConnectionManagement.IsReallyChecked(),
+                AllowAllPasswordsToBeChanged = chkAllowAllPasswordsToBeChanged.IsReallyChecked()
+            }, m_selectedIndex);
 
-                bAdd.Content = Terms.Resources.UIMessages.EditButtonText;
-
-                txtName.Text = m_groupViewModel.Name;
-                txtNotes.Text = m_groupViewModel.Notes;
-                chkAllowMultipleConnectionManagement.IsChecked = m_groupViewModel.AllowMultipleConnectionManagement;
-                chkAllowAllPasswordsToBeChanged.IsChecked = m_groupViewModel.AllowAllPasswordsToBeChanged;
+            if (chkCloseWindowAfterAdding.IsReallyChecked())
+            {
+                Close();
             }
             else
             {
                 SetupDefaults();
-            }
-
-            txtName.Focus();
-            txtName.SelectAll();
-        }
-
-        private void Window_OnClosing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            if (chkCloseWindowAfterAdding.IsVisible)
-            {
-                m_settings.Write(Settings.AddNewGroupWindow.AddNewGroupOptions, nameof(Settings.AddNewGroupWindow.CloseWindowAfterAdding), chkCloseWindowAfterAdding.IsReallyChecked().ToNumericString());
-            }
-        }
-
-        private void Button_Add_OnClick(object sender, RoutedEventArgs e)
-        {
-            string newName = txtName.Text.Trim();
-
-            if (string.IsNullOrEmpty(newName))
-            {
-                SetErrorMessage(Terms.Resources.UIMessages.ANameHasNotBeenEntered);
 
                 rbGroup.IsChecked = true;
 
-                txtName.Focus();
-            }
-            else if (m_main.DoesGroupExist(newName, m_selectedIndex))
-            {
-                SetErrorMessage(Terms.Resources.UIMessages.GroupNameAlreadyExists);
-
-                rbGroup.IsChecked = true;
+                lblErrorMessage.Visibility = Visibility.Hidden;
 
                 txtName.Focus();
             }
-            else
+        }
+    }
+
+    private void SetErrorMessage(string message)
+    {
+        lblErrorMessage.Content = message;
+        lblErrorMessage.Visibility = Visibility.Visible;
+    }
+
+    private void SetupDefaults()
+    {
+        Group blankGroupViewModel = new();
+
+        txtName.Text = blankGroupViewModel.Name;
+        txtNotes.Text = blankGroupViewModel.Notes;
+
+        chkAllowMultipleConnectionManagement.IsChecked = blankGroupViewModel.AllowMultipleConnectionManagement;
+        chkAllowAllPasswordsToBeChanged.IsChecked = blankGroupViewModel.AllowAllPasswordsToBeChanged;
+    }
+
+    private void Tab_OnChecked(object sender, RoutedEventArgs e)
+    {
+        if (gGroup != null)
+        {
+            gGroup.Visibility = Visibility.Collapsed;
+            gNotes.Visibility = Visibility.Collapsed;
+
+            if (rbGroup.IsReallyChecked())
             {
-                m_main.AddGroup(new Group
-                {
-                    Name = txtName.Text,
-                    Notes = txtNotes.Text,
-                    AllowMultipleConnectionManagement = chkAllowMultipleConnectionManagement.IsReallyChecked(),
-                    AllowAllPasswordsToBeChanged = chkAllowAllPasswordsToBeChanged.IsReallyChecked()
-                }, m_selectedIndex);
+                gGroup.Visibility = Visibility.Visible;
 
-                if (chkCloseWindowAfterAdding.IsReallyChecked())
-                {
-                    Close();
-                }
-                else
-                {
-                    SetupDefaults();
-
-                    rbGroup.IsChecked = true;
-
-                    lblErrorMessage.Visibility = Visibility.Hidden;
-
-                    txtName.Focus();
-                }
+                txtName.Focus();
             }
-        }
-
-        private void SetErrorMessage(string message)
-        {
-            lblErrorMessage.Content = message;
-            lblErrorMessage.Visibility = Visibility.Visible;
-        }
-
-        private void SetupDefaults()
-        {
-            Group blankGroupViewModel = new();
-
-            txtName.Text = blankGroupViewModel.Name;
-            txtNotes.Text = blankGroupViewModel.Notes;
-
-            chkAllowMultipleConnectionManagement.IsChecked = blankGroupViewModel.AllowMultipleConnectionManagement;
-            chkAllowAllPasswordsToBeChanged.IsChecked = blankGroupViewModel.AllowAllPasswordsToBeChanged;
-        }
-
-        private void Tab_OnChecked(object sender, RoutedEventArgs e)
-        {
-            if (gGroup != null)
+            else if (rbNotes.IsReallyChecked())
             {
-                gGroup.Visibility = Visibility.Collapsed;
-                gNotes.Visibility = Visibility.Collapsed;
+                gNotes.Visibility = Visibility.Visible;
 
-                if (rbGroup.IsReallyChecked())
-                {
-                    gGroup.Visibility = Visibility.Visible;
-
-                    txtName.Focus();
-                }
-                else if (rbNotes.IsReallyChecked())
-                {
-                    gNotes.Visibility = Visibility.Visible;
-
-                    txtNotes.Focus();
-                }
+                txtNotes.Focus();
             }
         }
     }
