@@ -8,7 +8,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Xml;
-using Hardcodet.Wpf.TaskbarNotification;
 using Terms.Tools.Extensions;
 using Terms.Tools.Settings.Interfaces;
 using Terms.Tools.Windows;
@@ -67,7 +66,6 @@ namespace Terms
         private bool m_showConnectionsOpenInTitleBarWhenAvailable;
         private bool m_showConfirmationMessageBeforeClosingMainWindow;
         private bool m_minimizeAllOtherConnectionsWhenFocusingConnection;
-        private bool m_windowMinimizeToTrayWarningShown;
         private TextFieldInput m_connectionAddress;
 
         #endregion
@@ -511,7 +509,6 @@ namespace Terms
             }
 
             Title = title;
-            tbSystemTray.ToolTipText = title;
         }
 
         private bool IsAtLeastOneGroupEnabledForAllPasswordChanging()
@@ -797,21 +794,7 @@ namespace Terms
 
         private void MinimizeWindow()
         {
-            if (!ShowInTaskbar)
-            {
-                Hide();
-
-                if (!m_windowMinimizeToTrayWarningShown)
-                {
-                    tbSystemTray.ShowBalloonTip(Terms.Resources.UIMessages.Terms, Terms.Resources.UIMessages.MinimizedToTrayWarning, BalloonIcon.Info);
-
-                    m_windowMinimizeToTrayWarningShown = true;
-                }
-            }
-            else
-            {
-                WindowState = WindowState.Minimized;
-            }
+            WindowState = WindowState.Minimized;
         }
 
         #endregion

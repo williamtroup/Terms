@@ -42,31 +42,6 @@
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
 
-                <tb:TaskbarIcon
-                    Name="tbSystemTray"
-                    IconSource="/Images/main_icon.ico"
-                    MenuActivation="RightClick"
-                    TrayMouseDoubleClick="NotifyTrayIcon_TrayMouseDoubleClick"
-                    Visibility="Visible">
-
-                    <tb:TaskbarIcon.ContextMenu>
-                        <ContextMenu>
-                            <MenuItem Click="Button_About_OnClick" Header="_About..." />
-                            <Separator />
-                            <MenuItem
-                                Click="NotifyTrayIcon_TrayMouseDoubleClick"
-                                FontWeight="Bold"
-                                Header="_Show" />
-                            <Separator />
-                            <MenuItem Click="Button_Close_OnClick" Header="E_xit">
-                                <MenuItem.Icon>
-                                    <Image Source="images/Menus/CLOSE.png" />
-                                </MenuItem.Icon>
-                            </MenuItem>
-                        </ContextMenu>
-                    </tb:TaskbarIcon.ContextMenu>
-                </tb:TaskbarIcon>
-
                 <Rectangle
                     Grid.Row="0"
                     Margin="-1,-1,-1,-1"
