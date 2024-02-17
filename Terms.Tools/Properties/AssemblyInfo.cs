@@ -1,15 +1,5 @@
 ﻿using System.Reflection;
 using System.Runtime.InteropServices;
-
-// General Information about an assembly is controlled through the following
-// set of attributes. Change these attribute values to modify the information
-// associated with an assembly.
-[assembly: AssemblyTitle("Terms.Engine")]
-[assembly: AssemblyDescription("Terms is a small program to help you manage your terminals list, enabling a full range of managing tools.  A useful range of additional tools is available for mass setup and adjustments.")]
-[assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Bunoon")]
-[assembly: AssemblyProduct("Terms.Engine")]
-[assembly: AssemblyCopyright("Copyright © 2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,16 +10,3 @@ using System.Runtime.InteropServices;
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
 [assembly: Guid("abf1addb-c8dc-4aa4-bfea-c8680c3905ca")]
-
-// Version information for an assembly consists of the following four values:
-//
-//      Major Version
-//      Minor Version
-//      Build Number
-//      Revision
-//
-// You can specify all the values or you can default the Build and Revision Numbers
-// by using the '*' as shown below:
-// [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("0.9.5.0")]
-[assembly: AssemblyFileVersion("0.9.5.0")]

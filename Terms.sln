@@ -1,13 +1,13 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2036
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Terms.UI", "Terms.UI\Terms.UI.csproj", "{E3959A5F-87AE-4189-854C-A3AB037EF67F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Terms.UI", "Terms.UI\Terms.UI.csproj", "{E3959A5F-87AE-4189-854C-A3AB037EF67F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Terms.UI.Tools", "Terms.UI.Tools\Terms.UI.Tools.csproj", "{7112B0A9-0309-4404-81BF-DC33A82E7BFA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Terms.UI.Tools", "Terms.UI.Tools\Terms.UI.Tools.csproj", "{7112B0A9-0309-4404-81BF-DC33A82E7BFA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Terms.Tools", "Terms.Tools\Terms.Tools.csproj", "{ABF1ADDB-C8DC-4AA4-BFEA-C8680C3905CA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Terms.Tools", "Terms.Tools\Terms.Tools.csproj", "{ABF1ADDB-C8DC-4AA4-BFEA-C8680C3905CA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
