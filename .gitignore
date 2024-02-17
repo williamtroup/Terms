@@ -1,0 +1,11 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs/Terms
+/Terms.Tools/bin/Debug
+/Terms.Tools/obj/Debug
+/Terms.UI/bin/Debug
+/Terms.UI/obj/Debug
+/Terms.UI.Tools/bin/Debug
+/Terms.UI.Tools/obj/Debug
