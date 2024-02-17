@@ -1,0 +1,327 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ConnectionNameAlreadyExists" xml:space="preserve">
+    <value>This connection name already exists.</value>
+  </data>
+  <data name="GroupNameAlreadyExists" xml:space="preserve">
+    <value>This group name already exists.</value>
+  </data>
+  <data name="AnAddressHasNotBeenEntered" xml:space="preserve">
+    <value>An address has not been entered.</value>
+  </data>
+  <data name="APasswordHasNotBeenEntered" xml:space="preserve">
+    <value>A password has not been entered.</value>
+  </data>
+  <data name="AUsernameHasNotBeenEntered" xml:space="preserve">
+    <value>A username has not been entered.</value>
+  </data>
+  <data name="UserCredentialNameAlreadyExist" xml:space="preserve">
+    <value>These user credentials already exists.</value>
+  </data>
+  <data name="NoCredentialsHaveBeenSetup" xml:space="preserve">
+    <value>No user credentials have been setup.</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="NoResultsFound" xml:space="preserve">
+    <value>No results found.</value>
+  </data>
+  <data name="NewConfirmation" xml:space="preserve">
+    <value>Clearing the groups and connections cannot be undone.  Are you sure you want to continue?</value>
+  </data>
+  <data name="ClearUserCredentialsConfirmation" xml:space="preserve">
+    <value>Clearing the user credentials cannot be undone.  Are you sure you want to continue?</value>
+  </data>
+  <data name="Unknown" xml:space="preserve">
+    <value>Unknown</value>
+  </data>
+  <data name="OpenConfirmation" xml:space="preserve">
+    <value>Opening another connections list will clear the groups and connections, which cannot be undone.  Are you sure you want to continue?</value>
+  </data>
+  <data name="DeleteGroupConfirmation" xml:space="preserve">
+    <value>Deleting this group will also delete all the connections.  Are you sure you want to continue?</value>
+  </data>
+  <data name="DuplicateNewName" xml:space="preserve">
+    <value>{0}_Copy</value>
+  </data>
+  <data name="PingNoSuccess" xml:space="preserve">
+    <value>[{0}]: Status: {1}, Round Trip Time: {2}, Bytes: {3}.</value>
+  </data>
+  <data name="PingSuccess" xml:space="preserve">
+    <value>[{0}]: Address: {1}, Status: {2}, Round Trip Time: {3}, Bytes: {4}.</value>
+  </data>
+  <data name="NoProgramHasBeenSpecified" xml:space="preserve">
+    <value>No program has been specified.</value>
+  </data>
+  <data name="ProgramDoesNotExist" xml:space="preserve">
+    <value>The program specified does not exist.</value>
+  </data>
+  <data name="WorkingDirectoryDoesNotExist" xml:space="preserve">
+    <value>Working directory does not exist.</value>
+  </data>
+  <data name="ANameHasNotBeenEntered" xml:space="preserve">
+    <value>A name has not been entered.</value>
+  </data>
+  <data name="ShutdownRestartWarning" xml:space="preserve">
+    <value>Warning, all session data on the target machine will be lost.  Are you sure you want to continue?</value>
+  </data>
+  <data name="ShutdownError" xml:space="preserve">
+    <value>Unable to perform action. Check your privileges.</value>
+  </data>
+  <data name="Terms" xml:space="preserve">
+    <value>Terms</value>
+  </data>
+  <data name="AnUpdateHasBeenFound" xml:space="preserve">
+    <value>An update has been found:</value>
+  </data>
+  <data name="NoUpdatesAvailable" xml:space="preserve">
+    <value>No Updates Available</value>
+  </data>
+  <data name="PingingAddress" xml:space="preserve">
+    <value>Pinging {0}...</value>
+  </data>
+  <data name="PingResultsForAddress" xml:space="preserve">
+    <value>Ping results for {0}:</value>
+  </data>
+  <data name="Available" xml:space="preserve">
+    <value>Available</value>
+  </data>
+  <data name="ConnectionStatuses" xml:space="preserve">
+    <value>Connection statuses ({0} of {1} available):</value>
+  </data>
+  <data name="Unavailable" xml:space="preserve">
+    <value>Unavailable</value>
+  </data>
+  <data name="PingingNamedAddress" xml:space="preserve">
+    <value>Pinging '{0}' at {1}...</value>
+  </data>
+  <data name="CheckingConnectionStatus" xml:space="preserve">
+    <value>Checking connection status {0} of {1}... </value>
+  </data>
+  <data name="Restart" xml:space="preserve">
+    <value>Res_tart</value>
+  </data>
+  <data name="Stop" xml:space="preserve">
+    <value>S_top</value>
+  </data>
+  <data name="PingResultsForNamedAddress" xml:space="preserve">
+    <value>Ping results for '{0}' at {1}:</value>
+  </data>
+  <data name="DeleteUnavailableConnectionsConfirmation" xml:space="preserve">
+    <value>Deleting the unavailable connections cannot be undone.  Are you sure you want to continue?</value>
+  </data>
+  <data name="PingAddressUnavailable" xml:space="preserve">
+    <value>[{0}]: Address {1} is unavailable.</value>
+  </data>
+  <data name="OpenConnectionPlaceholder" xml:space="preserve">
+    <value>Enter an address to open/find...</value>
+  </data>
+  <data name="Minimize" xml:space="preserve">
+    <value>Minimize</value>
+  </data>
+  <data name="MinimizeToTray" xml:space="preserve">
+    <value>Minimize To Tray</value>
+  </data>
+  <data name="CloseBracket" xml:space="preserve">
+    <value>]</value>
+  </data>
+  <data name="ConnectionsOpen" xml:space="preserve">
+    <value>connections open</value>
+  </data>
+  <data name="OpenBracket" xml:space="preserve">
+    <value>[</value>
+  </data>
+  <data name="CloseMainWindowConfirmation" xml:space="preserve">
+    <value>You currently have active connections open.  Are you sure you want to exit?</value>
+  </data>
+  <data name="CheckForUpdates" xml:space="preserve">
+    <value>Check For Updates</value>
+  </data>
+  <data name="CheckingForUpdates" xml:space="preserve">
+    <value>Checking For Updates...</value>
+  </data>
+  <data name="NewUpdateAvailable" xml:space="preserve">
+    <value>Version '{0}', released on '{1}' is now available.  Would you like to download this update now?</value>
+  </data>
+  <data name="DeleteSelectedConnectionsConfirmation" xml:space="preserve">
+    <value>Deleting the selected connections cannot be undone.  Are you sure you want to continue?</value>
+  </data>
+  <data name="UntitledConnection" xml:space="preserve">
+    <value>Untitled {0}</value>
+  </data>
+  <data name="CollectingDetails" xml:space="preserve">
+    <value>Collecting details for '{0}' at '{1}'...</value>
+  </data>
+  <data name="AllDetailsFor" xml:space="preserve">
+    <value>All details for '{0}' at '{1}':</value>
+  </data>
+  <data name="UnableToGetDetails" xml:space="preserve">
+    <value>Unable to get details for '{0}' at '{1}'.</value>
+  </data>
+  <data name="EditButtonText" xml:space="preserve">
+    <value>_Edit</value>
+  </data>
+  <data name="CollectingServices" xml:space="preserve">
+    <value>Collecting services for '{0}' at '{1}'...</value>
+  </data>
+  <data name="Running" xml:space="preserve">
+    <value>Running</value>
+  </data>
+  <data name="Stopped" xml:space="preserve">
+    <value>Stopped</value>
+  </data>
+  <data name="CollectingPhysicalDrives" xml:space="preserve">
+    <value>Collecting physical drives for '{0}' at '{1}'...</value>
+  </data>
+  <data name="CollectingProcesses" xml:space="preserve">
+    <value>Collecting processes for '{0}' at '{1}'...</value>
+  </data>
+  <data name="Ignored" xml:space="preserve">
+    <value>Ignored</value>
+  </data>
+  <data name="Started" xml:space="preserve">
+    <value>Started</value>
+  </data>
+  <data name="CouldNotHandleService" xml:space="preserve">
+    <value>Could Not Handle Service</value>
+  </data>
+  <data name="CannotFindService" xml:space="preserve">
+    <value>Cannot Find Service</value>
+  </data>
+  <data name="ErrorConnectingToHost" xml:space="preserve">
+    <value>Error Connecting To Host</value>
+  </data>
+  <data name="MinimizedToTrayWarning" xml:space="preserve">
+    <value>Terms is still running and has been minimized to your tray.</value>
+  </data>
+  <data name="ConnectionsDeleted" xml:space="preserve">
+    <value>{0} connections have been deleted.</value>
+  </data>
+  <data name="DeleteConnectionsConfirmation" xml:space="preserve">
+    <value>Deleting the connections cannot be undone.  Are you sure you want to continue?</value>
+  </data>
+  <data name="CachedCredentialsDeleted" xml:space="preserve">
+    <value>{0} possible cached credentials have been deleted.</value>
+  </data>
+</root>

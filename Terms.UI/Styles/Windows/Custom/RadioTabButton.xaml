@@ -1,0 +1,36 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Style x:Key="RadioTabButton" TargetType="{x:Type RadioButton}">
+        <Setter Property="IsTabStop" Value="False" />
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type RadioButton}">
+                    <Border
+                        Name="Border"
+                        Margin="10,5,0,0"
+                        Padding="2"
+                        Background="Transparent"
+                        CornerRadius="2,0,0,2">
+                        <TextBlock
+                            Name="TextBlock"
+                            Margin="10,5,0,0"
+                            Padding="5,0,10,5"
+                            VerticalAlignment="Center"
+                            Foreground="White"
+                            TextAlignment="Right">
+                            <ContentPresenter />
+                        </TextBlock>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsChecked" Value="true">
+                            <Setter TargetName="Border" Property="Background" Value="White" />
+                            <Setter TargetName="Border" Property="Margin" Value="10,5,-1,0" />
+                            <Setter TargetName="TextBlock" Property="Foreground" Value="Black" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

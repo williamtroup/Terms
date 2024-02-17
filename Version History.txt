@@ -1,0 +1,374 @@
+v0.9.5.0:
+-	Renamed the "Update" button on the "Options" window to "Apply".
+-	Added "Cached Credentials" to "Delete All" on the main window.  This will delete any cached credentials and show a finished message at the end.
+-	The "Pick Credentials" window now shows an icon next to the text.
+-	The "Move Connection(s)" window now shows an icon next to the text.
+-	Fixed a fault that would caused the main window to sometimes loose focus when closing the "About" window.
+-	Fixed a fault that caused an empty username to appear in the "Connections Running" when the credentials are entered manually.
+-	Fixed a fault in the "Connections" context menu that caused the "Duplicate" menu item to appear as "Unused".
+-	Added "Copy:" menu options to the "Connections" context menu (with "Name" and "Address" options).  Allows copying of specific data to the clipboard.
+
+v0.9.4.0:
+-	Type checking support in the "Connection Details" window (Date/Time values, lists (etc) are now shown correctly).
+-	Minor wording changes to the "Connection Details" window (removed unneeded words).
+-	Added message stages to the "Connection Details" window when collection data.
+-	Fixed a minor tabbing issue on the "Connection Details" window.
+-	Added "Refresh" to the "Connection Details" window (clears the lists and collects all the data again).
+-	Added "Only show the stopped services" to the "Services" section on the "Connection Details" window (remembered between uses).
+-	Added full key down searching support for all column based lists (across all windows).
+-	Added "Start Service" and "Stop Service" support on the "Connection Details" window (new context menu for the "Services" section).
+-	Added "Processes" section to the "Connection Details" window (shows the ID and name of which process).
+-	Added "Physical Drives" section to the "Connection Details" window (shows the drive letter and volume of each drive).
+-	Improved the names of the columns on the "Connection Details" window.
+-	Fixed a fault that sometimes caused the column widths on the "Connection Details" window to be forgotten.
+-	Fixed some spacing issues around the check boxes and radio buttons.
+-	Added hover effect to list items across all windows (now more obvious where the mouse is).
+-	The "Get Host Name From Address" in the "Add New Connection" window will now maintain the original name if nothing is found.
+-	Fixed a fault that allowed focus borders to appear on various controls (looks horrible on a styled design).
+-	The "About" window no longer shows a focus border for the text box when selecting text (licence coming soon).
+-	All text selection colours now use a built in style (no longer the base Windows colour).
+-	Added new columns to the "Services" section on the "Connection Details" window, which support to copy the name to the clipboard.
+-	Added "Allow multiple connection management" option to the "Add New Group" window (when turned off, it prevents multiple connection selecting).
+-	The "Add New Group" window now maintains the size of the "Notes" field when areas are hidden.
+-	Fixed a fault that caused text to become slightly blurred when a text field is focused.
+-	Added "Service Management..." context menu item to the main window (allows starting/stopping of a specific service on all selected connections).
+-	The total credentials check now verify that the credentials are actually enabled.
+-	The UI for the "Add New User Credentials" window has been completely redesigned, which now uses a side panel to open areas.
+-	The UI for the "Add New Group" window has been completely redesigned, which now uses a side panel to open areas.
+-	Fixed a fault that caused error messages to remain displayed once an item has been added (all add/edit windows).
+-	All text fields throughout the program now use styled context menus.
+-	The system tray context menu and tooltip is now fully styled using the standard layout styles.
+-	The "Ping Connection" window will now pause all pinging while the "Save As" dialog is open.
+- 	The "Connections Running" running area now shows the username next to the connection name for all connections currently open.
+-	When the option "Show in the taskbar" option is disabled, a warning notification is now shown when minimizing the main window (once in each use).
+-	Moved all the extra "Connections" context menu items under a new sub menu called "Options:".
+-	Added "Delete All:" menu options to the "Connections" context menu (with "Unused" and "Disabled" options).
+
+v0.9.3.0:
+-	Connections now open a lot faster when more than one is opened.
+-	Renamed "Invert Selection" to "Select Inverse" on the "Connections" context menu.
+-	Added a "Connections Running" area to the main window (off by default, only available under some bit architecture conditions) for managing the open connections.
+-	Added "Show the 'Running Connections' area" setting to the "Options" window (under new "Connections" tab, defaults to false).
+-	Added "When connections are running, show exit confirmation message" setting to the "Options" window (under "Connections" tab, defaults to true).
+-	Context menus on the main window now make it more obvious what the default items are (bold).
+-	On the "Pick Credentials" window, the "Enter Manually" button is now disabled when opening more than one connection (not realistically usable).
+-	The group context menu item "Remove" now has the shortcut "Ctrl+Del".
+-	The connection context menu item "Remove" now has the shortcut "Del".
+-	Added a close image to the system tray menu item "Exit".
+-	The ping button next to the address field on the "Add New Connection" window is now question mark instead of "..." (fits main window design).
+-	Tooltip improvements to the "Add New Connection" window.
+-	Fixed a fault that sometimes caused a crash when pressing "Enter Manually" button on the "Pick Credentials" window.
+-	The "Enabled" checkbox on the "Add New Connection" window is now checked by default when adding a new connection.
+-	Added "?" ping button to the "Shutdown/Restart Connection" window (next to the "Address" field).
+-	The "Check For Updates" link on the "About" window no longer launches a seperate window.  All checking is now done within the window (messages are shown for the statuses).
+-	Added "Check to see if new updates are available" to the "Startup" tab on the "Options" window (defaults to true).
+-	Fixed a fault that prevented the last selected Group/Connection on the main window being in view when Terms is first opened.
+-	The scrollbars now make it more obvious when the main scrolling buttons cannot be used.
+-	The context menus now have much better styles and hover effects (cleaner to look at and more smooth).
+-	Renamed all "Remove" items to "Delete" (bit more traditional with standard UIs).
+-	Added "Fade the main window in/out on startup/shutdown" to the "Startup" tab on the "Options" window (defaults to true).
+-	Fixed a bug that prevented the main window applying the change settings after using the "Options" window.
+-	Applying settings to the main window after pressing "Update" on the "Options" no longer reads all settings again (not needed, now much faster).
+-	The connection context menu item "Select Inverse" now has the shortcut "Ctrl+I".
+-	The connection context menu item "Select All" is now disabled if everything is selected (or nothing is available to select).
+-	When entering an address in the "Open New Connection" area on the main window, if the address exists in the current connection list, it's automatically selected.
+-	The "Enter an address to open..." placeholder to the "Open New Connection" area on the main window now says "Enter an address to open/find...".
+-	Fixed a fault that allowed the placeholder to the "Open New Connection" area on the main window to be tricked when entering different case letters.
+-	Added full column header sorting support across all windows (not remembered, as the list order is remember between each use).
+-	All column headers are now cleaner in appearance and display a hover effect when the mouse is over them.
+-	All buttons and column headers now show a mousedown effect when clicked.
+-	Fixed a fault that allowed all column headers across all windows to be re-ordered.
+-	Fixed a styling issue that caused the scroll bar buttons to appear white when pressed.
+-	All check/option boxes across all windows now show a different color for the box area when the mouse is over them.
+-	Fixed a fault that allowed a whole area on specific windows to check/select check/option boxes.
+-	Greyed-out logs in the "Ping Connection" window are now also shown in italic (consistent with everything else).
+-	All text/passwords fields across all windows now show a different color for the box area when the mouse is over them (except the main window).
+-	All text/passwords fields now show a blue effect when focused (except the main window).
+-	Some confirmation messages now have the option to turn them off (easier than going though the "Options" window).
+-	The "Shutdown/Restart" window now shows the name of the connection.
+-	The "Shutdown/Restart" window now shows greyed out text for areas you cannot edit.
+-	Added support to shutdown/restart multiple connections (when used, the "Name" and "Address" fields on "Shutdown/Restart" window are hidden).
+-	Deleting connections on the main window now shows a confirmation message.
+-	Added "Update 'Last Accessed' when connections are shutdown/restarted" to the "Connections" tab on the "Options" window (defaults to false).
+-	Added support for "Search Groups", "Search Connections" and "Search Both" to the "Search" window (saved between search uses).
+-	The "Shutdown/Restart" window now remembers the last message and delay used between uses (only saved if a connection is actually shutdown/restarted).
+-	Fixed a fault that sometimes allowed the "Enter Manually" button on the "Pick Credentials" to login using that last used credentials (cached in windows).
+-	Added a new "Details" window, which collects information about the specific connection address (OS, Version, manufacturer, running services, etc).
+-	Added "Details" to the connections context menu on the main window (uses the "Pick Credentials" window to connect to the target connection).
+-	The UI for the "Add New Connection" window has been completely redesigned, which now uses a side panel to open areas.
+-	The UI for the "Options" window has been completely redesigned, which now uses a side panel to open areas.
+-	If a name is available on the "Add New Connection" window, opening the "Ping Connection" window will show it.
+
+v0.9.2.0:
+-	Internal clean-ups and code optimizations.
+-	Added support to disable connections (you won't be able to connect, ping, check status or shutdown/restart them).
+-	Renamed all "Start-Up" word usages to "Startup".
+-	Added "Allow multiple instances to be used" setting to the "Options" window (under "Startup" tab, defaults to false).
+-	Added full tray icon (system tray) support (with a basic menu for the time being).
+-	Added "Show in the taskbar" setting to the "Options" window (under "Display" tab, defaults to true).
+-	Fixed a fault that allowed double checking when determining if more than one instance is open.
+-	Brand new "About" window (much nicer).
+-	The "Import Terminals XML File" button on the main window is now grouped with the "New, Open and Save" buttons.
+-	Added "Show 'Connection Management' buttons in the title bar" setting to the "Options" window (under "Display" tab, defaults to true).
+-	Increased the minimum width of the main window (stops overlaps).
+-	Minor title case change when connections are open and improved the formatting.
+-	Disabled entries in any list are now shown in and grey and italic (this does not apply to the "Ping Connection" window).
+-	Fixed a fault that sometimes prevented the window position to be saved when double-clicking the main window title bar (to dock the window).
+-	Added "Show 'connections open' in the title bar (when available)" setting to the "Options" window (under "Display" tab, defaults to true).
+-	Clicking the website link in the "About" window will now close the window.
+-	The confirmation "Message" window now auto sizes its height based on the message size (much nicer).
+-	Added "Show options" option (on by default) to the "Search" window (unchecking it hides all the additional options and shrinks the window).
+-	Added images to the buttons in the "Open New Connection" area on the main window.
+
+v0.9.1.0:
+-	PLEASE NOTE:  All connections and credentials will need to be added again.
+-	Added "Total time (milliseconds) between failed pings:" setting to the "Options" window (under "Pinging" tab.  Defaults to 5000 milliseconds).
+-	Minor setting renaming under the "Pinging" tab on the "Options" window.
+-	Internal code changes, which should give us another speed jump.
+-	The minimum and maximum values allowed for ping times (in the "Pinging" tab on the "Options" window) are 500 and 60000.
+-	On the "Add New Connection" window, the maximum "Port" value allowed is now 65535.
+-	On the "Add New Connection" window, the minimum width and height for a connection are now 640 and 480.
+-	Added an "Enter an address to open..." placeholder to the "Open New Connection" area on the main window.
+-	Improved shutdown times (due to the "Ping Connection" and "Connection Statuses" windows hanging on some thread calls).
+-	Massive split out of saved areas, now "connections.xml", "credentials.xml" and "settings.xml" store the settings.
+-	As part of the settings shift, a massive speed jump in loading and closing Terms has been implemented.
+-	Fixed a bug that caused the "Import" button on the "User Credentials" page to not update the list properly ("Remove" was crashing the program).
+
+v0.9.0.0:
+-	PLEASE NOTE:  You will have to set your column widths on the main window again, sorry.
+-	The "Ping Connection" window now has a new option to allow auto-scrolling to the bottom of the logs when new logs are added (on by default).
+-	The "Ping Connection" window will now show the connection name being pinged (if an connection has a name).
+-	Minor spacing improvements to the "Connection Statuses" window.
+-	Fixed a minor fault that sometimes prevented the main window showing the right title (when connections are open).
+-	The "Connection Statuses" window now has a new option to allow auto-scrolling to the bottom of the list when new items are added (on by default).
+-	Added "Stop/Restart" support to the "Connection Statuses" window (which stops all status checking and allows you to view the results much more easily).
+-	The "Connection Statuses" window now shows the total number of connections it has processed out of the number it's checking.
+-	Fixed a fault that prevented using the "Connection Statuses" when for the top group.
+-	The "Connection Statuses" window now states the total connections that are available/unavailable in the status results message.
+-	The "Ping Connection" window now supports "Stop/Restart" for the stop button (restarting will clear existing results).
+-	If only 1 connection is selected, all the connections in the selected group will be used in the "Connections Statuses" window (otherwise, the selected ones will be used).
+-	Added a "Date/Time" column to the "Connection Statuses" window.
+-	Increased the width of the "Connection Statuses" window and added support to resize the columns (remembered between uses).
+-	Added support to resize the columns on the "User Credentials" window (remembered between uses).
+-	Fixed a major fault that prevented saved connections lists from being opened.
+-	Fixed a fault that caused all settings to be included in saved files.
+-	The confirmation message for the "Open" button on the main window is only shown when connections are available (and the optional support setting is turned on).
+-	Text shown in disabled text fields is now a lighter grey (more obvious that the field is disabled).
+-	Added title bar context menu to the "Search" window.
+-	Added "Remove Unavailable Connections" support to the "Connection Statuses" window (removes them from the main window and closes the "Connections Statuses" window).
+-	Minor code optimizations to overall core (should give a nice little speed jump).
+-	Added "Enabled" support on the "Add User Credentials" window (defaults to on).  When disabled, the credentials will not show up in the "Pick Credentials" window.
+-	Added an "Enabled" column to the "User Credentials" window (increased the width of the window to fit).
+-	Enhanced the layout for the "Add User Credentials", "Add New Group", "Shutdown/Restart", "Change All Passwords", "Add New Connection", "Options", "Search" and "Updates" windows.
+-	Slightly increased the width and height for the "Search" window.
+-	Fixed a fault that caused the "Updates" window to behave slowly and sometimes lock up.
+-	Added main window title bar button "Check All Connection Statuses" (checks all the connections within every group).
+-	Added "Only Show Unavailable Connections" to the "Connection Statuses" window (remembered between uses, off by default).
+-	Added "Import/Export" support to the "User Credentials" window (saved as XML files).
+-	Added "Ping" support to the "Open New Connection" area on the main window.
+-	The main window is now minimized (if the setting is turned on) when opening a connection from the "Open New Connection" area.
+-	Increased the height of the "Move Connections" window.
+-	Fixed a fault that caused the "Connection Statuses" window to sometimes crash the program.
+-	Fixed a fault that caused the "Ping Connection" window to sometimes crash the program.
+-	Fixed a fault that sometimes prevented the "Ping Connection" window from writing logs.
+-	Fixed a fault that sometimes caused the "Connection Statuses" window to never finish checking all connections (stuck forever).
+-	Added 64bit building support (will eventually become the default).
+-	Added support to the "Ping Connection" window to show bad requests in grey and successful requests in black.
+-	On the "Connection Statuses" window, connections that are "Unavailable" are now shown in a grey font-colour.
+-	On the "User Credentials" window, credentials that are now enabled are now shown in a grey font-colour.
+-	Empty groups on the main window are now enabled are now shown in a grey font-colour.
+-	Resizing the groups area on the main window should now be slightly easier.
+
+v0.8.0.0:
+-	Fixed a minor issue when loading the columns widths in the main window (rare, but does happen).
+-	Added experimental "Shutdown/Restart" menu option to the connections context menu (either shutdown or restart a machine, with a message and delay support).
+-	Added a brand new icon, which is much easier to see on the taskbar.
+-	The main window title bar will now show when connections are open (launched from Terms or manually).
+-	Added support to check for new updates via the "About" window.
+-	Removed all uses of the word "please", with some minor text improvements.
+-	Added "Delete cached credentials after connecting" to the "Add New Connection" window (removes the cached credentials in windows).
+-	Increased the default width for the Groups section on the main window.
+-	Added "Start in last known position" to the "Add New Connection" window (still defaults to full-screen).
+-	Some minor text adjustments to the "Add New Connection" window.
+-	Added "Allow 'User Credentials' picking when opening connections" to the "Options" window under "Display" (defaults to true, applies to the Open Connection area only).
+-	Increased the width of the "Options" window to make things look a little bit cleaner.
+-	The milliseconds that a program waits to exit (before opening a connection) now defaults to seconds (settings will have to be re-applied).
+-	Fixed a fault that caused the "Ping Connection" window to freeze when an address is not available.
+-	The "Ping Connection" window now makes it more obvious which address it's pinging.
+-	Added a new loading screen (can be turned off via the "Options" window and is on by default) which is shown when loading the main window.
+-	The main window now fades in/out on load/exit.
+-	Added "Statuses" menu option to the connections context menu (shows a window which reports the status of each connection).
+
+v0.7.0.0:
+-	Pressing tab in the main window will no longer focus the section resizer.
+-	Added an "Open New Connection" area to the main window (allows quick opening/adding of new addresses to the current group).
+-	Added a new option to the "Display" tab in the "Options" window to turn on/off the "Open New Connection" area on the main window (off by default).
+-	When the "Search" window is opened when closing the program, the settings most recently used are now saved correctly (window position, search text, etc).
+-	Fixed a strange shortcut display issue with the "Open All.." menu items (on the group's context menu).
+-	The picked credentials on the "Pick Credentials" window is now remembered for each connection (the item is selected in the list when the window is opened).
+-	Added a new option to the "Display" tab in the "Options" window to disable remembering the last credentials picked for a connection (off by default).
+-	Fixed a fault that caused removed credentials on the "User Credentials" window to be remembered.
+-	Added "Move Up" and "Move Down" support to the "User Credentials" window.
+-	Minor layout enhancements to the "User Credentials" window.
+
+v0.6.1.0:
+-	Minor wording changes on the "Options" window (makes more sense with the recent changes).
+-	Passwords are no longer stored in a decrypted format in memory (much more secure and faster when loading/closing Terms).
+-	Added "Clear" to the "Options" window with support to clear the "Last Accessed" Date & Times for all connections across all groups.
+-	Changed the default port for connections from 3390 to 3389 (while improving port pass-overs to the active connection).
+-	Added clear all ports (reverts them to the default) support to the "Clear" tab in the "Options" window.
+-	Fixed a crash occurring when adding new connections (oops).
+
+v0.6.0.0:
+-	Fixed a fault that allowed duplicate connection names when moving connections from one group to another.
+-	Added shortcut to the groups context menu item "Open All..." (press "Ctrl+Enter").
+-	Fixed a fault that allowed double-clicking (with the wrong mouse button) on the lists within the "Pick Credentials", "Move Connections" and "User Credentials" windows.
+-	The context menu for the main window now shows the correct icons (same as the ones shown on the title bar).
+-	Added "Working Directory" support for "Before Connecting" in the "Add New Connection" window (sets the working directory for the program opened).
+-	Added "Wait for program to be closed" support for "Before Connecting" in the "Add New Connection" window (waits the program to close before opening the connection).
+-	Fixed some resetting issues on the "Add New Connection" window (after adding a connection).
+-	Credential setup now waits to finish before opening the connection (better when opening multiple connections).
+-	Added a new button to the title bar on the main window called "Open Computer Management".
+-	Added "Display" option to the "Options" window to auto-minimize the main window when connections are opened (off by default).
+-	Added "Start-Up" to the "Options" window and added support to start Terms on windows start-up.
+-	Fixed the keyboard tabbing order on the "Ping" window.
+-	Added "Save As" support to the "Ping" window (results will be saved in RTF format).
+-	Added "Stop" support to the "Ping" window (which stops all pinging and allows you to view the results much more easily).
+-	Increased the minimum width of the main window (to prevent overlaps and weird sizing issues).
+-	You can now ping addresses when adding/editing them via the "Add New Connection" window.
+-	If "Notes" have been added for a connection, a tooltip is now shown for that connection on the main window.
+-	ToolTips are now styled using the standard colours and layouts.
+-	Added "Notes" support to the "Add New Group" window (tooltips are now shown on the main window if notes are available).
+-	Added "Notes" support to "Add User Credentials" (tooltips are now shown on the "Credentials" and "Pick Credentials" windows if notes are available).
+-	Fixed a fault that prevent multiple lines in the "Notes" area on the "Add New Connection" window (also, pressing enter in that text field no longer closes the window).
+-	Added "Port" support to the "Add New Connection" window (defaults to 3390).
+-	Added "Always run this program" support for "Before Connecting" in the "Add New Connection" window (keeps the settings, but states if it should run).
+-	Fixed some spelling mistakes across various areas.
+-	Added support to auto-dock the main window when the title bar is double clicked (either to the left or right of the screen, based on the current position).
+-	Added "Wait (milliseconds) for program to be closed" support for "Before Connecting" in the "Add New Connection" window (only applied if "Wait for program to be closed" is enabled).
+-	Added "Allow all passwords to be changed" support to the "Add New Group" window (access button is now disabled on the main window if none are enabled).
+-	Fixed a fault that allowed empty names to be used on the "Add New Connection" window.
+-	Fixed a fault that allowed empty names to be used on the "Add New User Credentials" window.
+-	The "Add" button on the "Add New Group" window is now always enabled (due to more fields now being available).
+
+v0.5.0.0:
+-	Added "Clear" support to the "Search" window, which will clear the selected results on the main window and clear the text.
+-	Added "Match only used connections" to the "Search" window, which will ensure that only connections that have been used will be included in the search.
+-	Added "Duplicate..." support to the connections context menu (duplicates the connection within the selected group).
+-	Renamed some of the menu items in the context menus on the main window (un-needed words).
+-	Start-up and shutdown times have been greatly improved (shared XML documents, save mass reloading).
+-	Fixed a fault that prevented the scroll bar on the "Ping" window to not be styled.
+-	Added a small "Options" window (new button on the main title bar) contains some useful settings.
+-	Pinged connections will now update the "Last Accessed" section for a connection (new option, off by default).
+-	Fixed a fault that prevented the default values being applied to the "Add New Connection" window after a new connection is added (and the window remains open).
+-	Added "Notes" to the "Add New Connection" window (not shown in the main window).
+-	Fixed some alignment issues on the "Add New Connection" window.
+-	The time between pings (on the "Ping" window) is now configurable on the "Options" window (defaults to 2000 milliseconds).
+-	Fixed a fault that allowed connections with no Username/Password to be opened (remembered from previous connections).
+-	Added support to open multiple connections at the same time (the "Pick Credentials" window will be shown first if required).
+-	Added "Open All..." support to the groups context menu (selects all connections and attempts to open them).
+-	Removed "Change All Passwords..." from the groups context menu (it's now a title bar button next to "Options").
+-	Password text box characters now use the new window style character.
+-	Fixed a fault that allowed the main window to become maximized.
+-	Added "Before Connecting" to the "Add New Connection" window (will open a program with specific arguments before connecting).
+-	Fixed a fault that prevented the wrong tab being shown on the "Add New Connection" window when an error message is shown.
+-	Fixed a fault that caused connections to open when double clicking with the right mouse button.
+-	Fixed a fault that caused the connections context menu to remain open (for a few seconds) when opening the "Ping" window for a specific connection.
+-	The context menu for the main window now shows the correct shortcut keys.
+
+v0.4.0.0:
+-	Added support to ping specific connections (shown in a text window.  Each ping is sent every 2 seconds).
+-	Added "Get Host Name From Address" support to the Add/Edit connection window (a new "..." button next to the "Name" text field).
+-	The "Search" window now closes slightly faster (when saving its previously used settings).
+-	Added "Move..." support for the connections context menu (you can move/copy connections from one group to another).
+-	Added support to select multiple connections (for removing and moving only).
+-	When removing a group, if there are no connections are available, the confirmation message will no longer be shown.
+-	When removing a group, the last selected item index is maintained to ensure that a group is selected after the removal.
+-	Added "Select All", "Select None" and "Invert Selection" to the connections context menu.
+
+v0.3.3.0:
+-	Fixed a crash occurring when adding new connections.
+-	Slightly faster shutdown when the program is closed.
+-	Removing a group now asks for confirmation before said action is carried out.
+
+v0.3.2.0:
+-	 Fixed a fault that caused large memory usage when the program is opened/closed.
+-	Removed unneeded checks at start-up (slowing loading time down).
+-	Fixed a fault that caused empty entries to appear in the list when the settings file had been manually set.
+-	 General all-round performance enhancements (should be a lot faster when using it).
+-	Added "Last Accessed" column to the main window, which shows a Date/Time string stating when the connection was last used (defaults to "Unknown").
+-	Fixed a crash occurring when the program is started and it's already running.
+-	Changed the main icon from black to red (easier to see on Windows 10).
+-	Added a context menu to the title bar (consistent with the Windows design).
+-	All "Close window after editing" checkboxes are now hidden when editing any entry (makes more sense).
+-	When opening a connections list, a confirmation message will be shown first (as all existing groups and connections will be cleared).
+
+v0.3.1.0:
+-	Imported terminals that are not in groups are now added to a new group formatted "Ungrouped_HH_mm_ss_yyyy_MM_dd".
+-	When using the "Search" window (and "Show all matching items (hide all others)" is not selected), the selected items are now correctly focused.
+-	Fixed a fault that allowed "Editing" mode windows to stay open once the item had been edited.
+
+v0.3.0.0:
+-	Added "Show all matching items (hide all others)" option to the "Search" window (shows everything that matches the criteria and hides everything else).
+-	Fixed a fault that caused the value in "Connections" to not update when a connection is removed from a group.
+-	Improved the filter name used when importing a Terminals XML file (makes a little more sense).
+-	Renamed the "Manual" button on the "Pick Credentials" window to "Enter Manually".
+-	The "Add New Connection" window now uses a tabbed display to allow more options to be added.
+-	Added "Add New Connection" window option "Start in full-screen mode".
+-	Added "Add New Connection" window option "Span across multiple monitors (available area)".
+-	Added "Add New Connection" window option "Use a specific width and height for the window" (with new fields to specify the width/height).
+-	Added "Add New Connection" window option "Login using 'ADMIN' mode (to administer the server)".
+-	Fixed a bug that caused the wrong cursor to appear when selecting a search option using the mouse pointer.
+-	If the "Search" window was used when closing the program and a search was run, it's opened again and the search is run when the program is opened later.
+-	Improved start-up loading time (less re-opening of the settings).
+
+v0.2.2.0:
+-	When pressing "New" in the title bar, a confirmation message is now shown.
+-	When clearing the "User Credentials", a confirmation message is now shown.
+
+v0.2.1.0:
+-	Only one instance is now allowed to be opened of the program.
+-	Fixed the tab indexes on the "Pick User Credentials" window.
+-	Added support to manually enter the username/password for connections launched from the "Pick User Credentials" window (new button to do this).
+-	When the search window does not find any results, a message of "No results found" is now shown in the window.
+-	Fixed a fault that caused the "Search" window not to find connections correctly when searching again.
+-	Fixed a fault that caused the "Search" to start from the wrong position when continuing on.
+
+v0.2.0.0:
+-	Added an about screen to get information about the program.
+-	More unified styling across all the windows.
+-	Added "Change All Passwords" support (new context menu item for the "Groups" list).
+-	Removed extra spacing in all the "Add/Edit" windows.
+-	Fixed a crash occurring when removing a group of connections.
+-	Disabled the control menu appearing on the "Main" window.
+-	Fixed a fault that allowed the "Main" window to be maximized.
+-	Fixed a fault that allowed multiple connections to be selected on the "Main" window.
+-	Fixed a fault that caused old connections to appear in the "settings.xml" file when a group has been renamed.
+-	Added "Move Up" and "Move Down" support for Group/Connection list items.
+-	Fixed a command window flickering effect when opening new connections.
+-	Fixed a fault that prevented editing Group/Connection entries when the name has not changed.
+-	Changed the encryption type so that it can be used on multiple machines.
+-	Fixed a fault that caused gaps to appear in the title bar.
+-	Added "New", "Open" and "Save As" support via new buttons on the title area.
+-	Fixed a strange shade appearing in between the lists on the "Main" window.
+-	Fixed a fault that allowed some of the dialog windows to be resized.
+-	Fixed a bug that caused the wrong error message to appear when adding a connection that already exists.
+-	Added support to add a list of user credentials (which can be picked when connecting to a connection).
+-	New connections added will ask if you want to supply the credentials (if not, you will pick from the user credentials list).
+-	Fixed some issues around the spacing used for the list items.
+-	Renamed from the "Close" buttons to "Cancel" (makes a bit more sense now).
+-	The last selected items in the lists on the "Main" window are now remembered between uses.
+-	Loading display settings now only occurred after all previous settings and lists have been loaded.
+-	Improved the presentation of the "Main" window (borders are no longer thick, etc).
+-	Re-organised the context menus a little better (makes slightly more sense).
+-	Added "Open" support to the context menu for the Connections list (with Enter shortcut key support).
+-	Added a warning message to the "Change All Passwords" window.
+-	The group section column "Items" is now "Connections".
+-	Increased the default widths for some of the columns and the split size between the lists.
+-	Minor spacing fixes on the "About" window.
+-	Added a "Search" window, which will use advanced options to search through the Groups and Connections.
+-	Added icons to the "Remove" menu items in both context menus.
+-	Added support to import the "Terminals" XML file (will require user credentials to be set up, as credentials are not copied).
+
+v0.1.0.0:
+-	Initial version.

@@ -1,0 +1,720 @@
+﻿<Window
+    x:Class="Terms.Main"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:tb="http://www.hardcodet.net/taskbar"
+    Title="Terms"
+    Width="600"
+    Height="350"
+    MinWidth="600"
+    MinHeight="300"
+    Activated="Window_OnActivated"
+    AllowsTransparency="True"
+    Background="Transparent"
+    Closing="Window_OnClosing"
+    Deactivated="Window_OnDeactivated"
+    PreviewKeyDown="Window_OnPreviewKeyDown"
+    ResizeMode="CanResizeWithGrip"
+    SizeChanged="Window_OnSizeChanged"
+    WindowStartupLocation="CenterScreen"
+    WindowStyle="None"
+    mc:Ignorable="d">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles/Windows/NoEffects/TextBox.xaml" />
+                <ResourceDictionary Source="Styles/Windows/Button.xaml" />
+                <ResourceDictionary Source="Styles/Windows/ListView.xaml" />
+                <ResourceDictionary Source="Styles/Windows/ResizeGrip.xaml" />
+                <ResourceDictionary Source="Styles/Windows/ScrollViewer.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Grid>
+        <Border Name="WindowBorder" Style="{DynamicResource BaseWindowNavigationBorder}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <tb:TaskbarIcon
+                    Name="tbSystemTray"
+                    IconSource="/Images/main_icon.ico"
+                    MenuActivation="RightClick"
+                    TrayMouseDoubleClick="NotifyTrayIcon_TrayMouseDoubleClick"
+                    Visibility="Visible">
+
+                    <tb:TaskbarIcon.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Click="Button_About_OnClick" Header="_About..." />
+                            <Separator />
+                            <MenuItem
+                                Click="NotifyTrayIcon_TrayMouseDoubleClick"
+                                FontWeight="Bold"
+                                Header="_Show" />
+                            <Separator />
+                            <MenuItem Click="Button_Close_OnClick" Header="E_xit">
+                                <MenuItem.Icon>
+                                    <Image Source="images/Menus/CLOSE.png" />
+                                </MenuItem.Icon>
+                            </MenuItem>
+                        </ContextMenu>
+                    </tb:TaskbarIcon.ContextMenu>
+                </tb:TaskbarIcon>
+
+                <Rectangle
+                    Grid.Row="0"
+                    Margin="-1,-1,-1,-1"
+                    Fill="Gray" />
+
+                <TextBlock
+                    Name="lblTitle"
+                    Grid.Row="0"
+                    Margin="-1,-1,-1,-1"
+                    Padding="5"
+                    Background="Transparent"
+                    FontSize="14"
+                    Foreground="White"
+                    MouseDown="Title_OnMouseDown">
+
+                    <Run Text="Terms" />
+                    <Run Name="rTermsTitleOpen" Text="[" />
+                    <Run
+                        Name="rTermsTitleConnectionsOpen"
+                        FontStyle="Italic"
+                        FontWeight="Bold"
+                        Text="connections open" />
+                    <Run Name="rTermsTitleClose" Text="]" />
+
+                    <TextBlock.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem
+                                Name="mnuMinimize"
+                                Click="Button_Minimize_OnClick"
+                                Header="_Minimize">
+                                <MenuItem.Icon>
+                                    <Image Source="images/Menus/MINIMIZE.png" />
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <Separator />
+                            <MenuItem
+                                Click="Button_Close_OnClick"
+                                FontWeight="Bold"
+                                Header="E_xit"
+                                InputGestureText="Alt+F4">
+                                <MenuItem.Icon>
+                                    <Image Source="images/Menus/CLOSE.png" />
+                                </MenuItem.Icon>
+                            </MenuItem>
+                        </ContextMenu>
+                    </TextBlock.ContextMenu>
+                </TextBlock>
+
+                <StackPanel
+                    Grid.Row="0"
+                    HorizontalAlignment="Right"
+                    Orientation="Horizontal">
+
+                    <StackPanel
+                        Name="spConnectionManagementButtons"
+                        Margin="0,0,10,0"
+                        HorizontalAlignment="Right"
+                        Orientation="Horizontal">
+
+                        <Button
+                            Name="bNew"
+                            Click="Button_New_OnClick"
+                            Style="{DynamicResource BaseWindowNavigationButton}"
+                            ToolTip="New (Ctrl+N)">
+                            <StackPanel>
+                                <Image Source="Images/Buttons/NEW.png" Style="{DynamicResource BaseWindowNavigationButtonImage}" />
+                            </StackPanel>
+                        </Button>
+
+                        <Button
+                            Name="bOpen"
+                            Click="Button_Open_OnClick"
+                            Style="{DynamicResource BaseWindowNavigationButton}"
+                            ToolTip="Open (Ctrl+O)">
+                            <StackPanel>
+                                <Image Source="Images/Buttons/OPEN.png" Style="{DynamicResource BaseWindowNavigationButtonImage}" />
+                            </StackPanel>
+                        </Button>
+
+                        <Button
+                            Name="bSaveAs"
+                            Click="Button_SaveAs_OnClick"
+                            Style="{DynamicResource BaseWindowNavigationButton}"
+                            ToolTip="Save As (Ctrl+S)">
+                            <StackPanel>
+                                <Image Source="Images/Buttons/SAVE.png" Style="{DynamicResource BaseWindowNavigationButtonImage}" />
+                            </StackPanel>
+                        </Button>
+
+                        <Button
+                            Click="Button_ImportFromTerminals_OnClick"
+                            Style="{DynamicResource BaseWindowNavigationButton}"
+                            ToolTip="Import Terminals XML File">
+                            <StackPanel>
+                                <Image Source="Images/Buttons/IMPORT.png" Style="{DynamicResource BaseWindowNavigationButtonImage}" />
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
+
+                    <StackPanel
+                        Margin="0,0,10,0"
+                        HorizontalAlignment="Right"
+                        Orientation="Horizontal">
+
+                        <Button
+                            Click="Button_Credentials_OnClick"
+                            Style="{DynamicResource BaseWindowNavigationButton}"
+                            ToolTip="User Credentials">
+                            <StackPanel>
+                                <Image Source="Images/Buttons/USERS.png" Style="{DynamicResource BaseWindowNavigationButtonImage}" />
+                            </StackPanel>
+                        </Button>
+
+                        <Button
+                            Name="bSearch"
+                            Click="Button_Search_OnClick"
+                            Style="{DynamicResource BaseWindowNavigationButton}"
+                            ToolTip="Search (Ctrl+F)">
+                            <StackPanel>
+                                <Image Source="Images/Buttons/SEARCH.png" Style="{DynamicResource BaseWindowNavigationButtonImage}" />
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
+
+                    <StackPanel
+                        Margin="0,0,10,0"
+                        HorizontalAlignment="Right"
+                        Orientation="Horizontal">
+
+                        <Button
+                            Click="Button_Options_OnClick"
+                            Style="{DynamicResource BaseWindowNavigationButton}"
+                            ToolTip="Options">
+                            <StackPanel>
+                                <Image Source="Images/Buttons/OPTIONS.png" Style="{DynamicResource BaseWindowNavigationButtonImage}" />
+                            </StackPanel>
+                        </Button>
+
+                        <Button
+                            Name="bChangeAllPasswords"
+                            Click="Button_ChangeAllPasswords_OnClick"
+                            Style="{DynamicResource BaseWindowNavigationButton}"
+                            ToolTip="Change All Passwords">
+                            <StackPanel>
+                                <Image Source="Images/Buttons/LOCK.png" Style="{DynamicResource BaseWindowNavigationButtonImage}" />
+                            </StackPanel>
+                        </Button>
+
+                        <Button
+                            Click="Button_OpenComputerManagement_OnClick"
+                            Style="{DynamicResource BaseWindowNavigationButton}"
+                            ToolTip="Open Computer Management">
+                            <StackPanel>
+                                <Image Source="Images/Buttons/MONITOR.png" Style="{DynamicResource BaseWindowNavigationButtonImage}" />
+                            </StackPanel>
+                        </Button>
+
+                        <Button
+                            Name="bCheckAllConnectionStatuses"
+                            Click="Button_CheckAllConnectionStatuses_OnClick"
+                            Style="{DynamicResource BaseWindowNavigationButton}"
+                            ToolTip="Check All Connection Statuses">
+                            <StackPanel>
+                                <Image Source="Images/Buttons/STATUS.png" Style="{DynamicResource BaseWindowNavigationButtonImage}" />
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
+
+                    <StackPanel
+                        Margin="0,0,5,0"
+                        HorizontalAlignment="Right"
+                        Orientation="Horizontal">
+
+                        <Button
+                            Click="Button_About_OnClick"
+                            Style="{DynamicResource BaseWindowNavigationButton}"
+                            ToolTip="About">
+                            <StackPanel>
+                                <Image Source="Images/Buttons/QUESTION.png" Style="{DynamicResource BaseWindowNavigationButtonImage}" />
+                            </StackPanel>
+                        </Button>
+
+                        <Button
+                            Name="bMinimize"
+                            Click="Button_Minimize_OnClick"
+                            Style="{DynamicResource BaseWindowNavigationButton}"
+                            ToolTip="Minimize">
+                            <StackPanel>
+                                <Image Source="Images/Buttons/MINIMIZE.png" Style="{DynamicResource BaseWindowNavigationButtonImage}" />
+                            </StackPanel>
+                        </Button>
+
+                        <Button
+                            Click="Button_Close_OnClick"
+                            Style="{DynamicResource BaseWindowNavigationButton}"
+                            ToolTip="Exit">
+                            <StackPanel>
+                                <Image Source="Images/Buttons/CLOSE.png" Style="{DynamicResource BaseWindowNavigationButtonImage}" />
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
+                </StackPanel>
+
+                <Border
+                    Name="InternalWindowBorder"
+                    Grid.Row="1"
+                    Margin="-3,-3,-3,-3"
+                    Background="White"
+                    BorderBrush="Gray"
+                    BorderThickness="5"
+                    CornerRadius="5">
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition
+                                Name="cdGroupSection"
+                                Width="245"
+                                MinWidth="200" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Name="cdRunningSection" Width="245" />
+                        </Grid.ColumnDefinitions>
+
+                        <ListView
+                            x:Name="lstvGroups"
+                            Grid.Column="0"
+                            Margin="3,3,0,69"
+                            GridViewColumnHeader.Click="Groups_ColumnHeader_Click"
+                            IsTabStop="False"
+                            KeyDown="Groups_OnKeyDown"
+                            SelectionChanged="Groups_SelectionChanged"
+                            SelectionMode="Single">
+
+                            <ListView.ContextMenu>
+                                <ContextMenu Name="cmGroupsContextMenu">
+                                    <MenuItem
+                                        Name="mnuGroup_OpenAll"
+                                        Click="MenuItem_Group_OpenAll_OnClick"
+                                        FontWeight="Bold"
+                                        Header="_Open All..."
+                                        InputGestureText="Ctrl+Enter" />
+                                    <Separator />
+                                    <MenuItem
+                                        Name="mnuGroup_MoveUp"
+                                        Click="MenuItem_Group_MoveUp_OnClick"
+                                        Header="Move _Up"
+                                        InputGestureText="Ctrl+Up">
+                                        <MenuItem.Icon>
+                                            <Image Source="images/Menus/UP.png" />
+                                        </MenuItem.Icon>
+                                    </MenuItem>
+                                    <MenuItem
+                                        Name="mnuGroup_MoveDown"
+                                        Click="MenuItem_Group_MoveDown_OnClick"
+                                        Header="Move Do_wn"
+                                        InputGestureText="Ctrl+Down">
+                                        <MenuItem.Icon>
+                                            <Image Source="images/Menus/DOWN.png" />
+                                        </MenuItem.Icon>
+                                    </MenuItem>
+                                    <Separator />
+                                    <MenuItem
+                                        Name="mnuGroup_Delete"
+                                        Click="MenuItem_Group_Delete_OnClick"
+                                        Header="_Delete"
+                                        InputGestureText="Ctrl+Del">
+                                        <MenuItem.Icon>
+                                            <Image Source="images/Menus/DELETE.png" />
+                                        </MenuItem.Icon>
+                                    </MenuItem>
+                                    <Separator />
+                                    <MenuItem
+                                        Name="mnuGroup_Edit"
+                                        Click="MenuItem_Group_Edit_OnClick"
+                                        Header="_Edit..." />
+                                </ContextMenu>
+                            </ListView.ContextMenu>
+
+                            <ListView.Resources>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+                                </Style>
+                            </ListView.Resources>
+
+                            <ListView.ItemContainerStyle>
+                                <Style BasedOn="{StaticResource {x:Type ListViewItem}}" TargetType="ListViewItem">
+                                    <Setter Property="Visibility" Value="{Binding Visibility}" />
+                                    <Setter Property="ToolTip" Value="{Binding Notes}" />
+                                    <Setter Property="Foreground" Value="{Binding ForeColor}" />
+                                    <Setter Property="FontStyle" Value="{Binding FontStyle}" />
+                                </Style>
+                            </ListView.ItemContainerStyle>
+
+                            <ListView.View>
+                                <GridView AllowsColumnReorder="False">
+                                    <GridViewColumn
+                                        Width="120"
+                                        DisplayMemberBinding="{Binding Name}"
+                                        Header="Group:" />
+                                    <GridViewColumn
+                                        Width="100"
+                                        DisplayMemberBinding="{Binding TotalConnections}"
+                                        Header="Connections:" />
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+
+                        <Button
+                            Grid.Column="0"
+                            Height="30"
+                            Margin="3,3,0,36"
+                            VerticalAlignment="Bottom"
+                            Click="Button_AddNewGroup_OnClick"
+                            Content="Add New _Group"
+                            IsTabStop="False" />
+
+                        <Button
+                            Grid.Column="0"
+                            Height="30"
+                            Margin="3,3,0,3"
+                            VerticalAlignment="Bottom"
+                            Click="Button_AddNewConnection_OnClick"
+                            Content="Add New _Connection"
+                            IsEnabled="{Binding ElementName=lstvGroups, Path=SelectedItems.Count}"
+                            IsTabStop="False" />
+
+                        <GridSplitter
+                            Grid.Column="0"
+                            Width="3"
+                            Margin="0,0,-3,0"
+                            HorizontalAlignment="Right"
+                            Background="Transparent"
+                            IsTabStop="False" />
+
+                        <Grid Grid.Column="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition Name="rdOpenConnection" Height="33" />
+                            </Grid.RowDefinitions>
+
+                            <ListView
+                                x:Name="lstvConnections"
+                                Grid.Row="0"
+                                Margin="3,3,3,3"
+                                GridViewColumnHeader.Click="Connections_ColumnHeader_Click"
+                                IsTabStop="False"
+                                KeyDown="Connections_OnKeyDown"
+                                SelectionMode="Extended">
+
+                                <ListView.Resources>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+                                    </Style>
+                                </ListView.Resources>
+
+                                <ListView.ItemContainerStyle>
+                                    <Style BasedOn="{StaticResource {x:Type ListViewItem}}" TargetType="ListViewItem">
+                                        <EventSetter Event="MouseDoubleClick" Handler="Connections_OnMouseDoubleClick" />
+                                        <Setter Property="Visibility" Value="{Binding Visibility}" />
+                                        <Setter Property="ToolTip" Value="{Binding Notes}" />
+                                        <Setter Property="Foreground" Value="{Binding ForeColor}" />
+                                        <Setter Property="FontStyle" Value="{Binding FontStyle}" />
+                                    </Style>
+                                </ListView.ItemContainerStyle>
+
+                                <ListView.ContextMenu>
+                                    <ContextMenu Name="mnuConnectionsContextMenu">
+                                        <MenuItem
+                                            Name="mnuConnection_Open"
+                                            Click="MenuItem_Connection_Open_OnClick"
+                                            FontWeight="Bold"
+                                            Header="_Open..."
+                                            InputGestureText="Enter" />
+                                        <Separator />
+                                        <MenuItem
+                                            Name="mnuConnection_MoveUp"
+                                            Click="MenuItem_Connection_MoveUp_OnClick"
+                                            Header="Move _Up"
+                                            InputGestureText="Shift+Up">
+                                            <MenuItem.Icon>
+                                                <Image Source="images/Menus/UP.png" />
+                                            </MenuItem.Icon>
+                                        </MenuItem>
+                                        <MenuItem
+                                            Name="mnuConnection_MoveDown"
+                                            Click="MenuItem_Connection_MoveDown_OnClick"
+                                            Header="Move Do_wn"
+                                            InputGestureText="Shift+Down">
+                                            <MenuItem.Icon>
+                                                <Image Source="images/Menus/DOWN.png" />
+                                            </MenuItem.Icon>
+                                        </MenuItem>
+                                        <Separator />
+                                        <MenuItem Name="mnuConnection_Copy" Header="_Copy:">
+                                            <MenuItem Click="MenuItem_Connection_Copy_Name_OnClick" Header="_Name" />
+                                            <MenuItem Click="MenuItem_Connection_Copy_Address_OnClick" Header="_Address" />
+                                        </MenuItem>
+                                        <Separator />
+                                        <MenuItem
+                                            Name="mnuConnection_Delete"
+                                            Click="MenuItem_Connection_Delete_OnClick"
+                                            Header="_Delete"
+                                            InputGestureText="Del">
+                                            <MenuItem.Icon>
+                                                <Image Source="images/Menus/DELETE.png" />
+                                            </MenuItem.Icon>
+                                        </MenuItem>
+                                        <MenuItem Name="mnuConnection_DeleteAll" Header="Dele_te All:">
+                                            <MenuItem Click="MenuItem_Connection_DeleteAll_Unused_OnClick" Header="_Unused" />
+                                            <MenuItem Click="MenuItem_Connection_DeleteAll_Disabled_OnClick" Header="_Disabled" />
+                                            <Separator />
+                                            <MenuItem
+                                                Name="mnuConnection_DeleteAll_CachedCredentials"
+                                                Click="MenuItem_Connection_DeleteAll_CachedCredentials_OnClick"
+                                                Header="_Cached Credentials" />
+                                        </MenuItem>
+                                        <Separator />
+                                        <MenuItem
+                                            Name="mnuConnection_Move"
+                                            Click="MenuItem_Connection_Move_OnClick"
+                                            Header="_Move..." />
+                                        <MenuItem
+                                            Name="mnuConnection_Duplicate"
+                                            Click="MenuItem_Connection_Duplicate_OnClick"
+                                            Header="D_uplicate..." />
+                                        <Separator />
+                                        <MenuItem Name="mnuConnection_Options" Header="O_ptions:">
+                                            <MenuItem
+                                                Name="mnuConnection_Ping"
+                                                Click="MenuItem_Connection_Ping_OnClick"
+                                                Header="_Ping..." />
+                                            <MenuItem
+                                                Name="mnuConnection_Details"
+                                                Click="MenuItem_Connection_Details_OnClick"
+                                                Header="Deta_ils..." />
+                                            <MenuItem
+                                                Name="mnuConnection_Statuses"
+                                                Click="MenuItem_Connection_Statuses_OnClick"
+                                                Header="Sta_tuses..." />
+                                            <MenuItem
+                                                Name="mnuConnection_ShutdownRestart"
+                                                Click="MenuItem_Connection_ShutdownRestart_OnClick"
+                                                Header="S_hutdown/Restart..." />
+                                            <MenuItem
+                                                Name="mnuConnection_ServiceManagement"
+                                                Click="MenuItem_Connection_ServiceManagement_OnClick"
+                                                Header="Ser_vice Management..." />
+                                        </MenuItem>
+                                        <Separator Name="mnuConnection_SelectionSeparator" />
+                                        <MenuItem
+                                            Name="mnuConnection_SelectAll"
+                                            Click="MenuItem_Connection_SelectAll_OnClick"
+                                            Header="Select _All"
+                                            InputGestureText="Ctrl+A" />
+                                        <MenuItem
+                                            Name="mnuConnection_SelectNone"
+                                            Click="MenuItem_Connection_SelectNone_OnClick"
+                                            Header="Select _None"
+                                            InputGestureText="Ctrl+Z" />
+                                        <MenuItem
+                                            Name="mnuConnection_SelectInverse"
+                                            Click="MenuItem_Connection_SelectInverse_OnClick"
+                                            Header="Se_lect Inverse"
+                                            InputGestureText="Ctrl+I" />
+                                        <Separator />
+                                        <MenuItem
+                                            Name="mnuConnection_Edit"
+                                            Click="MenuItem_Connection_Edit_OnClick"
+                                            Header="_Edit..." />
+                                    </ContextMenu>
+                                </ListView.ContextMenu>
+
+                                <ListView.View>
+                                    <GridView AllowsColumnReorder="False">
+                                        <GridViewColumn
+                                            Width="100"
+                                            DisplayMemberBinding="{Binding Name}"
+                                            Header="Name:" />
+                                        <GridViewColumn
+                                            Width="150"
+                                            DisplayMemberBinding="{Binding Address}"
+                                            Header="Address:" />
+                                        <GridViewColumn
+                                            Width="150"
+                                            DisplayMemberBinding="{Binding Username}"
+                                            Header="Username:" />
+                                        <GridViewColumn
+                                            Width="150"
+                                            DisplayMemberBinding="{Binding AskForCredentialsYesNo}"
+                                            Header="Ask For Credentials:" />
+                                        <GridViewColumn
+                                            Width="150"
+                                            DisplayMemberBinding="{Binding LastAccessed}"
+                                            Header="Last Accessed:" />
+                                    </GridView>
+                                </ListView.View>
+                            </ListView>
+
+                            <Grid Grid.Row="1">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="25" />
+                                    <ColumnDefinition Width="25" />
+                                    <ColumnDefinition Width="25" />
+                                </Grid.ColumnDefinitions>
+
+                                <TextBox
+                                    Name="txtConnectionAddress"
+                                    Grid.Column="0"
+                                    Margin="3,0,3,3"
+                                    Padding="0,4,0,0"
+                                    IsTabStop="False" />
+
+                                <Button
+                                    Name="bPing"
+                                    Grid.Column="1"
+                                    Margin="0,0,3,3"
+                                    Click="Button_OpenConnectionArea_Ping_OnClick"
+                                    IsTabStop="False"
+                                    ToolTip="Ping">
+                                    <StackPanel>
+                                        <Image Source="Images/Buttons/QUESTION2.png" Style="{DynamicResource BaseWindowNavigationButtonImage}" />
+                                    </StackPanel>
+                                </Button>
+
+                                <Button
+                                    Name="bAddConnection"
+                                    Grid.Column="2"
+                                    Margin="0,0,3,3"
+                                    Click="Button_OpenConnectionArea_AddConnection_OnClick"
+                                    IsTabStop="False"
+                                    ToolTip="Add As New Connection">
+                                    <StackPanel>
+                                        <Image Source="Images/Buttons/PLUS.png" Style="{DynamicResource BaseWindowNavigationButtonImage}" />
+                                    </StackPanel>
+                                </Button>
+
+                                <Button
+                                    Name="bOpenConnection"
+                                    Grid.Column="3"
+                                    Margin="0,0,3,3"
+                                    Click="Button_OpenConnectionArea_OpenConnection_OnClick"
+                                    IsTabStop="False"
+                                    ToolTip="Open">
+                                    <StackPanel>
+                                        <Image Source="Images/Buttons/PLAY.png" Style="{DynamicResource BaseWindowNavigationButtonImage}" />
+                                    </StackPanel>
+                                </Button>
+                            </Grid>
+                        </Grid>
+
+                        <GridSplitter
+                            Name="gsRunningSplitter"
+                            Grid.Column="1"
+                            Width="3"
+                            Margin="0,0,0,0"
+                            HorizontalAlignment="Right"
+                            Background="Transparent"
+                            IsTabStop="False" />
+
+                        <ListView
+                            x:Name="lstvRunning"
+                            Grid.Column="2"
+                            Margin="0,3,3,3"
+                            GridViewColumnHeader.Click="Running_ColumnHeader_Click"
+                            IsTabStop="False"
+                            KeyDown="Running_OnKeyDown"
+                            SelectionMode="Extended">
+
+                            <ListView.ContextMenu>
+                                <ContextMenu Name="cmRunningContextMenu">
+                                    <MenuItem
+                                        Name="mnuRunning_Focus"
+                                        Click="MenuItem_Running_Focus_OnClick"
+                                        FontWeight="Bold"
+                                        Header="_Focus" />
+                                    <Separator />
+                                    <MenuItem
+                                        Name="mnuRunning_SetAsNormal"
+                                        Click="MenuItem_Running_SetAsNormal_OnClick"
+                                        Header="Set As N_ormal" />
+                                    <MenuItem
+                                        Name="mnuRunning_SetAsMinimized"
+                                        Click="MenuItem_Running_SetAsMinimized_OnClick"
+                                        Header="Set As _Minimized" />
+                                    <MenuItem
+                                        Name="mnuRunning_SetAsMaximized"
+                                        Click="MenuItem_Running_SetAsMaximized_OnClick"
+                                        Header="Set As Ma_ximized" />
+                                    <Separator />
+                                    <MenuItem
+                                        Name="mnuRunning_SelectAll"
+                                        Click="MenuItem_Running_SelectAll_OnClick"
+                                        Header="Select _All" />
+                                    <MenuItem
+                                        Name="mnuRunning_SelectNone"
+                                        Click="MenuItem_Running_SelectNone_OnClick"
+                                        Header="Select _None" />
+                                    <MenuItem
+                                        Name="mnuRunning_SelectInverse"
+                                        Click="MenuItem_Running_SelectInverse_OnClick"
+                                        Header="Select _Inverse" />
+                                    <Separator />
+                                    <MenuItem
+                                        Name="mnuRunning_Close"
+                                        Click="MenuItem_Running_Close_OnClick"
+                                        Header="_Close">
+                                        <MenuItem.Icon>
+                                            <Image Source="images/Menus/CLOSE.png" />
+                                        </MenuItem.Icon>
+                                    </MenuItem>
+                                </ContextMenu>
+                            </ListView.ContextMenu>
+
+                            <ListView.ItemContainerStyle>
+                                <Style BasedOn="{StaticResource {x:Type ListViewItem}}" TargetType="ListViewItem">
+                                    <EventSetter Event="MouseDoubleClick" Handler="Running_OnMouseDoubleClick" />
+                                </Style>
+                            </ListView.ItemContainerStyle>
+
+                            <ListView.Resources>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+                                </Style>
+                            </ListView.Resources>
+
+                            <ListView.View>
+                                <GridView AllowsColumnReorder="False">
+                                    <GridViewColumn
+                                        Width="100"
+                                        DisplayMemberBinding="{Binding Name}"
+                                        Header="Name:" />
+                                    <GridViewColumn
+                                        Width="150"
+                                        DisplayMemberBinding="{Binding Started}"
+                                        Header="Started:" />
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </Grid>
+                </Border>
+
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="150" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                </Grid>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>

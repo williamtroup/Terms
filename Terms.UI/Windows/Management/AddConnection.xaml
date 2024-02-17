@@ -1,0 +1,511 @@
+﻿<Window
+    x:Class="Terms.Windows.Management.AddConnection"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Width="550"
+    Height="300"
+    Closing="Window_OnClosing"
+    Style="{DynamicResource BaseDialogWindow}"
+    WindowStartupLocation="CenterOwner"
+    mc:Ignorable="d">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../../Styles/Windows/Custom/RadioTabButton.xaml" />
+                <ResourceDictionary Source="../../Styles/Windows/Button.xaml" />
+                <ResourceDictionary Source="../../Styles/Windows/CheckBox.xaml" />
+                <ResourceDictionary Source="../../Styles/Windows/PasswordBox.xaml" />
+                <ResourceDictionary Source="../../Styles/Windows/RadioButton.xaml" />
+                <ResourceDictionary Source="../../Styles/Windows/TextBox.xaml" />
+                <ResourceDictionary Source="../../Styles/Windows/ScrollViewer.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Grid Margin="0,0,0,0">
+        <Border Name="WindowBorder" Style="{DynamicResource BaseWindowNavigationBorder}" />
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="140" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <Border
+                Name="bdSidePanel"
+                Grid.Row="0"
+                Grid.RowSpan="2"
+                Grid.Column="0"
+                Margin="2"
+                Padding="0,5,0,0"
+                Background="Gray">
+
+                <StackPanel>
+                    <RadioButton
+                        Name="rbCredentials"
+                        Checked="Tab_OnChecked"
+                        Content="Credentials"
+                        GroupName="WindowDisplayType"
+                        IsChecked="True"
+                        Style="{StaticResource RadioTabButton}" />
+
+                    <RadioButton
+                        Name="rbSettings"
+                        Checked="Tab_OnChecked"
+                        Content="Settings"
+                        GroupName="WindowDisplayType"
+                        Style="{StaticResource RadioTabButton}" />
+
+                    <RadioButton
+                        Name="rbNotes"
+                        Checked="Tab_OnChecked"
+                        Content="Notes"
+                        GroupName="WindowDisplayType"
+                        Style="{StaticResource RadioTabButton}" />
+
+                    <RadioButton
+                        Name="rbBeforeConnecting"
+                        Checked="Tab_OnChecked"
+                        Content="Before Connecting"
+                        GroupName="WindowDisplayType"
+                        IsTabStop="True"
+                        Style="{StaticResource RadioTabButton}" />
+                </StackPanel>
+            </Border>
+
+            <Grid
+                Name="gCredentials"
+                Column="1"
+                Row="0">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="130" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="40" />
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <Label
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Margin="10,10,10,0"
+                    Content="Name:" />
+
+                <TextBox
+                    x:Name="txtName"
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Height="23"
+                    Margin="0,10,10,0"
+                    TabIndex="0" />
+
+                <Button
+                    Name="bGetHostNameFromAddress"
+                    Grid.Row="0"
+                    Grid.Column="2"
+                    Height="23"
+                    Margin="0,10,10,0"
+                    Click="Button_GetHostNameFromAddress_OnClick"
+                    Content="..."
+                    IsEnabled="{Binding ElementName=txtAddress, Path=Text.Length}"
+                    TabIndex="1"
+                    ToolTip="Get Host Name From Address" />
+
+                <Label
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    Margin="10,5,10,0"
+                    Content="Address:" />
+
+                <TextBox
+                    x:Name="txtAddress"
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    Height="23"
+                    Margin="0,5,10,0"
+                    TabIndex="2" />
+
+                <Button
+                    Grid.Row="1"
+                    Grid.Column="2"
+                    Height="23"
+                    Margin="0,5,10,0"
+                    Click="Button_PingAddress_OnClick"
+                    Content="?"
+                    IsEnabled="{Binding ElementName=txtAddress, Path=Text.Length}"
+                    TabIndex="3"
+                    ToolTip="Ping Address" />
+
+                <Label
+                    Grid.Row="2"
+                    Grid.Column="0"
+                    Margin="10,5,10,0"
+                    Content="Port:" />
+
+                <TextBox
+                    x:Name="txtPort"
+                    Grid.Row="2"
+                    Grid.Column="1"
+                    Width="80"
+                    Height="23"
+                    Margin="0,5,10,0"
+                    HorizontalAlignment="Left"
+                    TabIndex="4" />
+
+                <Label
+                    Grid.Row="3"
+                    Grid.Column="0"
+                    Margin="10,5,10,0"
+                    Content="Username:" />
+
+                <TextBox
+                    x:Name="txtUsername"
+                    Grid.Row="3"
+                    Grid.Column="1"
+                    Grid.ColumnSpan="2"
+                    Height="23"
+                    Margin="0,5,10,0"
+                    TabIndex="5" />
+
+                <Label
+                    Grid.Row="4"
+                    Grid.Column="0"
+                    Margin="10,5,10,0"
+                    Content="Password:" />
+
+                <PasswordBox
+                    x:Name="txtPassword"
+                    Grid.Row="4"
+                    Grid.Column="1"
+                    Grid.ColumnSpan="2"
+                    Height="23"
+                    Margin="0,5,10,0"
+                    TabIndex="6" />
+
+                <CheckBox
+                    x:Name="chkEnabled"
+                    Grid.Row="5"
+                    Grid.Column="1"
+                    Grid.ColumnSpan="2"
+                    Margin="0,5,10,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Content="Enabled"
+                    IsChecked="True"
+                    TabIndex="7" />
+
+                <CheckBox
+                    x:Name="chkAskForCredentailsBeforeConnecting"
+                    Grid.Row="6"
+                    Grid.Column="1"
+                    Grid.ColumnSpan="2"
+                    Margin="0,0,10,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Checked="CheckBox_AskForCredentailsBeforeConnecting_CheckedChanged"
+                    Content="Ask for credentials before connecting"
+                    TabIndex="8"
+                    Unchecked="CheckBox_AskForCredentailsBeforeConnecting_CheckedChanged" />
+
+                <CheckBox
+                    x:Name="chkCloseWindowAfterAdding"
+                    Grid.Row="7"
+                    Grid.Column="1"
+                    Grid.ColumnSpan="2"
+                    Margin="0,0,10,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Content="Close window after adding"
+                    TabIndex="9" />
+            </Grid>
+
+            <Grid
+                Name="gSettings"
+                Margin="10"
+                Column="1"
+                Row="0"
+                Visibility="Collapsed">
+
+                <StackPanel>
+                    <RadioButton
+                        Name="chkStartUsingLastPosition"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Content="Start using last known position"
+                        GroupName="WindowDisplayType"
+                        IsChecked="False"
+                        TabIndex="0" />
+
+                    <RadioButton
+                        Name="chkStartInFullScreenMode"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Content="Start in full-screen mode"
+                        GroupName="WindowDisplayType"
+                        IsChecked="True"
+                        TabIndex="1" />
+
+                    <RadioButton
+                        Name="chkSpanAcrossMultipleMonitors"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Content="Span across multiple monitors (available area)"
+                        GroupName="WindowDisplayType"
+                        TabIndex="2" />
+
+                    <RadioButton
+                        Name="chkUseSpecificWidthAndHeight"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Content="Use a specific width and height for the window:"
+                        GroupName="WindowDisplayType"
+                        TabIndex="3" />
+
+                    <TextBlock
+                        Margin="21,5,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Text="Width:" />
+
+                    <TextBox
+                        Name="txtWidth"
+                        Width="80"
+                        Margin="40,5,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        IsEnabled="{Binding ElementName=chkUseSpecificWidthAndHeight, Path=IsChecked}"
+                        MaxLength="9"
+                        TabIndex="4" />
+
+                    <TextBlock
+                        Margin="21,5,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Text="Height:" />
+
+                    <TextBox
+                        Name="txtHeight"
+                        Width="80"
+                        Margin="40,5,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        IsEnabled="{Binding ElementName=chkUseSpecificWidthAndHeight, Path=IsChecked}"
+                        MaxLength="9"
+                        TabIndex="5" />
+
+                    <CheckBox
+                        Name="chkLoginUsingAdminMode"
+                        Margin="0,10,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Content="Login using 'ADMIN' mode (to administer the server)"
+                        TabIndex="6" />
+
+                    <CheckBox
+                        Name="chkDeleteCachedCredentialsAfterConnecting"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Content="Delete cached credentials after connecting"
+                        TabIndex="7" />
+                </StackPanel>
+            </Grid>
+
+            <Grid
+                Name="gNotes"
+                Margin="10"
+                Column="1"
+                Row="0"
+                Visibility="Collapsed">
+
+                <TextBox
+                    Name="txtNotes"
+                    AcceptsReturn="True"
+                    ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                    ScrollViewer.VerticalScrollBarVisibility="Visible"
+                    TabIndex="0"
+                    TextWrapping="Wrap" />
+            </Grid>
+
+            <Grid
+                Name="gBeforeConnecting"
+                Column="1"
+                Row="0"
+                Visibility="Collapsed">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="130" />
+                    <ColumnDefinition Width="100" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="40" />
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <Label
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Margin="10,10,10,0"
+                    Content="Program:" />
+
+                <TextBox
+                    x:Name="txtProgram"
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Grid.ColumnSpan="2"
+                    Height="23"
+                    Margin="0,10,10,0"
+                    TabIndex="0" />
+
+                <Button
+                    Grid.Row="0"
+                    Grid.Column="3"
+                    Height="23"
+                    Margin="0,10,10,0"
+                    Click="Button_GetProgram_OnClick"
+                    Content="..."
+                    TabIndex="1"
+                    ToolTip="Find Program" />
+
+                <Label
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    Margin="10,5,10,0"
+                    Content="Arguments:" />
+
+                <TextBox
+                    x:Name="txtArguments"
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    Grid.ColumnSpan="3"
+                    Height="23"
+                    Margin="0,5,10,0"
+                    TabIndex="2" />
+
+                <Label
+                    Grid.Row="2"
+                    Grid.Column="0"
+                    Margin="10,5,10,0"
+                    Content="Working Directory:" />
+
+                <TextBox
+                    x:Name="txtWorkingDirectory"
+                    Grid.Row="2"
+                    Grid.Column="1"
+                    Grid.ColumnSpan="3"
+                    Height="23"
+                    Margin="0,5,10,0"
+                    TabIndex="3" />
+
+                <Label
+                    Grid.Row="3"
+                    Grid.Column="0"
+                    Margin="10,5,10,0"
+                    Content="Wait (seconds)" />
+
+                <TextBox
+                    x:Name="txtWaitMillisecondsToBeClosed"
+                    Grid.Row="3"
+                    Grid.Column="1"
+                    Height="23"
+                    Margin="0,5,10,0"
+                    TabIndex="4" />
+
+                <Label
+                    Grid.Row="3"
+                    Grid.Column="2"
+                    Grid.ColumnSpan="2"
+                    Margin="0,5,10,0"
+                    Content="for program to be closed" />
+
+                <CheckBox
+                    x:Name="chkWaitForProgramToBeClosed"
+                    Grid.Row="4"
+                    Grid.Column="1"
+                    Grid.ColumnSpan="3"
+                    Margin="0,5,10,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Content="Wait for program to be closed"
+                    TabIndex="5" />
+
+                <CheckBox
+                    x:Name="chkAlwaysRunProgramBeforeConnecting"
+                    Grid.Row="5"
+                    Grid.Column="1"
+                    Grid.ColumnSpan="3"
+                    Margin="0,0,10,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Content="Always run this program"
+                    TabIndex="6" />
+            </Grid>
+
+            <Grid Grid.Row="1" Grid.Column="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <Label
+                    x:Name="lblErrorMessage"
+                    Grid.Column="0"
+                    Margin="5,10,10,10"
+                    Content="Error"
+                    Foreground="Red" />
+
+                <StackPanel
+                    Grid.Column="1"
+                    FlowDirection="LeftToRight"
+                    Orientation="Horizontal">
+
+                    <Button
+                        Name="bAdd"
+                        Width="75"
+                        Height="25"
+                        Margin="0,0,5,10"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Bottom"
+                        Click="Button_Add_OnClick"
+                        Content="_Add"
+                        IsDefault="True"
+                        TabIndex="10" />
+
+                    <Button
+                        Width="75"
+                        Height="25"
+                        Margin="0,0,10,10"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Bottom"
+                        Content="_Cancel"
+                        IsCancel="True"
+                        TabIndex="11" />
+                </StackPanel>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>

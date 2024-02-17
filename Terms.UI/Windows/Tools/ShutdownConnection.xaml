@@ -1,0 +1,181 @@
+﻿<Window
+    x:Class="Terms.Windows.Tools.ShutdownConnection"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Width="400"
+    Closing="Window_OnClosing"
+    SizeToContent="Height"
+    Style="{DynamicResource BaseDialogWindow}"
+    WindowStartupLocation="CenterOwner"
+    mc:Ignorable="d">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../../Styles/Windows/Button.xaml" />
+                <ResourceDictionary Source="../../Styles/Windows/CheckBox.xaml" />
+                <ResourceDictionary Source="../../Styles/Windows/ScrollViewer.xaml" />
+                <ResourceDictionary Source="../../Styles/Windows/TextBox.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Grid Margin="0,0,0,0">
+        <Border Name="WindowBorder" Style="{DynamicResource BaseWindowNavigationBorder}" />
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="130" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Name="rdName" Height="Auto" />
+                <RowDefinition Name="rdAddress" Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <Label
+                Grid.Row="0"
+                Grid.Column="0"
+                Margin="10,10,10,0"
+                Content="Name:" />
+
+            <TextBox
+                x:Name="txtName"
+                Grid.Row="0"
+                Grid.Column="1"
+                Height="23"
+                Margin="0,10,10,0"
+                Foreground="DarkGray"
+                IsReadOnly="True"
+                TabIndex="0" />
+
+            <Label
+                Grid.Row="1"
+                Grid.Column="0"
+                Margin="10,5,10,0"
+                Content="Address:" />
+
+            <Grid Column="1" Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="40" />
+                </Grid.ColumnDefinitions>
+
+                <TextBox
+                    x:Name="txtAddress"
+                    Grid.Column="0"
+                    Height="23"
+                    Margin="0,5,10,0"
+                    Foreground="DarkGray"
+                    IsReadOnly="True"
+                    TabIndex="1" />
+
+                <Button
+                    Grid.Column="1"
+                    Height="23"
+                    Margin="0,5,10,0"
+                    Click="Button_PingAddress_OnClick"
+                    Content="?"
+                    IsEnabled="{Binding ElementName=txtAddress, Path=Text.Length}"
+                    TabIndex="2"
+                    ToolTip="Ping Address" />
+            </Grid>
+
+            <Label
+                Name="lblMessage"
+                Grid.Row="2"
+                Grid.Column="0"
+                Margin="10,5,10,0"
+                Content="Message:" />
+
+            <TextBox
+                Name="txtMessage"
+                Grid.Row="2"
+                Grid.Column="1"
+                Height="80"
+                Margin="0,5,10,0"
+                AcceptsReturn="True"
+                MaxLength="3072"
+                ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                ScrollViewer.VerticalScrollBarVisibility="Visible"
+                TabIndex="3"
+                TextWrapping="Wrap" />
+
+            <Label
+                Grid.Row="3"
+                Grid.Column="0"
+                Margin="10,5,10,0"
+                Content="Delay (seconds):" />
+
+            <TextBox
+                x:Name="txtDelay"
+                Grid.Row="3"
+                Grid.Column="1"
+                Width="80"
+                Height="23"
+                Margin="0,5,10,0"
+                HorizontalAlignment="Left"
+                TabIndex="4" />
+
+            <CheckBox
+                x:Name="chkRestart"
+                Grid.Row="4"
+                Grid.Column="1"
+                Margin="0,5,10,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Content="Restart the target address"
+                TabIndex="5" />
+
+            <Grid
+                Grid.Row="5"
+                Grid.Column="0"
+                ColumnSpan="2">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <Label
+                    x:Name="lblErrorMessage"
+                    Grid.Column="0"
+                    Margin="10,10,10,10"
+                    Content="Error"
+                    Foreground="Red" />
+
+                <StackPanel
+                    Grid.Column="1"
+                    FlowDirection="LeftToRight"
+                    Orientation="Horizontal">
+
+                    <Button
+                        Width="75"
+                        Height="25"
+                        Margin="0,0,5,10"
+                        VerticalAlignment="Bottom"
+                        Click="Button_Run_OnClick"
+                        Content="_OK"
+                        IsDefault="True"
+                        TabIndex="6" />
+
+                    <Button
+                        Width="75"
+                        Height="25"
+                        Margin="0,0,10,10"
+                        VerticalAlignment="Bottom"
+                        Content="_Cancel"
+                        IsCancel="True"
+                        TabIndex="7" />
+                </StackPanel>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>
