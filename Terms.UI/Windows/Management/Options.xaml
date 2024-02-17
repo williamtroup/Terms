@@ -272,18 +272,11 @@
                             TabIndex="2" />
 
                         <CheckBox
-                            Name="chkCheckToSeeIfNewUpdatesAreAvailable"
-                            HorizontalAlignment="Left"
-                            VerticalAlignment="Top"
-                            Content="Check to see if new updates are available"
-                            TabIndex="3" />
-
-                        <CheckBox
                             Name="chkFadeMainWindowInOutOnStartupShutdown"
                             HorizontalAlignment="Left"
                             VerticalAlignment="Top"
                             Content="Fade the main window in/out on startup/shutdown"
-                            TabIndex="4" />
+                            TabIndex="3" />
                     </StackPanel>
                 </Grid>
 

@@ -66,7 +66,6 @@ public partial class Options
 
         int showLoadingSplashScreen = Convert.ToInt32(m_settings.Read(Settings.MainWindow.StartUp, nameof(Settings.MainWindow.ShowLoadingSplashScreen), Settings.MainWindow.ShowLoadingSplashScreen, xmlDocument));
         int allowMultipleInstancesToBeUsed = Convert.ToInt32(m_settings.Read(Settings.MainWindow.StartUp, nameof(Settings.MainWindow.AllowMultipleInstancesToBeUsed), Settings.MainWindow.AllowMultipleInstancesToBeUsed, xmlDocument));
-        int checkToSeeIfNewUpdatesAreAvailable = Convert.ToInt32(m_settings.Read(Settings.MainWindow.StartUp, nameof(Settings.MainWindow.CheckToSeeIfNewUpdatesAreAvailable), Settings.MainWindow.CheckToSeeIfNewUpdatesAreAvailable, xmlDocument));
         int fadeMainWindowInOutOnStartupShutdown = Convert.ToInt32(m_settings.Read(Settings.MainWindow.StartUp, nameof(Settings.MainWindow.FadeMainWindowInOutOnStartupShutdown), Settings.MainWindow.FadeMainWindowInOutOnStartupShutdown, xmlDocument));
 
         int totalTimeBetweenEachPing = Convert.ToInt32(m_settings.Read(Settings.PingWindow.PingOptions, nameof(Settings.PingWindow.TotalTimeBetweenEachPing), Settings.PingWindow.TotalTimeBetweenEachPing.ToString(), xmlDocument));
@@ -90,7 +89,6 @@ public partial class Options
         chkOpenOnWindowsStartUp.IsChecked = !string.IsNullOrEmpty(productStartUp);
         chkShowLoadingSplashScreen.IsChecked = showLoadingSplashScreen > 0;
         chkAllowMultipleInstancesToBeUsed.IsChecked = allowMultipleInstancesToBeUsed > 0;
-        chkCheckToSeeIfNewUpdatesAreAvailable.IsChecked = checkToSeeIfNewUpdatesAreAvailable > 0;
         chkFadeMainWindowInOutOnStartupShutdown.IsChecked = fadeMainWindowInOutOnStartupShutdown > 0;
 
         txtTotalTimeBetweenEachPing.Text = totalTimeBetweenEachPing.ToString();
@@ -133,7 +131,6 @@ public partial class Options
 
         m_settings.Write(Settings.MainWindow.StartUp, nameof(Settings.MainWindow.ShowLoadingSplashScreen), IsChecked(chkShowLoadingSplashScreen), xmlDocument);
         m_settings.Write(Settings.MainWindow.StartUp, nameof(Settings.MainWindow.AllowMultipleInstancesToBeUsed), IsChecked(chkAllowMultipleInstancesToBeUsed), xmlDocument);
-        m_settings.Write(Settings.MainWindow.StartUp, nameof(Settings.MainWindow.CheckToSeeIfNewUpdatesAreAvailable), IsChecked(chkCheckToSeeIfNewUpdatesAreAvailable), xmlDocument);
         m_settings.Write(Settings.MainWindow.StartUp, nameof(Settings.MainWindow.FadeMainWindowInOutOnStartupShutdown), IsChecked(chkFadeMainWindowInOutOnStartupShutdown), xmlDocument);
 
         m_settings.Write(Settings.PingWindow.PingOptions, nameof(Settings.PingWindow.TotalTimeBetweenEachPing), txtTotalTimeBetweenEachPing.Text, xmlDocument);

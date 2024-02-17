@@ -28,7 +28,6 @@ public static class Settings
         public const string RunningSectionWidth = "265";
         public const string ShowTheRunningConnectionsSection = "0";
         public const string ShowConfirmationMessageBeforeClosingMainWindow = "1";
-        public const string CheckToSeeIfNewUpdatesAreAvailable = "1";
         public const string MinimizeAllOtherConnectionsWhenFocusingConnection = "0";
         public const string FadeMainWindowInOutOnStartupShutdown = "1";
         public const string UpdateLastAccessedForPingedConnections = "0";
