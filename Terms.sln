@@ -1,13 +1,17 @@
-
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27130.2036
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34607.119
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Terms.UI", "Terms.UI\Terms.UI.csproj", "{E3959A5F-87AE-4189-854C-A3AB037EF67F}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Terms.UI.Tools", "Terms.UI.Tools\Terms.UI.Tools.csproj", "{7112B0A9-0309-4404-81BF-DC33A82E7BFA}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Terms.Tools", "Terms.Tools\Terms.Tools.csproj", "{ABF1ADDB-C8DC-4AA4-BFEA-C8680C3905CA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{54CE5975-E2B8-4A03-95AA-88E3FE32BECA}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
