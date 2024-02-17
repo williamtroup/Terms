@@ -59,7 +59,7 @@ namespace Terms.UI.Tools.Shell
 
         private static void OpenBeforeConnectingProgram(Connection connection)
         {
-            using (Process beforeConnectingProcess = new Process())
+            using (Process beforeConnectingProcess = new())
             {
                 beforeConnectingProcess.StartInfo.FileName = connection.BeforeOpeningProgram;
 
@@ -100,7 +100,7 @@ namespace Terms.UI.Tools.Shell
 
         private static void OpenConnection(MstscProcesses mstscProcesses, Connection connection)
         {
-            using (Process process = new Process())
+            using (Process process = new())
             {
                 List<string> arguments = GetMstscArguments(connection);
 
@@ -126,7 +126,7 @@ namespace Terms.UI.Tools.Shell
 
         private static void SendCmdKeys(string arguments)
         {
-            using (Process cmdkeyProcess = new Process())
+            using (Process cmdkeyProcess = new())
             {
                 string executable = string.Format(ExecutablePath, "cmdkey.exe");
 
@@ -145,7 +145,7 @@ namespace Terms.UI.Tools.Shell
 
         private static List<string> GetMstscArguments(Connection connection)
         {
-            List<string> arguments = new List<string>
+            List<string> arguments = new()
             {
                 $"/v:{connection.Address}:{connection.Port}"
             };

@@ -6,31 +6,22 @@ using Terms.Tools.Settings.Interfaces;
 
 namespace Terms.UI.Tools.Views
 {
-    public class WindowPosition
+    public class WindowPosition(
+        Window window,
+        IXmlSettings settings,
+        double defaultWidth,
+        double defaultHeight,
+        string sectionName = "Window")
     {
         #region Private Read-Only Variables
 
-        private readonly Window m_window;
-        private readonly IXmlSettings m_settings;
-        private readonly double m_defaultWidth;
-        private readonly double m_defaultHeight;
-        private readonly string m_sectionName;
+        private readonly Window m_window = window;
+        private readonly IXmlSettings m_settings = settings;
+        private readonly double m_defaultWidth = defaultWidth;
+        private readonly double m_defaultHeight = defaultHeight;
+        private readonly string m_sectionName = sectionName;
 
         #endregion
-
-        public WindowPosition(
-            Window window,
-            IXmlSettings settings,
-            double defaultWidth,
-            double defaultHeight,
-            string sectionName = "Window")
-        {
-            m_window = window;
-            m_settings = settings;
-            m_defaultWidth = defaultWidth;
-            m_defaultHeight = defaultHeight;
-            m_sectionName = sectionName;
-        }
 
         public void Get(bool ignoreWindowResizeMode = false, XmlDocument xmlDocument = null)
         {

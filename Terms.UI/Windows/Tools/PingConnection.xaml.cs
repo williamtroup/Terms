@@ -88,7 +88,7 @@ namespace Terms.Windows.Tools
 
         private void StartPinging()
         {
-            Thread thread = new Thread(PingingThread);
+            Thread thread = new(PingingThread);
             thread.SetApartmentState(ApartmentState.STA);
             thread.Start();
         }
@@ -99,7 +99,7 @@ namespace Terms.Windows.Tools
             {
                 bool success = false;
 
-                using (Ping ping = new Ping())
+                using (Ping ping = new())
                 {
                     PingReply pingReply = ping.ToResult(m_address);
 
@@ -153,7 +153,7 @@ namespace Terms.Windows.Tools
         {
             result = string.IsNullOrEmpty(txtPingResults.Text()) ? result : $"\r{result}";
 
-            TextRange textRange = new TextRange(txtPingResults.Document.ContentEnd, txtPingResults.Document.ContentEnd)
+            TextRange textRange = new(txtPingResults.Document.ContentEnd, txtPingResults.Document.ContentEnd)
             {
                 Text = result
             };

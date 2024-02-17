@@ -5,20 +5,14 @@ using System.Windows.Data;
 
 namespace Terms.UI.Tools.Actions
 {
-    public class ListViewOrdering
+    public class ListViewOrdering(ListView listview, RoutedEventArgs routedEventArgs)
     {
         #region Private Read-Only Variables
 
-        private readonly ListView m_listview;
-        private readonly RoutedEventArgs m_routedEventArgs;
+        private readonly ListView m_listview = listview;
+        private readonly RoutedEventArgs m_routedEventArgs = routedEventArgs;
 
         #endregion
-
-        public ListViewOrdering(ListView listview, RoutedEventArgs routedEventArgs)
-        {
-            m_listview = listview;
-            m_routedEventArgs = routedEventArgs;
-        }
 
         public void Sort()
         {

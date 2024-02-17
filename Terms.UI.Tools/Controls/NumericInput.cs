@@ -26,7 +26,7 @@ namespace Terms.UI.Tools.Controls
 
             textBox.PreviewTextInput += TextBox_PreviewTextInput;
 
-            NumericInputData numericInputData = new NumericInputData();
+            NumericInputData numericInputData = new();
 
             if (defaultValueIfBlank != null)
             {

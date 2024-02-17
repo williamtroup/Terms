@@ -6,24 +6,18 @@ using Terms.UI.Tools.ViewModels.Storage;
 
 namespace Terms.UI.Tools.Views
 {
-    public class WindowGroupedConnections
+    public class WindowGroupedConnections(ListView groupList, ListView connectionsList)
     {
         #region Private Read-Only Variables
 
-        private readonly ListView m_groupList;
-        private readonly ListView m_connectionsList;
+        private readonly ListView m_groupList = groupList;
+        private readonly ListView m_connectionsList = connectionsList;
 
         #endregion
 
-        public WindowGroupedConnections(ListView groupList, ListView connectionsList)
-        {
-            m_groupList = groupList;
-            m_connectionsList = connectionsList;
-        }
-
         public void Load(string filename = Connections.DefaultFilename, bool clearItems = true, Action afterLoadingAction = null)
         {
-            Connections connections = new Connections();
+            Connections connections = new();
             connections.Load(filename);
 
             if (clearItems)
@@ -44,7 +38,7 @@ namespace Terms.UI.Tools.Views
 
         public void Save(string filename = Connections.DefaultFilename)
         {
-            Connections connections = new Connections();
+            Connections connections = new();
 
             foreach (object item in m_groupList.Items)
             {

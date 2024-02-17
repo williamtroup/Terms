@@ -344,7 +344,7 @@ namespace Terms
 
         private void SetupWindowUpdateThread()
         {
-            Thread thread = new Thread(WindowUpdateThread);
+            Thread thread = new(WindowUpdateThread);
             thread.SetApartmentState(ApartmentState.STA);
             thread.Start();
         }
@@ -652,7 +652,7 @@ namespace Terms
 
         private void Button_Credentials_OnClick(object sender, RoutedEventArgs e)
         {
-            EditCredentials credentials = new EditCredentials(m_settings, m_credentials, m_filenameDialog)
+            EditCredentials credentials = new(m_settings, m_credentials, m_filenameDialog)
             {
                 Topmost = Topmost,
                 Owner = this
@@ -670,7 +670,7 @@ namespace Terms
         {
             List<Group> groups = lstvGroups.Items.Cast<Group>().ToList();
 
-            TerminalsXml terminalsXml = new TerminalsXml();
+            TerminalsXml terminalsXml = new();
 
             if (terminalsXml.Read(Terms.Resources.Dialog.TerminalFileFilter, Terms.Resources.Dialog.OpenTerminalsFile, groups))
             {
@@ -692,7 +692,7 @@ namespace Terms
 
         private void Button_Options_OnClick(object sender, RoutedEventArgs e)
         {
-            Options options = new Options(m_settings, this)
+            Options options = new(m_settings, this)
             {
                 Topmost = Topmost,
                 Owner = this
@@ -703,7 +703,7 @@ namespace Terms
 
         private void Button_ChangeAllPasswords_OnClick(object sender, RoutedEventArgs e)
         {
-            ChangePasswords changePasswords = new ChangePasswords(this)
+            ChangePasswords changePasswords = new(this)
             {
                 Topmost = Topmost,
                 Owner = this
@@ -719,7 +719,7 @@ namespace Terms
 
         private void Button_CheckAllConnectionStatuses_OnClick(object sender, RoutedEventArgs e)
         {
-            List<Connection> connections = new List<Connection>();
+            List<Connection> connections = new();
 
             foreach (object item in lstvGroups.Items)
             {
@@ -729,7 +729,7 @@ namespace Terms
                 {
                     if (connection.Enabled)
                     {
-                        Connection newConnectionViewModel = new Connection();
+                        Connection newConnectionViewModel = new();
                         newConnectionViewModel.Update(connection);
                         newConnectionViewModel.Name = $"{group.Name} > {connection.Name}";
 
@@ -738,7 +738,7 @@ namespace Terms
                 }
             }
 
-            ConnectionStatuses connectionStatuses = new ConnectionStatuses(m_settings, connections, this, false)
+            ConnectionStatuses connectionStatuses = new(m_settings, connections, this, false)
             {
                 Topmost = Topmost,
                 Owner = this
@@ -749,7 +749,7 @@ namespace Terms
 
         private void Button_About_OnClick(object sender, RoutedEventArgs e)
         {
-            About about = new About(m_settings)
+            About about = new(m_settings)
             {
                 Topmost = Topmost,
                 Owner = this
@@ -954,7 +954,7 @@ namespace Terms
 
         private void Groups_ColumnHeader_Click(object sender, RoutedEventArgs e)
         {
-            ListViewOrdering listViewOrdering = new ListViewOrdering(lstvGroups, e);
+            ListViewOrdering listViewOrdering = new(lstvGroups, e);
             listViewOrdering.Sort();
         }
 
@@ -965,7 +965,7 @@ namespace Terms
 
         private void Button_AddNewGroup_OnClick(object sender, RoutedEventArgs e)
         {
-            AddGroup addGroup = new AddGroup(m_settings, this)
+            AddGroup addGroup = new(m_settings, this)
             {
                 Topmost = Topmost,
                 Owner = this
@@ -976,7 +976,7 @@ namespace Terms
 
         private void Button_AddNewConnection_OnClick(object sender, RoutedEventArgs e)
         {
-            AddConnection addConnection = new AddConnection(m_settings, this, m_credentials, m_filenameDialog)
+            AddConnection addConnection = new(m_settings, this, m_credentials, m_filenameDialog)
             {
                 Topmost = Topmost,
                 Owner = this
@@ -1074,7 +1074,7 @@ namespace Terms
             {
                 Group group = (Group) lstvGroups.SelectedItem;
 
-                AddGroup addGroup = new AddGroup(m_settings, this, lstvGroups.SelectedIndex, group)
+                AddGroup addGroup = new(m_settings, this, lstvGroups.SelectedIndex, group)
                 {
                     Topmost = Topmost,
                     Owner = this
@@ -1114,7 +1114,7 @@ namespace Terms
 
         private void Connections_ColumnHeader_Click(object sender, RoutedEventArgs e)
         {
-            ListViewOrdering listViewOrdering = new ListViewOrdering(lstvConnections, e);
+            ListViewOrdering listViewOrdering = new(lstvConnections, e);
             listViewOrdering.Sort();
         }
         
@@ -1212,7 +1212,7 @@ namespace Terms
             if (messageQuestionResult.Result)
             {
                 int currentListIndex = 0;
-                List<int> indexesToRemove = new List<int>();
+                List<int> indexesToRemove = new();
 
                 foreach (object connectionItem in lstvConnections.Items)
                 {
@@ -1238,7 +1238,7 @@ namespace Terms
             if (messageQuestionResult.Result)
             {
                 int currentListIndex = 0;
-                List<int> indexesToRemove = new List<int>();
+                List<int> indexesToRemove = new();
 
                 foreach (object connectionItem in lstvConnections.Items)
                 {
@@ -1288,7 +1288,7 @@ namespace Terms
             {
                 Group selectedGroupViewModel = (Group) lstvGroups.SelectedItem;
 
-                MoveConnections moveConnections = new MoveConnections(lstvGroups.Items, selectedGroupViewModel)
+                MoveConnections moveConnections = new(lstvGroups.Items, selectedGroupViewModel)
                 {
                     Topmost = Topmost,
                     Owner = this
@@ -1312,7 +1312,7 @@ namespace Terms
 
                                 if (copyTheConnections)
                                 {
-                                    Connection newConnectionViewModel = new Connection();
+                                    Connection newConnectionViewModel = new();
                                     newConnectionViewModel.Update(connection);
                                     newConnectionViewModel.ResetLastAccessed();
                                     newConnectionViewModel.Name = GetNewConnectionName(group, newConnectionViewModel.Name);
@@ -1346,7 +1346,7 @@ namespace Terms
             {
                 Connection connection = (Connection) lstvConnections.SelectedItem;
 
-                AddConnection addConnection = new AddConnection(m_settings, this, m_credentials, m_filenameDialog, connection: connection)
+                AddConnection addConnection = new(m_settings, this, m_credentials, m_filenameDialog, connection: connection)
                 {
                     Topmost = Topmost,
                     Owner = this
@@ -1362,7 +1362,7 @@ namespace Terms
             {
                 Connection connection = (Connection)lstvConnections.SelectedItem;
 
-                PingConnection pingConnection = new PingConnection(m_settings, m_filenameDialog, connection.Address, connection.Name)
+                PingConnection pingConnection = new(m_settings, m_filenameDialog, connection.Address, connection.Name)
                 {
                     Topmost = Topmost,
                     Owner = this
@@ -1381,7 +1381,7 @@ namespace Terms
         {
             if (lstvConnections.SelectedIndex > -1)
             {
-                PickCredentials pickCredentials = new PickCredentials(m_credentials)
+                PickCredentials pickCredentials = new(m_credentials)
                 {
                     Topmost = Topmost,
                     Owner = this
@@ -1392,7 +1392,7 @@ namespace Terms
                 {
                     Connection connection = (Connection)lstvConnections.SelectedItem;
 
-                    ConnectionDetails connectionDetails = new ConnectionDetails(m_settings, connection, pickCredentials.CredentailSelected)
+                    ConnectionDetails connectionDetails = new(m_settings, connection, pickCredentials.CredentailSelected)
                     {
                         Topmost = Topmost,
                         Owner = this
@@ -1414,7 +1414,7 @@ namespace Terms
                     ? group.Connections.Where(connection => connection.Enabled).ToList()
                     : lstvConnections.SelectedItems.Cast<Connection>().Where(connection => connection.Enabled).ToList();
 
-                ConnectionStatuses connectionStatuses = new ConnectionStatuses(m_settings, connections, this)
+                ConnectionStatuses connectionStatuses = new(m_settings, connections, this)
                 {
                     Topmost = Topmost,
                     Owner = this
@@ -1430,7 +1430,7 @@ namespace Terms
             {
                 List<Connection> connections = lstvConnections.SelectedItems.Cast<Connection>().Where(connection => connection.Enabled).ToList();
 
-                ShutdownConnection shutdownConnection = new ShutdownConnection(connections, m_settings, m_filenameDialog)
+                ShutdownConnection shutdownConnection = new(connections, m_settings, m_filenameDialog)
                 {
                     Topmost = Topmost,
                     Owner = this
@@ -1448,7 +1448,7 @@ namespace Terms
         {
             if (lstvConnections.SelectedIndex > -1)
             {
-                PickCredentials pickCredentials = new PickCredentials(m_credentials)
+                PickCredentials pickCredentials = new(m_credentials)
                 {
                     Topmost = Topmost,
                     Owner = this
@@ -1459,7 +1459,7 @@ namespace Terms
                 {
                     List<Connection> connections = lstvConnections.SelectedItems.Cast<Connection>().Where(connection => connection.Enabled).ToList();
 
-                    ConnectionServices connectionDetails = new ConnectionServices(m_settings, connections, pickCredentials.CredentailSelected)
+                    ConnectionServices connectionDetails = new(m_settings, connections, pickCredentials.CredentailSelected)
                     {
                         Topmost = Topmost,
                         Owner = this
@@ -1491,7 +1491,7 @@ namespace Terms
             {
                 Connection connection = (Connection) lstvConnections.SelectedItem;
 
-                AddConnection addConnection = new AddConnection(m_settings, this, m_credentials, m_filenameDialog, lstvConnections.SelectedIndex, connection)
+                AddConnection addConnection = new(m_settings, this, m_credentials, m_filenameDialog, lstvConnections.SelectedIndex, connection)
                 {
                     Topmost = Topmost,
                     Owner = this
@@ -1535,8 +1535,8 @@ namespace Terms
         {
             if (lstvConnections.SelectedIndex > -1)
             {
-                List<Connection> connections = new List<Connection>();
-                List<Connection> connectionViewModelsWithCredentials = new List<Connection>();
+                List<Connection> connections = new();
+                List<Connection> connectionViewModelsWithCredentials = new();
 
                 foreach (object connectionItem in lstvConnections.SelectedItems)
                 {
@@ -1562,7 +1562,7 @@ namespace Terms
 
                     if (connectionsWithCredentialsAvailable)
                     {
-                        PickCredentials pickCredentials = new PickCredentials(m_mstscProcesses, m_credentials, connectionViewModelsWithCredentials, m_rememberTheLastPickedUserCredentialsForConnections)
+                        PickCredentials pickCredentials = new(m_mstscProcesses, m_credentials, connectionViewModelsWithCredentials, m_rememberTheLastPickedUserCredentialsForConnections)
                         {
                             Topmost = Topmost,
                             Owner = this
@@ -1640,7 +1640,7 @@ namespace Terms
 
         private void Button_OpenConnectionArea_Ping_OnClick(object sender, RoutedEventArgs e)
         {
-            PingConnection pingConnection = new PingConnection(m_settings, m_filenameDialog, m_connectionAddress.Text)
+            PingConnection pingConnection = new(m_settings, m_filenameDialog, m_connectionAddress.Text)
             {
                 Topmost = Topmost,
                 Owner = this
@@ -1651,12 +1651,12 @@ namespace Terms
 
         private void Button_OpenConnectionArea_AddConnection_OnClick(object sender, RoutedEventArgs e)
         {
-            Connection connection = new Connection
+            Connection connection = new()
             {
                 Address = m_connectionAddress.Text
             };
 
-            AddConnection addConnection = new AddConnection(m_settings, this, m_credentials, m_filenameDialog, connection: connection)
+            AddConnection addConnection = new(m_settings, this, m_credentials, m_filenameDialog, connection: connection)
             {
                 Topmost = Topmost,
                 Owner = this
@@ -1669,13 +1669,13 @@ namespace Terms
         {
             string connectionName = string.Format(Terms.Resources.UIMessages.UntitledConnection, lstvRunning.Items.Count + 1);
 
-            Connection connection = new Connection
+            Connection connection = new()
             {
                 Name = connectionName,
                 Address = m_connectionAddress.Text
             };
 
-            List<Connection> connections = new List<Connection>
+            List<Connection> connections = new()
             {
                 connection
             };
@@ -1684,7 +1684,7 @@ namespace Terms
 
             if (m_credentials.Count > 0 && m_allowUserCredentialsPickingWhenOpeningConnections)
             {
-                PickCredentials pickCredentials = new PickCredentials(m_mstscProcesses, m_credentials, connections, m_rememberTheLastPickedUserCredentialsForConnections)
+                PickCredentials pickCredentials = new(m_mstscProcesses, m_credentials, connections, m_rememberTheLastPickedUserCredentialsForConnections)
                 {
                     Topmost = Topmost,
                     Owner = this
@@ -1738,7 +1738,7 @@ namespace Terms
 
         private void Running_ColumnHeader_Click(object sender, RoutedEventArgs e)
         {
-            ListViewOrdering listViewOrdering = new ListViewOrdering(lstvRunning, e);
+            ListViewOrdering listViewOrdering = new(lstvRunning, e);
             listViewOrdering.Sort();
         }
 
@@ -1828,7 +1828,7 @@ namespace Terms
 
         private MessageQuestionResult GetConfirmationFromMessage(string message, bool showConfirmation = true, string settingSection = null, string settingName = null)
         {
-            MessageQuestionResult result = new MessageQuestionResult();
+            MessageQuestionResult result = new();
 
             if (!showConfirmation)
             {
@@ -1837,7 +1837,7 @@ namespace Terms
 
             if (showConfirmation)
             {
-                MessageQuestion messageBox = new MessageQuestion(m_settings, message, settingSection, settingName)
+                MessageQuestion messageBox = new(m_settings, message, settingSection, settingName)
                 {
                     Topmost = Topmost,
                     Owner = this
@@ -1853,7 +1853,7 @@ namespace Terms
 
         private void ShowMessage(string message)
         {
-            Message messageWindow = new Message(message)
+            Message messageWindow = new(message)
             {
                 Topmost = Topmost,
                 Owner = this

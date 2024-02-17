@@ -125,7 +125,7 @@ namespace Terms.Windows.Tools
 
         private void SetupWindowUpdateThread()
         {
-            Thread thread = new Thread(WindowUpdateThread);
+            Thread thread = new(WindowUpdateThread);
             thread.SetApartmentState(ApartmentState.STA);
             thread.Start();
         }
@@ -170,7 +170,7 @@ namespace Terms.Windows.Tools
 
         private void SetupWindowDisplayThread()
         {
-            Thread thread = new Thread(WindowDisplayThread);
+            Thread thread = new(WindowDisplayThread);
             thread.SetApartmentState(ApartmentState.STA);
             thread.Start();
         }
@@ -271,7 +271,7 @@ namespace Terms.Windows.Tools
 
                                 BackgroundAction.Run(() =>
                                 {
-                                    WmiDetail wmiDetail = new WmiDetail
+                                    WmiDetail wmiDetail = new()
                                     {
                                         Name = name,
                                         Value = value
@@ -312,7 +312,7 @@ namespace Terms.Windows.Tools
                                 visible = state != UIMessages.Running;
                             }
 
-                            WmiService wmiService = new WmiService
+                            WmiService wmiService = new()
                             {
                                 Name = name,
                                 Description = caption,
@@ -345,7 +345,7 @@ namespace Terms.Windows.Tools
 
                         BackgroundAction.Run(() =>
                         {
-                            WmiProcess wmiProcess = new WmiProcess
+                            WmiProcess wmiProcess = new()
                             {
                                 Id = id,
                                 Name = name
@@ -388,7 +388,7 @@ namespace Terms.Windows.Tools
 
                         BackgroundAction.Run(() =>
                         {
-                            WmiDrive wmiDrive = new WmiDrive
+                            WmiDrive wmiDrive = new()
                             {
                                 Name = name,
                                 VolumeName = volumeName,
@@ -405,8 +405,8 @@ namespace Terms.Windows.Tools
 
         private ManagementObjectCollection GetObjectCollection(string query)
         {
-            ObjectQuery objectQuery = new ObjectQuery(query);
-            ManagementObjectSearcher managementObjectSearcher = new ManagementObjectSearcher(m_managementScope, objectQuery);
+            ObjectQuery objectQuery = new(query);
+            ManagementObjectSearcher managementObjectSearcher = new(m_managementScope, objectQuery);
 
             return managementObjectSearcher.Get();
         }
@@ -417,25 +417,25 @@ namespace Terms.Windows.Tools
 
         private void Details_ColumnHeader_Click(object sender, RoutedEventArgs e)
         {
-            ListViewOrdering listViewOrdering = new ListViewOrdering(lstvDetails, e);
+            ListViewOrdering listViewOrdering = new(lstvDetails, e);
             listViewOrdering.Sort();
         }
 
         private void Services_ColumnHeader_Click(object sender, RoutedEventArgs e)
         {
-            ListViewOrdering listViewOrdering = new ListViewOrdering(lstvServices, e);
+            ListViewOrdering listViewOrdering = new(lstvServices, e);
             listViewOrdering.Sort();
         }
 
         private void Processes_ColumnHeader_Click(object sender, RoutedEventArgs e)
         {
-            ListViewOrdering listViewOrdering = new ListViewOrdering(lstvProcesses, e);
+            ListViewOrdering listViewOrdering = new(lstvProcesses, e);
             listViewOrdering.Sort();
         }
 
         private void PhysicalDrives_ColumnHeader_Click(object sender, RoutedEventArgs e)
         {
-            ListViewOrdering listViewOrdering = new ListViewOrdering(lstvPhysicalDrives, e);
+            ListViewOrdering listViewOrdering = new(lstvPhysicalDrives, e);
             listViewOrdering.Sort();
         }
 
@@ -565,7 +565,7 @@ namespace Terms.Windows.Tools
         {
             bool showOnlyTheStopServices = chkShowOnlyTheStoppedServices.IsReallyChecked();
 
-            Thread thread = new Thread(() =>
+            Thread thread = new(() =>
             {
                 string command = start ? "StartService" : "StopService";
                 string path = $"Win32_Service.Name='{name}'";
@@ -574,7 +574,7 @@ namespace Terms.Windows.Tools
 
                 bool updateFullList = false;
 
-                using (ManagementObject managementObject = new ManagementObject(m_managementScope, new ManagementPath(path), null))
+                using (ManagementObject managementObject = new(m_managementScope, new ManagementPath(path), null))
                 {
                     try
                     {

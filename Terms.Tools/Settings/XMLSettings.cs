@@ -5,7 +5,7 @@ using Terms.Tools.Settings.Interfaces;
 
 namespace Terms.Tools.Settings
 {
-    public class XmlSettings : IXmlSettings
+    public class XmlSettings(string filename = "settings.xml", string root = "Configuration", string entryName = "Setting") : IXmlSettings
     {
         #region Private Constants
 
@@ -17,24 +17,17 @@ namespace Terms.Tools.Settings
 
         #region Private ReadOnly Variables
 
-        private readonly string m_filename;
-        private readonly string m_root;
-        private readonly string m_entryName;
+        private readonly string m_filename = filename;
+        private readonly string m_root = root;
+        private readonly string m_entryName = entryName;
 
         #endregion
-
-        public XmlSettings(string filename = "settings.xml", string root = "Configuration", string entryName = "Setting")
-        {
-            m_filename = filename;
-            m_root = root;
-            m_entryName = entryName;
-        }
 
         public XmlDocument GetDocument()
         {
             Create();
 
-            XmlDocument xmlDocument = new XmlDocument();
+            XmlDocument xmlDocument = new();
             xmlDocument.Load(m_filename);
 
             return xmlDocument;
@@ -135,7 +128,7 @@ namespace Terms.Tools.Settings
 
         public Dictionary<string, string> ReadAll(string section, XmlDocument xmlOverrideDocument = null)
         {
-            Dictionary<string, string> items = new Dictionary<string, string>();
+            Dictionary<string, string> items = new();
 
             XmlDocument xmlDocument = LoadDocument(xmlOverrideDocument);
             XmlNodeList xmlNodeList = xmlDocument.DocumentElement?.SelectNodes($"/{m_root}/{section}/{m_entryName}");
@@ -178,7 +171,7 @@ namespace Terms.Tools.Settings
             if (!File.Exists(m_filename))
             {
                 using (FileStream fileStream = File.Open(m_filename, FileMode.Create))
-                using (StreamWriter fileStreamWriter = new StreamWriter(fileStream))
+                using (StreamWriter fileStreamWriter = new(fileStream))
                 {
                     fileStreamWriter.WriteLine("<?xml version=\"1.0\" encoding=\"utf-8\"?>");
                     fileStreamWriter.WriteLine("<{0}>", m_root);

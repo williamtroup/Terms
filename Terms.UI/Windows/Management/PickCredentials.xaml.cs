@@ -60,7 +60,7 @@ namespace Terms.Windows.Management
             {
                 if (credential.Enabled)
                 {
-                    ListBoxItem listBoxItem = new ListBoxItem
+                    ListBoxItem listBoxItem = new()
                     {
                         Content = credential.Name,
                         ToolTip = credential.Notes
@@ -90,7 +90,7 @@ namespace Terms.Windows.Management
 
         private string LastUserCredentialNameUsed()
         {
-            HashSet<string> names = new HashSet<string>();
+            HashSet<string> names = new();
 
             foreach (Connection connection in m_connections)
             {
@@ -143,11 +143,11 @@ namespace Terms.Windows.Management
 
                 if (!m_pickingModeOnly)
                 {
-                    List<Connection> newConnections = new List<Connection>();
+                    List<Connection> newConnections = new();
 
                     foreach (Connection connection in m_connections)
                     {
-                        Connection newConnectionViewModel = new Connection();
+                        Connection newConnectionViewModel = new();
                         newConnectionViewModel.Update(connection);
 
                         if (!enterManually && credential != null)

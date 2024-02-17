@@ -38,7 +38,7 @@ namespace Terms.Windows.Management
 
                 if (!string.Equals(group.Name, m_selectedGroupViewModel.Name, StringComparison.CurrentCultureIgnoreCase))
                 {
-                    ListBoxItem listBoxItem = new ListBoxItem
+                    ListBoxItem listBoxItem = new()
                     {
                         Content = group.Name,
                         ToolTip = group.Notes

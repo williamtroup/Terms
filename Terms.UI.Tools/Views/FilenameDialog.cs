@@ -3,22 +3,17 @@ using System.IO;
 
 namespace Terms.UI.Tools.Views
 {
-    public class FilenameDialog
+    public class FilenameDialog(WindowGroupedConnections groupedConnections)
     {
         #region Private Read-Only Variables
 
-        private readonly WindowGroupedConnections m_windowGroupedConnections;
+        private readonly WindowGroupedConnections m_windowGroupedConnections = groupedConnections;
 
         #endregion
 
-        public FilenameDialog(WindowGroupedConnections groupedConnections)
-        {
-            m_windowGroupedConnections = groupedConnections;
-        }
-
         public void Open(string filter, string title)
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog
+            OpenFileDialog openFileDialog = new()
             {
                 Filter = filter,
                 Title = title
@@ -33,7 +28,7 @@ namespace Terms.UI.Tools.Views
 
         public bool Open(string filter, string title, ref string filename)
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog
+            OpenFileDialog openFileDialog = new()
             {
                 Filter = filter,
                 Title = title
@@ -50,7 +45,7 @@ namespace Terms.UI.Tools.Views
 
         public void Save(string filter, string title)
         {
-            SaveFileDialog saveFileDialog = new SaveFileDialog
+            SaveFileDialog saveFileDialog = new()
             {
                 Filter = filter,
                 Title = title
@@ -70,7 +65,7 @@ namespace Terms.UI.Tools.Views
 
         public bool Save(string filter, string title, ref string filename)
         {
-            SaveFileDialog saveFileDialog = new SaveFileDialog
+            SaveFileDialog saveFileDialog = new()
             {
                 Filter = filter,
                 Title = title

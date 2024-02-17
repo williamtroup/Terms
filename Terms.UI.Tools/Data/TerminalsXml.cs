@@ -19,7 +19,7 @@ namespace Terms.UI.Tools.Data
         {
             bool hasBeenRead = false;
 
-            OpenFileDialog openFileDialog = new OpenFileDialog
+            OpenFileDialog openFileDialog = new()
             {
                 Filter = filter,
                 Title = title
@@ -92,7 +92,7 @@ namespace Terms.UI.Tools.Data
                 string name = xmlNameNode.InnerText;
                 string tags = xmlTagsNode.InnerText;
 
-                Connection connection = new Connection
+                Connection connection = new()
                 {
                     Name = name,
                     Address = serverName,
@@ -116,7 +116,7 @@ namespace Terms.UI.Tools.Data
 
                     if (addUnderNewGroup)
                     {
-                        Group group = new Group
+                        Group group = new()
                         {
                             Name = tags
                         };
@@ -166,7 +166,7 @@ namespace Terms.UI.Tools.Data
 
         private static XmlDocument LoadDocument(string filename)
         {
-            XmlDocument xmlDocument = new XmlDocument();
+            XmlDocument xmlDocument = new();
             xmlDocument.Load(filename);
 
             return xmlDocument;

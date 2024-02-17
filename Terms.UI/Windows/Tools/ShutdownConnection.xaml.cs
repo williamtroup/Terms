@@ -97,7 +97,7 @@ namespace Terms.Windows.Tools
 
         private void Button_PingAddress_OnClick(object sender, RoutedEventArgs e)
         {
-            PingConnection pingConnection = new PingConnection(m_settings, m_filenameDialog, txtAddress.Text, txtName.Text)
+            PingConnection pingConnection = new(m_settings, m_filenameDialog, txtAddress.Text, txtName.Text)
             {
                 Topmost = Topmost,
                 Owner = this
@@ -144,7 +144,7 @@ namespace Terms.Windows.Tools
 
         private bool GetConfirmationFromMessage(string message)
         {
-            MessageQuestion messageBox = new MessageQuestion(m_settings, message)
+            MessageQuestion messageBox = new(m_settings, message)
             {
                 Topmost = Topmost,
                 Owner = this

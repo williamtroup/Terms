@@ -134,7 +134,7 @@ namespace Terms.Windows.Management
 
         private void SetupDefaults()
         {
-            Group blankGroupViewModel = new Group();
+            Group blankGroupViewModel = new();
 
             txtName.Text = blankGroupViewModel.Name;
             txtNotes.Text = blankGroupViewModel.Notes;

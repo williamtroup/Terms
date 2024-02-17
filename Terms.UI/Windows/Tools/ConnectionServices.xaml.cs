@@ -108,7 +108,7 @@ namespace Terms.Windows.Tools
 
         private void SetupWindowUpdateThread()
         {
-            Thread thread = new Thread(WindowUpdateThread);
+            Thread thread = new(WindowUpdateThread);
             thread.SetApartmentState(ApartmentState.STA);
             thread.Start();
         }
@@ -125,7 +125,7 @@ namespace Terms.Windows.Tools
                         {
                             try
                             {
-                                ManagementScope managementScope = new ManagementScope($"\\\\{connection.Address}\\root\\cimv2", GetConnectionOptions());
+                                ManagementScope managementScope = new($"\\\\{connection.Address}\\root\\cimv2", GetConnectionOptions());
                                 managementScope.Connect();
 
                                 HandleServices(managementScope, connection);
@@ -221,7 +221,7 @@ namespace Terms.Windows.Tools
         {
             BackgroundAction.Run(() =>
             {
-                ConnectionService connectionService = new ConnectionService
+                ConnectionService connectionService = new()
                 {
                     Name = connection.Name,
                     Address = connection.Address,
@@ -256,8 +256,8 @@ namespace Terms.Windows.Tools
 
         private static ManagementObjectCollection GetObjectCollection(ManagementScope managementScope, string query)
         {
-            ObjectQuery objectQuery = new ObjectQuery(query);
-            ManagementObjectSearcher managementObjectSearcher = new ManagementObjectSearcher(managementScope, objectQuery);
+            ObjectQuery objectQuery = new(query);
+            ManagementObjectSearcher managementObjectSearcher = new(managementScope, objectQuery);
 
             return managementObjectSearcher.Get();
         }
@@ -269,7 +269,7 @@ namespace Terms.Windows.Tools
             string command = start ? "StartService" : "StopService";
             string path = $"Win32_Service.Name='{m_serviceName}'";
 
-            using (ManagementObject managementObject = new ManagementObject(managementScope, new ManagementPath(path), null))
+            using (ManagementObject managementObject = new(managementScope, new ManagementPath(path), null))
             {
                 try
                 {
@@ -290,7 +290,7 @@ namespace Terms.Windows.Tools
 
         private void ConnectionServiceStatuses_ColumnHeader_Click(object sender, RoutedEventArgs e)
         {
-            ListViewOrdering listViewOrdering = new ListViewOrdering(lstvConnectionServiceStatuses, e);
+            ListViewOrdering listViewOrdering = new(lstvConnectionServiceStatuses, e);
             listViewOrdering.Sort();
         }
 

@@ -111,7 +111,7 @@ namespace Terms.Windows.Tools
 
         private void SetupWindowUpdateThread()
         {
-            Thread thread = new Thread(WindowUpdateThread);
+            Thread thread = new(WindowUpdateThread);
             thread.SetApartmentState(ApartmentState.STA);
             thread.Start();
         }
@@ -126,7 +126,7 @@ namespace Terms.Windows.Tools
                     {
                         if (m_updateWindowThreadRunning)
                         {
-                            using (Ping ping = new Ping())
+                            using (Ping ping = new())
                             {
                                 PingReply pingReply = ping.ToResult(connection.Address);
                                 string status = Terms.Resources.UIMessages.Unavailable;
@@ -165,7 +165,7 @@ namespace Terms.Windows.Tools
 
         private void UpdateResults(string name, string address, string status)
         {
-            ConnectionStatus connectionStatus = new ConnectionStatus
+            ConnectionStatus connectionStatus = new()
             {
                 Name = name,
                 Address = address,
@@ -237,7 +237,7 @@ namespace Terms.Windows.Tools
 
         private void Button_DeleteUnavailableConnections_OnClick(object sender, RoutedEventArgs e)
         {
-            MessageQuestion messageBox = new MessageQuestion(m_settings, Terms.Resources.UIMessages.DeleteUnavailableConnectionsConfirmation)
+            MessageQuestion messageBox = new(m_settings, Terms.Resources.UIMessages.DeleteUnavailableConnectionsConfirmation)
             {
                 Topmost = Topmost,
                 Owner = this
@@ -287,7 +287,7 @@ namespace Terms.Windows.Tools
 
         private void ConnectionStatuses_ColumnHeader_Click(object sender, RoutedEventArgs e)
         {
-            ListViewOrdering listViewOrdering = new ListViewOrdering(lstvConnectionStatuses, e);
+            ListViewOrdering listViewOrdering = new(lstvConnectionStatuses, e);
             listViewOrdering.Sort();
         }
 

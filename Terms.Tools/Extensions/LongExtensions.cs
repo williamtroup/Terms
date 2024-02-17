@@ -9,7 +9,7 @@ namespace Terms.Tools.Extensions
         {
             string formattedSize = number.ToString();
 
-            List<string> suffixes = new List<string> { "B", "KB", "MB", "GB", "TB", "PB" };
+            List<string> suffixes = new() { "B", "KB", "MB", "GB", "TB", "PB" };
 
             for (int suffixIndex = 0; suffixIndex < suffixes.Count; suffixIndex++)
             {

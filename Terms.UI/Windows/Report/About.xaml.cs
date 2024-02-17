@@ -34,7 +34,7 @@ namespace Terms.Windows.Report
 
         public static void CheckForUpdates(Window owner)
         {
-            About about = new About(viewable: false);
+            About about = new(viewable: false);
             about.StartCheckForUpdates(owner, false);
         }
 
@@ -47,7 +47,7 @@ namespace Terms.Windows.Report
 
         private void StartCheckForUpdates(Window owner, bool updateLabels = true)
         {
-            CheckForUpdates checkForUpdates = new CheckForUpdates("terms.xml");
+            CheckForUpdates checkForUpdates = new("terms.xml");
 
             checkForUpdates.UpdateFound = () =>
             {
@@ -58,7 +58,7 @@ namespace Terms.Windows.Report
 
                 string message = string.Format(Terms.Resources.UIMessages.NewUpdateAvailable, checkForUpdates.NewVersion, checkForUpdates.Released);
 
-                MessageQuestion messageBox = new MessageQuestion(m_settings, message)
+                MessageQuestion messageBox = new(m_settings, message)
                 {
                     Topmost = Topmost,
                     Owner = owner

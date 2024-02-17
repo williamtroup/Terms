@@ -83,7 +83,7 @@ namespace Terms.Windows.Management
 
         private void SetupWindowUpdateThread()
         {
-            Thread thread = new Thread(WindowUpdateThread);
+            Thread thread = new(WindowUpdateThread);
             thread.SetApartmentState(ApartmentState.STA);
             thread.Start();
         }
@@ -150,7 +150,7 @@ namespace Terms.Windows.Management
 
         private void Button_Add_Click(object sender, RoutedEventArgs e)
         {
-            AddCredential addCredential = new AddCredential(m_settings, this)
+            AddCredential addCredential = new(m_settings, this)
             {
                 Topmost = Topmost,
                 Owner = this
@@ -165,7 +165,7 @@ namespace Terms.Windows.Management
             {
                 Credential credential = (Credential) lstvUserCredentials.SelectedItem;
 
-                AddCredential addCredential = new AddCredential(m_settings, this, lstvUserCredentials.SelectedIndex, credential)
+                AddCredential addCredential = new(m_settings, this, lstvUserCredentials.SelectedIndex, credential)
                 {
                     Topmost = Topmost,
                     Owner = this
@@ -226,7 +226,7 @@ namespace Terms.Windows.Management
 
             if (m_filenameDialog.Open(Terms.Resources.Dialog.SupportedFileFilter, Terms.Resources.Dialog.OpenUserCredentialsFile, ref filename))
             {
-                Credentials credentials = new Credentials();
+                Credentials credentials = new();
                 credentials.Load(filename);
 
                 foreach (Credential credential in credentials.UserCredentials)
@@ -252,7 +252,7 @@ namespace Terms.Windows.Management
 
         private void Button_Clear_Click(object sender, RoutedEventArgs e)
         {
-            MessageQuestion messageBox = new MessageQuestion(m_settings, Terms.Resources.UIMessages.ClearUserCredentialsConfirmation)
+            MessageQuestion messageBox = new(m_settings, Terms.Resources.UIMessages.ClearUserCredentialsConfirmation)
             {
                 Topmost = Topmost,
                 Owner = this
@@ -282,7 +282,7 @@ namespace Terms.Windows.Management
 
         private void Credentials_ColumnHeader_Click(object sender, RoutedEventArgs e)
         {
-            ListViewOrdering listViewOrdering = new ListViewOrdering(lstvUserCredentials, e);
+            ListViewOrdering listViewOrdering = new(lstvUserCredentials, e);
             listViewOrdering.Sort();
         }
 

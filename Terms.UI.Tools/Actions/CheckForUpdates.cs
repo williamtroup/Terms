@@ -8,24 +8,18 @@ using Terms.Tools.Settings.Interfaces;
 
 namespace Terms.UI.Tools.Actions
 {
-    public class CheckForUpdates
+    public class CheckForUpdates(string updateXmlFilename, int waitBeforeCheckingTimeout = 1000)
     {
         #region Private Read-Only Variables
 
-        private readonly string m_updateXmlFilename;
-        private readonly int m_waitBeforeCheckingTimeout;
+        private readonly string m_updateXmlFilename = updateXmlFilename;
+        private readonly int m_waitBeforeCheckingTimeout = waitBeforeCheckingTimeout;
 
         #endregion
 
-        public CheckForUpdates(string updateXmlFilename, int waitBeforeCheckingTimeout = 1000)
-        {
-            m_updateXmlFilename = updateXmlFilename;
-            m_waitBeforeCheckingTimeout = waitBeforeCheckingTimeout;
-        }
-
         public void Start()
         {
-            Thread thread = new Thread(StartChecking);
+            Thread thread = new(StartChecking);
             thread.SetApartmentState(ApartmentState.STA);
             thread.Start();
         }
@@ -41,7 +35,7 @@ namespace Terms.UI.Tools.Actions
 
             try
             {
-                using (WebClient client = new WebClient())
+                using (WebClient client = new())
                 {
                     client.DownloadFile($"http://www.bunoon.com/updates/{m_updateXmlFilename}", m_updateXmlFilename);
                 }

@@ -70,7 +70,7 @@ namespace Terms.Windows.Management
 
             lblErrorMessage.Visibility = Visibility.Hidden;
 
-            Connection connection = new Connection();
+            Connection connection = new();
 
             if (m_selectedIndex > -1 || m_connectionViewModel != null)
             {
@@ -166,7 +166,7 @@ namespace Terms.Windows.Management
         {
             bGetHostNameFromAddress.IsEnabled = false;
 
-            Thread thread = new Thread(() =>
+            Thread thread = new(() =>
             {
                 string newName = null;
 
@@ -199,7 +199,7 @@ namespace Terms.Windows.Management
         {
             string name = string.IsNullOrEmpty(txtName.Text) ? null : txtName.Text;
 
-            PingConnection pingConnection = new PingConnection(m_settings, m_filenameDialog, txtAddress.Text, name)
+            PingConnection pingConnection = new(m_settings, m_filenameDialog, txtAddress.Text, name)
             {
                 Topmost = Topmost,
                 Owner = this
@@ -303,7 +303,7 @@ namespace Terms.Windows.Management
                 int waitMillisecondsToBeClosed = Convert.ToInt32(txtWaitMillisecondsToBeClosed.Text);
                 string lastAccessed = m_connectionViewModel != null && m_selectedIndex > -1 ? m_connectionViewModel.LastAccessed : Terms.Resources.UIMessages.Unknown;
 
-                Connection connection = new Connection
+                Connection connection = new()
                 {
                     Name = txtName.Text,
                     Address = txtAddress.Text,
@@ -338,7 +338,7 @@ namespace Terms.Windows.Management
                 }
                 else
                 {
-                    Connection blankConnectionViewModel = new Connection();
+                    Connection blankConnectionViewModel = new();
 
                     txtName.Text = blankConnectionViewModel.Name;
                     txtAddress.Text = blankConnectionViewModel.Address;

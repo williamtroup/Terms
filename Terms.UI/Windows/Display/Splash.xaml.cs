@@ -80,7 +80,7 @@ namespace Terms.Windows.Display
 
         private void ShowMainWindow()
         {
-            Main main = new Main(m_settings, m_xmlDocument, m_fadeMainWindowInOutOnStartupShutdown);
+            Main main = new(m_settings, m_xmlDocument, m_fadeMainWindowInOutOnStartupShutdown);
             main.Show();
 
             Close();

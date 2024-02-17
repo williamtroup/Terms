@@ -6,11 +6,11 @@ using System.Windows.Media;
 
 namespace Terms.UI.Tools.Controls
 {
-    public class TextFieldInput
+    public class TextFieldInput(TextBox textBox)
     {
         #region Private Read-Only Variables
 
-        private readonly TextBox m_textBox;
+        private readonly TextBox m_textBox = textBox;
 
         #endregion
 
@@ -19,11 +19,6 @@ namespace Terms.UI.Tools.Controls
         private Timer m_textChangedTimer;
 
         #endregion
-
-        public TextFieldInput(TextBox textBox)
-        {
-            m_textBox = textBox;
-        }
 
         public void Focus()
         {

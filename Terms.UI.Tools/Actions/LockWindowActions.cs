@@ -44,7 +44,7 @@ namespace Terms.UI.Tools.Actions
 
         private void Hook()
         {
-            WindowInteropHelper helper = new WindowInteropHelper(m_window);
+            WindowInteropHelper helper = new(m_window);
             HwndSource source = HwndSource.FromHwnd(helper.Handle);
 
             source?.AddHook(WndProc);

@@ -15,15 +15,15 @@ namespace Terms.Tools.Actions
             {
                 try
                 {
-                    XmlDocument xmlDocument = new XmlDocument();
+                    XmlDocument xmlDocument = new();
                     xmlDocument.Load(fileName);
 
                     string outerXml = xmlDocument.OuterXml;
 
-                    using (StringReader stringReader = new StringReader(outerXml))
+                    using (StringReader stringReader = new(outerXml))
                     {
                         Type loadType = typeof(T);
-                        XmlSerializer xmlSerializer = new XmlSerializer(loadType);
+                        XmlSerializer xmlSerializer = new(loadType);
 
                         using (XmlReader xmlReader = new XmlTextReader(stringReader))
                         {
@@ -49,10 +49,10 @@ namespace Terms.Tools.Actions
             {
                 try
                 {
-                    XmlDocument xmlDocument = new XmlDocument();
-                    XmlSerializer xmlSerializer = new XmlSerializer(serializableObject.GetType());
+                    XmlDocument xmlDocument = new();
+                    XmlSerializer xmlSerializer = new(serializableObject.GetType());
 
-                    using (MemoryStream memoryStream = new MemoryStream())
+                    using (MemoryStream memoryStream = new())
                     {
                         xmlSerializer.Serialize(memoryStream, serializableObject);
                         memoryStream.Position = 0;

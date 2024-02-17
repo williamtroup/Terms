@@ -36,7 +36,7 @@ namespace Terms.UI.Tools.Views
 
         public static WindowLayout Setup(Window window, Border windowBorder = null, bool handlePreviewKeyDown = true, List<Border> sideBorders = null)
         {
-            WindowLayout windowLayout = new WindowLayout(window, windowBorder, handlePreviewKeyDown);
+            WindowLayout windowLayout = new(window, windowBorder, handlePreviewKeyDown);
 
             if (sideBorders != null)
             {
