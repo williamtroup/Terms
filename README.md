@@ -27,6 +27,13 @@ Terms
 
 <h1>What OS's are supported?</h1>
 
-Current, only Microsoft Windows is supported.
+Currently, only Microsoft Windows is supported.
+<br>
+<br>
+
+
+<h1>Please Note</h1>
+
+I wrote this a very long time ago, so its not some of my best, or cleanest code.  I will be upgrading the project further to improve this, but please, free free to contribute :)
 <br>
 <br>
