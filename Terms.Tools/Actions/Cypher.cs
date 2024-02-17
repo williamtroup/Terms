@@ -6,12 +6,8 @@ namespace Terms.Tools.Actions
 {
     public static class Cypher
     {
-        #region Private Statics
-
         private static readonly byte[] RgbKey = { 8, 6, 1, 4, 3, 7, 2, 5 };
         private static readonly byte[] RgbIv = { 8, 6, 1, 4, 3, 7, 2, 5 };
-
-        #endregion
 
         public static string Encrypt(string text)
         {

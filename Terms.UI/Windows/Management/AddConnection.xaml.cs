@@ -21,15 +21,9 @@ namespace Terms.Windows.Management
 {
     public partial class AddConnection
     {
-        #region Private constants
-
         private const int MaximumPortAllowed = 65535;
         private const int MinimumWidthAllowed = 640;
         private const int MimimumHeightAllowed = 480;
-
-        #endregion
-
-        #region Private Read-Only Variables
 
         private readonly IXmlSettings m_settings;
         private readonly Main m_main;
@@ -37,8 +31,6 @@ namespace Terms.Windows.Management
         private readonly FilenameDialog m_filenameDialog;
         private readonly int m_selectedIndex;
         private readonly Connection m_connectionViewModel;
-
-        #endregion
 
         public AddConnection(
             IXmlSettings settings,
@@ -133,8 +125,6 @@ namespace Terms.Windows.Management
             UpdateWindow();
         }
 
-        #region Private "Window" Events
-
         private void Window_OnClosing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             if (chkCloseWindowAfterAdding.IsVisible)
@@ -142,10 +132,6 @@ namespace Terms.Windows.Management
                 m_settings.Write(Settings.AddNewConnectionWindow.AddNewConnectionOptions, nameof(Settings.AddNewConnectionWindow.CloseWindowAfterAdding), chkCloseWindowAfterAdding.IsReallyChecked().ToNumericString());
             }
         }
-
-        #endregion
-
-        #region Private "Editing" Events
 
         private void CheckBox_AskForCredentailsBeforeConnecting_CheckedChanged(object sender, RoutedEventArgs e)
         {
@@ -157,10 +143,6 @@ namespace Terms.Windows.Management
             txtUsername.IsEnabled = !chkAskForCredentailsBeforeConnecting.IsReallyChecked();
             txtPassword.IsEnabled = !chkAskForCredentailsBeforeConnecting.IsReallyChecked();
         }
-
-        #endregion
-
-        #region Private "Button" Events
 
         private void Button_GetHostNameFromAddress_OnClick(object sender, RoutedEventArgs e)
         {
@@ -379,10 +361,6 @@ namespace Terms.Windows.Management
             lblErrorMessage.Visibility = Visibility.Visible;
         }
 
-        #endregion
-
-        #region Private "Tab Display" Events
-
         private void Tab_OnChecked(object sender, RoutedEventArgs e)
         {
             if (gCredentials != null)
@@ -416,7 +394,5 @@ namespace Terms.Windows.Management
                 }
             }
         }
-
-        #endregion
     }
 }

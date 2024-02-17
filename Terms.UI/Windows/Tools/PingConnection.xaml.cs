@@ -16,22 +16,14 @@ namespace Terms.Windows.Tools
 {
     public partial class PingConnection
     {
-        #region Private Read-Only Variables
-
         private readonly IXmlSettings m_settings;
         private readonly FilenameDialog m_filenameDialog;
         private readonly string m_address;
         private readonly string m_name;
 
-        #endregion
-
-        #region Private Variables
-
         private bool m_updateWindowThreadRunning = true;
         private int m_totalTimeBetweenEachPing;
         private int m_totalTimeBetweenEachFailedPing;
-
-        #endregion
 
         public PingConnection(IXmlSettings settings, FilenameDialog filenameDialog, string address, string name = null)
         {
@@ -73,18 +65,12 @@ namespace Terms.Windows.Tools
                 : string.Format(Terms.Resources.UIMessages.PingingAddress, m_address);
         }
 
-        #region Private "Window" Events
-
         private void Window_OnClosing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             m_updateWindowThreadRunning = false;
 
             m_settings.Write(Settings.PingWindow.PingOptions, nameof(Settings.PingWindow.AutomaticallyScrollToTheBottom), chkAutomaticallyScrollToTheBottom.IsReallyChecked().ToNumericString());
         }
-
-        #endregion
-
-        #region Private Pinging Helpers
 
         private void StartPinging()
         {
@@ -171,10 +157,6 @@ namespace Terms.Windows.Tools
             bSave.IsEnabled = true;
         }
 
-        #endregion
-
-        #region Private "Button" Events
-
         private void Button_Stop_OnClick(object sender, RoutedEventArgs e)
         {
             if (m_updateWindowThreadRunning)
@@ -230,7 +212,5 @@ namespace Terms.Windows.Tools
                 StartPinging();
             }
         }
-
-        #endregion
     }
 }

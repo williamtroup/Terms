@@ -20,24 +20,16 @@ namespace Terms.Windows.Tools
 {
     public partial class ConnectionStatuses
     {
-        #region Private Read-Only Variables
-
         private readonly IXmlSettings m_settings;
         private readonly List<Connection> m_connections;
         private readonly Main m_main;
         private readonly bool m_showRemoveUnavailableConnectionsButtons;
         private readonly ListViewSettings m_listViewSettings;
 
-        #endregion
-
-        #region Private Variables
-
         private bool m_updateWindowThreadRunning = true;
         private int m_totalAvailable;
         private int m_totalUnavailable;
         private List<string> m_unavailableConnectionsNames;
-
-        #endregion
 
         public ConnectionStatuses(IXmlSettings settings, List<Connection> connections, Main main, bool showRemoveUnavailableConnectionsButtons = true)
         {
@@ -89,8 +81,6 @@ namespace Terms.Windows.Tools
             lblTitle.Text = string.Format(Terms.Resources.UIMessages.CheckingConnectionStatus, lstvConnectionStatuses.Items.Count + 1, m_connections.Count);
         }
 
-        #region Private "Window" Events
-
         private void Window_OnClosing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             m_updateWindowThreadRunning = false;
@@ -104,10 +94,6 @@ namespace Terms.Windows.Tools
 
             m_settings.SaveDocument(xmlDocument);
         }
-
-        #endregion
-
-        #region Private Pinging Helpers
 
         private void SetupWindowUpdateThread()
         {
@@ -212,10 +198,6 @@ namespace Terms.Windows.Tools
             }
         }
 
-        #endregion
-
-        #region Private "Button" Events
-
         private void Button_Stop_OnClick(object sender, RoutedEventArgs e)
         {
             if (m_updateWindowThreadRunning)
@@ -253,10 +235,6 @@ namespace Terms.Windows.Tools
             }
         }
 
-        #endregion
-
-        #region Private "CheckBox" Events
-
         private void CheckBox_OnlyShowUnavailableConnections_CheckedChanged(object sender, RoutedEventArgs e)
         {
             foreach (object statusItem in lstvConnectionStatuses.Items)
@@ -281,10 +259,6 @@ namespace Terms.Windows.Tools
             }
         }
 
-        #endregion
-
-        #region Private "ListView" Events
-
         private void ConnectionStatuses_ColumnHeader_Click(object sender, RoutedEventArgs e)
         {
             ListViewOrdering listViewOrdering = new(lstvConnectionStatuses, e);
@@ -295,7 +269,5 @@ namespace Terms.Windows.Tools
         {
             ListViewAction.FindOnKeydown(e.Key.ToString(), lstvConnectionStatuses);
         }
-
-        #endregion
     }
 }

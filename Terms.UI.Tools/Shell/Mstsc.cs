@@ -10,19 +10,11 @@ namespace Terms.UI.Tools.Shell
 {
     public static class Mstsc
     {
-        #region Public Statics
-
         public static readonly string ConnectionExecutableName = "mstsc";
         public static readonly string ConnectionExecutable = $"{ConnectionExecutableName}.exe";
 
-        #endregion
-
-        #region Private Constants
-
         private const string ExecutablePath = @"%SystemRoot%\system32\{0}";
         private const string SendKeysCredentialStorageName = "TERMSRV";
-
-        #endregion
 
         public static void Open(MstscProcesses mstscProcesses, List<Connection> connections, bool setCredentails = true)
         {
@@ -122,8 +114,6 @@ namespace Terms.UI.Tools.Shell
             }
         }
 
-        #region Private "CmdKeys" Helpers
-
         private static void SendCmdKeys(string arguments)
         {
             using (Process cmdkeyProcess = new())
@@ -138,10 +128,6 @@ namespace Terms.UI.Tools.Shell
                 cmdkeyProcess.WaitForExit();
             }
         }
-
-        #endregion
-
-        #region Private "Argument" Helpers
 
         private static List<string> GetMstscArguments(Connection connection)
         {
@@ -171,7 +157,5 @@ namespace Terms.UI.Tools.Shell
 
             return arguments;
         }
-
-        #endregion
     }
 }

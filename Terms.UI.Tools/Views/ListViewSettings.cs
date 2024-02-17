@@ -7,13 +7,9 @@ namespace Terms.UI.Tools.Views
 {
     public class ListViewSettings
     {
-        #region Private Read-Only Variables
-
         private readonly IXmlSettings m_settings;
         private readonly GridView m_gridView;
         private readonly string m_sectionName;
-
-        #endregion
 
         public ListViewSettings(IXmlSettings settings, ListView listView, string sectionName = "Columns", XmlDocument xmlDocument = null)
         {
@@ -42,8 +38,6 @@ namespace Terms.UI.Tools.Views
             }
         }
 
-        #region Private Get Helpers
-
         private void GetColumnWidths(XmlDocument xmlDocument)
         {
             int columnIndex = 0;
@@ -62,7 +56,5 @@ namespace Terms.UI.Tools.Views
                 columnIndex++;
             }
         }
-
-        #endregion
     }
 }

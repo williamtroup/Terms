@@ -9,8 +9,6 @@ namespace Terms.UI.Tools.ViewModels
     [Serializable]
     public class Credential : Observable, IDataModel
     {
-        #region Property Name
-
         private string m_name = string.Empty;
 
         public string Name
@@ -22,10 +20,6 @@ namespace Terms.UI.Tools.ViewModels
                 OnPropertyChanged(nameof(Name));
             }
         }
-
-        #endregion
-
-        #region Property Address
 
         private string m_address = string.Empty;
 
@@ -39,10 +33,6 @@ namespace Terms.UI.Tools.ViewModels
             }
         }
 
-        #endregion
-
-        #region Property Username
-
         private string m_username = string.Empty;
 
         public string Username
@@ -54,10 +44,6 @@ namespace Terms.UI.Tools.ViewModels
                 OnPropertyChanged(nameof(Username));
             }
         }
-
-        #endregion
-
-        #region Property Password
 
         private string m_password = string.Empty;
 
@@ -71,10 +57,6 @@ namespace Terms.UI.Tools.ViewModels
             }
         }
 
-        #endregion
-
-        #region Property Notes
-
         private string m_notes;
 
         public string Notes
@@ -86,10 +68,6 @@ namespace Terms.UI.Tools.ViewModels
                 OnPropertyChanged(nameof(Notes));
             }
         }
-
-        #endregion
-
-        #region Property Enabled
 
         private bool m_enabled = true;
 
@@ -106,16 +84,8 @@ namespace Terms.UI.Tools.ViewModels
             }
         }
 
-        #endregion
-
-        #region Property EnabledYesNo
-
         [XmlIgnore]
         public string EnabledYesNo => m_enabled ? "Yes" : "No";
-
-        #endregion
-
-        #region Property ForeColor
 
         [XmlIgnore]
         public SolidColorBrush ForeColor
@@ -133,10 +103,6 @@ namespace Terms.UI.Tools.ViewModels
             }
         }
 
-        #endregion
-
-        #region Property FontStyle
-
         [XmlIgnore]
         public FontStyle FontStyle
         {
@@ -152,8 +118,6 @@ namespace Terms.UI.Tools.ViewModels
                 return fontStyle;
             }
         }
-
-        #endregion
 
         public void Update(Credential model)
         {

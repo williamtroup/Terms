@@ -8,36 +8,18 @@ namespace Terms.UI.Tools.Controls
 {
     public class TextFieldInput(TextBox textBox)
     {
-        #region Private Read-Only Variables
-
         private readonly TextBox m_textBox = textBox;
 
-        #endregion
-
-        #region Private Variables
-
         private Timer m_textChangedTimer;
-
-        #endregion
 
         public void Focus()
         {
             m_textBox.Focus();
         }
 
-        #region Property Text
-
         public string Text => IsPlaceHolderSet ? "" : m_textBox.Text;
 
-        #endregion
-
-        #region Property IsFocused
-
         public bool IsFocused => m_textBox.IsFocused;
-
-        #endregion
-
-        #region Property TextChanged
 
         private Action m_textChanged;
 
@@ -51,10 +33,6 @@ namespace Terms.UI.Tools.Controls
                 m_textBox.TextChanged += TextBox_TextChanged;
             }
         }
-
-        #endregion
-
-        #region Property PlaceHolder
 
         private string m_placeHolder;
 
@@ -75,21 +53,9 @@ namespace Terms.UI.Tools.Controls
             }
         }
 
-        #endregion
-
-        #region Property PlaceHolderTimeout
-
         public int PlaceHolderTimeout { private get; set; } = 250;
 
-        #endregion
-
-        #region Property IsPlaceHolderSet
-
         private bool IsPlaceHolderSet => string.Equals(m_textBox.Text, PlaceHolder, StringComparison.CurrentCultureIgnoreCase);
-
-        #endregion
-
-        #region Private "Event" Helpers
 
         private void TextBox_GotFocus(object sender, RoutedEventArgs e)
         {
@@ -126,7 +92,5 @@ namespace Terms.UI.Tools.Controls
                 }, null, TimeSpan.FromMilliseconds(PlaceHolderTimeout), TimeSpan.FromMilliseconds(-1));
             }
         }
-
-        #endregion
     }
 }

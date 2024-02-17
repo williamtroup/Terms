@@ -15,25 +15,13 @@ namespace Terms.Windows.Tools
 {
     public partial class ShutdownConnection
     {
-        #region Private Constants
-
         private const int DefaultDelay = 0;
-
-        #endregion
-
-        #region Private Read-Only Variables
 
         private readonly List<Connection> m_connections;
         private readonly IXmlSettings m_settings;
         private readonly FilenameDialog m_filenameDialog;
 
-        #endregion
-
-        #region Private Variables
-
         private bool m_wereConnectionsShutdown;
-
-        #endregion
 
         public ShutdownConnection(List<Connection> connections, IXmlSettings settings, FilenameDialog filenameDialog)
         {
@@ -80,8 +68,6 @@ namespace Terms.Windows.Tools
             txtMessage.SelectAll();
         }
 
-        #region Private "Window" Events
-
         private void Window_OnClosing(object sender, CancelEventArgs e)
         {
             if (m_wereConnectionsShutdown)
@@ -90,10 +76,6 @@ namespace Terms.Windows.Tools
                 m_settings.Write(Settings.ShutdownConnectionsWindow.ShutdownConnectionOptions, nameof(Settings.ShutdownConnectionsWindow.LastDelay), txtDelay.Text);
             }
         }
-
-        #endregion
-
-        #region Private "Button" Events
 
         private void Button_PingAddress_OnClick(object sender, RoutedEventArgs e)
         {
@@ -138,10 +120,6 @@ namespace Terms.Windows.Tools
             lblErrorMessage.Visibility = Visibility.Visible;
         }
 
-        #endregion
-
-        #region Private "Message" Helpers
-
         private bool GetConfirmationFromMessage(string message)
         {
             MessageQuestion messageBox = new(m_settings, message)
@@ -155,7 +133,5 @@ namespace Terms.Windows.Tools
 
             return confirmed;
         }
-
-        #endregion
     }
 }

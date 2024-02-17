@@ -4,8 +4,6 @@ namespace Terms.UI.Tools.ViewModels
 {
     public class WmiProcess : Observable, IDataModel
     {
-        #region Property Id
-
         private string m_id = string.Empty;
 
         public string Id
@@ -18,10 +16,6 @@ namespace Terms.UI.Tools.ViewModels
             }
         }
 
-        #endregion
-
-        #region Property Name
-
         private string m_name = string.Empty;
 
         public string Name
@@ -33,7 +27,5 @@ namespace Terms.UI.Tools.ViewModels
                 OnPropertyChanged(nameof(Name));
             }
         }
-
-        #endregion
     }
 }

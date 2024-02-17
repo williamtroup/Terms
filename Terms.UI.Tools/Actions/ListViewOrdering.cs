@@ -7,12 +7,8 @@ namespace Terms.UI.Tools.Actions
 {
     public class ListViewOrdering(ListView listview, RoutedEventArgs routedEventArgs)
     {
-        #region Private Read-Only Variables
-
         private readonly ListView m_listview = listview;
         private readonly RoutedEventArgs m_routedEventArgs = routedEventArgs;
-
-        #endregion
 
         public void Sort()
         {
@@ -22,8 +18,6 @@ namespace Terms.UI.Tools.Actions
                 SortByColumnBindingName(binding.Path.Path);
             }
         }
-
-        #region Private "Column Sorting" Helpers
 
         private int GetColumnIndex()
         {
@@ -55,7 +49,5 @@ namespace Terms.UI.Tools.Actions
                 m_listview.Items.SortDescriptions.Add(new SortDescription(bindingName, listSortDirection));
             }
         }
-
-        #endregion
     }
 }

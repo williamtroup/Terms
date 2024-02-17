@@ -7,11 +7,7 @@ namespace Terms.UI.Tools.ViewModels.Storage
     [Serializable]
     public class Credentials
     {
-        #region Private Constants
-
         private const string DefaultFilename = "credentials.xml";
-
-        #endregion
 
         public Credentials()
         {

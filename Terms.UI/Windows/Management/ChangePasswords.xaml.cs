@@ -6,11 +6,7 @@ namespace Terms.Windows.Management
 {
     public partial class ChangePasswords
     {
-        #region Private Read-Only Variables
-
         private readonly Main m_main;
-
-        #endregion
 
         public ChangePasswords(Main main)
         {
@@ -30,8 +26,6 @@ namespace Terms.Windows.Management
             Password_OnPasswordChanged(null, null);
         }
 
-        #region Private "Change" Events
-
         private void Button_Change_OnClick(object sender, RoutedEventArgs e)
         {
             string newPassword = Cypher.Encrypt(txtPassword.Password);
@@ -45,7 +39,5 @@ namespace Terms.Windows.Management
         {
             bChange.IsEnabled = txtPassword.Password.Length > 0;
         }
-
-        #endregion
     }
 }

@@ -16,8 +16,6 @@ namespace Terms.UI.Tools.ViewModels
             Connections = new List<Connection>();
         }
 
-        #region Property Name
-
         private string m_name = string.Empty;
 
         public string Name
@@ -30,10 +28,6 @@ namespace Terms.UI.Tools.ViewModels
             }
         }
 
-        #endregion
-
-        #region Property Connections
-
         private List<Connection> m_connections;
 
         public List<Connection> Connections
@@ -45,10 +39,6 @@ namespace Terms.UI.Tools.ViewModels
                 ConnectionsChanged();
             }
         }
-
-        #endregion
-
-        #region Property Visibility
 
         private Visibility m_visibility = Visibility.Visible;
 
@@ -63,10 +53,6 @@ namespace Terms.UI.Tools.ViewModels
             }
         }
 
-        #endregion
-
-        #region Property TotalConnections
-
         [XmlIgnore]
         public int TotalConnections
         {
@@ -75,10 +61,6 @@ namespace Terms.UI.Tools.ViewModels
                 return Connections.Count(connection => connection.Visibility == Visibility.Visible);
             }
         }
-
-        #endregion
-
-        #region Property Notes
 
         private string m_notes;
 
@@ -92,10 +74,6 @@ namespace Terms.UI.Tools.ViewModels
             }
         }
 
-        #endregion
-
-        #region Property AllowMultipleConnectionManagement
-
         private bool m_allowMultipleConnectionManagement = true;
 
         public bool AllowMultipleConnectionManagement
@@ -108,10 +86,6 @@ namespace Terms.UI.Tools.ViewModels
             }
         }
 
-        #endregion
-
-        #region Property AllowAllPasswordsToBeChanged
-
         private bool m_allowAllPasswordsToBeChanged;
 
         public bool AllowAllPasswordsToBeChanged
@@ -123,10 +97,6 @@ namespace Terms.UI.Tools.ViewModels
                 OnPropertyChanged(nameof(AllowAllPasswordsToBeChanged));
             }
         }
-
-        #endregion
-
-        #region Property ForeColor
 
         [XmlIgnore]
         public SolidColorBrush ForeColor
@@ -144,10 +114,6 @@ namespace Terms.UI.Tools.ViewModels
             }
         }
 
-        #endregion
-
-        #region Property FontStyle
-
         [XmlIgnore]
         public FontStyle FontStyle
         {
@@ -163,8 +129,6 @@ namespace Terms.UI.Tools.ViewModels
                 return fontStyle;
             }
         }
-
-        #endregion
 
         public void Update(Group model)
         {

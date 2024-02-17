@@ -30,13 +30,7 @@ namespace Terms
 {
     public partial class Main
     {
-        #region Private Constants
-
         private const int UpdateWindowInterval = 50;
-
-        #endregion
-
-        #region Private Read-Only Variables
 
         private readonly IXmlSettings m_settings;
         private readonly WindowDisplay m_windowDisplay;
@@ -49,10 +43,6 @@ namespace Terms
         private readonly Credentials m_credentials;
         private readonly XmlDocument m_xmlDocument;
         private readonly MstscProcesses m_mstscProcesses;
-
-        #endregion
-
-        #region Private Variables
 
         private bool m_updateWindowThreadRunning = true;
         private Search m_searchWindow;
@@ -67,8 +57,6 @@ namespace Terms
         private bool m_showConfirmationMessageBeforeClosingMainWindow;
         private bool m_minimizeAllOtherConnectionsWhenFocusingConnection;
         private TextFieldInput m_connectionAddress;
-
-        #endregion
 
         public Main(IXmlSettings settings, XmlDocument xmlDocument, bool fadeInOut)
         {
@@ -340,8 +328,6 @@ namespace Terms
 
         public bool IsInitialised { get; set; }
 
-        #region Private Window Update Thread
-
         private void SetupWindowUpdateThread()
         {
             Thread thread = new(WindowUpdateThread);
@@ -526,10 +512,6 @@ namespace Terms
             return lstvConnections.SelectedItems.Cast<Connection>().All(connection => connection.Enabled);
         }
 
-        #endregion
-
-        #region Private "Search" Helpers
-
         public void InitializeSearch()
         {
             int wasOpenedOnExit = Convert.ToInt32(m_settings.Read(Settings.SearchWindow.SearchOptions, nameof(Settings.SearchWindow.WasOpenedOnExit), Settings.SearchWindow.WasOpenedOnExit));
@@ -573,10 +555,6 @@ namespace Terms
             m_searchWasRun = true;
         }
 
-        #endregion
-
-        #region Private "Title Bar" Events
-
         private void Title_OnMouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.ChangedButton == MouseButton.Left && e.ClickCount == 1)
@@ -607,10 +585,6 @@ namespace Terms
                 m_windowPosition.Changed = true;
             }
         }
-
-        #endregion
-
-        #region Private "Title Bar Button" Events
 
         private void Button_New_OnClick(object sender, RoutedEventArgs e)
         {
@@ -797,10 +771,6 @@ namespace Terms
             WindowState = WindowState.Minimized;
         }
 
-        #endregion
-
-        #region Private "Window" Events
-
         private void Window_OnActivated(object sender, EventArgs e)
         {
             WindowBorder.BorderBrush = WindowLayout.BorderActivatedColor;
@@ -942,10 +912,6 @@ namespace Terms
         {
             m_windowPosition.Changed = true;
         }
-
-        #endregion
-
-        #region Private "Groups Area" Events
 
         private void Groups_OnKeyDown(object sender, KeyEventArgs e)
         {
@@ -1102,10 +1068,6 @@ namespace Terms
                 ? SelectionMode.Extended 
                 : SelectionMode.Single;
         }
-
-        #endregion
-
-        #region Private "Connections Area" Events
 
         private void Connections_OnKeyDown(object sender, KeyEventArgs e)
         {
@@ -1634,10 +1596,6 @@ namespace Terms
             return newConnectionName;
         }
 
-        #endregion
-
-        #region Private "Open Connection Area" Events
-
         private void Button_OpenConnectionArea_Ping_OnClick(object sender, RoutedEventArgs e)
         {
             PingConnection pingConnection = new(m_settings, m_filenameDialog, m_connectionAddress.Text)
@@ -1726,10 +1684,6 @@ namespace Terms
                 }
             }
         }
-
-        #endregion
-
-        #region Private "Running Connections Area" Events
 
         private void Running_OnKeyDown(object sender, KeyEventArgs e)
         {
@@ -1822,10 +1776,6 @@ namespace Terms
             }
         }
 
-        #endregion
-
-        #region Private "Message" Helpers
-
         private MessageQuestionResult GetConfirmationFromMessage(string message, bool showConfirmation = true, string settingSection = null, string settingName = null)
         {
             MessageQuestionResult result = new();
@@ -1862,10 +1812,6 @@ namespace Terms
             messageWindow.ShowDialog();
         }
 
-        #endregion
-
-        #region Private "Tray Icon" Helpers
-
         private void NotifyTrayIcon_TrayMouseDoubleClick(object sender, RoutedEventArgs e)
         {
             if (WindowState == WindowState.Minimized)
@@ -1876,7 +1822,5 @@ namespace Terms
             Show();
             Activate();
         }
-
-        #endregion
     }
 }

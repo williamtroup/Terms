@@ -12,11 +12,7 @@ namespace Terms.Windows.Report
 {
     public partial class About
     {
-        #region Private Read-Only Variables
-
         private readonly IXmlSettings m_settings;
-
-        #endregion
 
         public About(IXmlSettings settings = null, bool viewable = true)
         {
@@ -85,8 +81,6 @@ namespace Terms.Windows.Report
             checkForUpdates.Start();
         }
 
-        #region Private "Label" Events
-
         private void CheckForUpdatesLink_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.ChangedButton == MouseButton.Left)
@@ -106,10 +100,6 @@ namespace Terms.Windows.Report
                 Close();
             }
         }
-
-        #endregion
-
-        #region Private "Assembly Attribute Accessors" Helpers
 
         private static string AssemblyVersion => Assembly.GetExecutingAssembly().GetName().Version.ToString();
 
@@ -144,7 +134,5 @@ namespace Terms.Windows.Report
                 return copyright;
             }
         }
-
-        #endregion
     }
 }

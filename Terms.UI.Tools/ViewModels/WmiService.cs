@@ -5,8 +5,6 @@ namespace Terms.UI.Tools.ViewModels
 {
     public class WmiService : Observable, IDataModel
     {
-        #region Property Name
-
         private string m_name = string.Empty;
 
         public string Name
@@ -18,10 +16,6 @@ namespace Terms.UI.Tools.ViewModels
                 OnPropertyChanged(nameof(Name));
             }
         }
-
-        #endregion
-
-        #region Property Description
 
         private string m_description = string.Empty;
 
@@ -35,10 +29,6 @@ namespace Terms.UI.Tools.ViewModels
             }
         }
 
-        #endregion
-
-        #region Property State
-
         private string m_state = string.Empty;
 
         public string State
@@ -51,10 +41,6 @@ namespace Terms.UI.Tools.ViewModels
             }
         }
 
-        #endregion
-
-        #region Property Visibility
-
         private Visibility m_visibility = Visibility.Visible;
 
         public Visibility Visibility
@@ -66,7 +52,5 @@ namespace Terms.UI.Tools.ViewModels
                 OnPropertyChanged(nameof(Visibility));
             }
         }
-
-        #endregion
     }
 }

@@ -6,26 +6,14 @@ namespace Terms.UI.Tools.Views
 {
     public class WindowDisplay
     {
-        #region Private Constants
-
         private const double OpacityIncriment = 0.08;
         private const double OpacityMinimum = 0.0;
 
-        #endregion
-
-        #region Private Variables
-
         private WindowMode m_windowMode = WindowMode.Load;
-
-        #endregion
-
-        #region Private Read-Only Variables
 
         private readonly Window m_window;
         private readonly double m_opacityIncriment;
         private readonly double m_maximumOpacity;
-
-        #endregion
 
         public WindowDisplay(Window window, double opacityIncriment = OpacityIncriment, double maximumOpacity = 1.0)
         {

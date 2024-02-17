@@ -13,20 +13,12 @@ namespace Terms.Windows.Management
 {
     public partial class EditCredentials
     {
-        #region Private Read-Only Variables
-
         private readonly IXmlSettings m_settings;
         private readonly Credentials m_credentials;
         private readonly FilenameDialog m_filenameDialog;
         private readonly ListViewSettings m_listViewSettings;
 
-        #endregion
-
-        #region Private Variables
-
         private bool m_updateWindowThreadRunning = true;
-
-        #endregion
 
         public EditCredentials(IXmlSettings settings, Credentials credentials, FilenameDialog filenameDialog)
         {
@@ -79,8 +71,6 @@ namespace Terms.Windows.Management
             }
         }
 
-        #region Private "Update Window Thread" Helpers
-
         private void SetupWindowUpdateThread()
         {
             Thread thread = new(WindowUpdateThread);
@@ -121,10 +111,6 @@ namespace Terms.Windows.Management
             }
         }
 
-        #endregion
-
-        #region Private "Window" Events
-
         private void Window_OnPreviewKeyDown(object sender, KeyEventArgs e)
         {
             if (Keyboard.IsKeyDown(Key.Delete) && bDelete.IsEnabled)
@@ -143,10 +129,6 @@ namespace Terms.Windows.Management
 
             m_listViewSettings.SetColumnWidths();
         }
-
-        #endregion
-
-        #region Private "Button" Events
 
         private void Button_Add_Click(object sender, RoutedEventArgs e)
         {
@@ -268,10 +250,6 @@ namespace Terms.Windows.Management
             }
         }
 
-        #endregion
-
-        #region Private "Credentials" Events
-
         private void Credentials_OnMouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             if (e.LeftButton == MouseButtonState.Pressed)
@@ -290,7 +268,5 @@ namespace Terms.Windows.Management
         {
             ListViewAction.FindOnKeydown(e.Key.ToString(), lstvUserCredentials);
         }
-
-        #endregion
     }
 }

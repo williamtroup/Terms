@@ -5,11 +5,7 @@ namespace Terms.UI.Tools.Views
 {
     public class FilenameDialog(WindowGroupedConnections groupedConnections)
     {
-        #region Private Read-Only Variables
-
         private readonly WindowGroupedConnections m_windowGroupedConnections = groupedConnections;
-
-        #endregion
 
         public void Open(string filter, string title)
         {

@@ -7,11 +7,7 @@ namespace Terms.UI.Tools.ViewModels.Storage
     [Serializable]
     public class Connections
     {
-        #region Public Constants
-
         public const string DefaultFilename = "connections.xml";
-
-        #endregion
 
         public Connections()
         {

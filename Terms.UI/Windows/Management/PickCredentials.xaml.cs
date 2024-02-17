@@ -14,15 +14,11 @@ namespace Terms.Windows.Management
 {
     public partial class PickCredentials
     {
-        #region Private Read-Only Variables
-
         private readonly MstscProcesses m_mstscProcesses;
         private readonly Credentials m_credentials;
         private readonly List<Connection> m_connections;
         private readonly bool m_rememberTheLastPickedUserCredentialsForConnections;
         private readonly bool m_pickingModeOnly;
-
-        #endregion
 
         public PickCredentials(Credentials credentials)
         {
@@ -105,8 +101,6 @@ namespace Terms.Windows.Management
 
         public Credential CredentailSelected { get; private set; }
 
-        #region Private "Pick" Events
-
         private void Credentials_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             if (e.LeftButton == MouseButtonState.Pressed)
@@ -172,7 +166,5 @@ namespace Terms.Windows.Management
                 Close();
             }
         }
-
-        #endregion
     }
 }

@@ -18,24 +18,16 @@ namespace Terms.Windows.List
 {
     public partial class Search
     {
-        #region Private Read-Only Variables
-
         private readonly IXmlSettings m_settings;
         private readonly WindowPosition m_windowPosition;
         private readonly ListView m_groups;
         private readonly ListView m_connections;
         private readonly Main m_main;
 
-        #endregion
-
-        #region Private Variables
-
         private bool m_wasSearchConducted;
         private int m_lastGroupIndex;
         private int m_lastConnectionIndex;
         private bool m_allItemsVisibielStateSet;
-
-        #endregion
 
         public Search(IXmlSettings settings, ListView groups, ListView connections, Main main)
         {
@@ -145,8 +137,6 @@ namespace Terms.Windows.List
 
         public bool DoFullSaveofSettings { get; set; }
 
-        #region Private "Window Title Bar" Events
-
         private void Title_OnMouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.ChangedButton == MouseButton.Left)
@@ -156,10 +146,6 @@ namespace Terms.Windows.List
                 m_windowPosition.Changed = true;
             }
         }
-
-        #endregion
-
-        #region Private "Window" Events
 
         private void Window_OnActivated(object sender, EventArgs e)
         {
@@ -223,10 +209,6 @@ namespace Terms.Windows.List
             }
         }
 
-        #endregion
-
-        #region Private "Button" Events
-
         private void Button_Find_Click(object sender, RoutedEventArgs e)
         {
             if (chkShowAllMatchingItems.IsReallyChecked())
@@ -277,10 +259,6 @@ namespace Terms.Windows.List
         {
             Close();
         }
-
-        #endregion
-
-        #region Private "Search" Helpers
 
         private bool RunSearch(bool searchAgain = true)
         {
@@ -559,15 +537,9 @@ namespace Terms.Windows.List
         }
 
 
-        #endregion
-
-        #region Private "CheckBox" Events
-
         private void CheckBox_ShowOptions_CheckedChanged(object sender, RoutedEventArgs e)
         {
             spSearchOptions.Visibility = chkShowOptions.IsReallyChecked() ? Visibility.Visible : Visibility.Collapsed;
         }
-
-        #endregion
     }
 }

@@ -9,11 +9,7 @@ namespace Terms.UI.Tools.Controls
 {
     public static class NumericInput
     {
-        #region Private Constants
-
         private const string ValidInput = "[^0-9]+";
-
-        #endregion
 
         public static void Create(
             TextBox textBox, 
@@ -63,8 +59,6 @@ namespace Terms.UI.Tools.Controls
             DataObject.AddPastingHandler(textBox, TextBox_OnPaste);
         }
 
-        #region Private "Event" Helpers
-
         private static void TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             e.Handled = Regex.IsMatch(e.Text, ValidInput);
@@ -110,7 +104,5 @@ namespace Terms.UI.Tools.Controls
                 }
             }
         }
-
-        #endregion
     }
 }

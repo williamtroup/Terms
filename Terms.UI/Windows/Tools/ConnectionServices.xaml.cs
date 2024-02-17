@@ -21,23 +21,15 @@ namespace Terms.Windows.Tools
 {
     public partial class ConnectionServices
     {
-        #region Private Read-Only Variables
-
         private readonly IXmlSettings m_settings;
         private readonly List<Connection> m_connections;
         private readonly Credential m_credential;
         private readonly ListViewSettings m_listViewSettings;
 
-        #endregion
-
-        #region Private Variables
-
         private bool m_updateWindowThreadRunning = true;
         private bool m_hasServiceBeenHandled;
         private ServicesMode m_servicesMode;
         private string m_serviceName;
-
-        #endregion
 
         public ConnectionServices(IXmlSettings settings, List<Connection> connections, Credential credential)
         {
@@ -82,8 +74,6 @@ namespace Terms.Windows.Tools
             }
         }
 
-        #region Private "Window" Events
-
         private void Window_OnClosing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             m_updateWindowThreadRunning = false;
@@ -101,10 +91,6 @@ namespace Terms.Windows.Tools
 
             m_settings.SaveDocument(xmlDocument);
         }
-
-        #endregion
-
-        #region Private "Running" Helpers
 
         private void SetupWindowUpdateThread()
         {
@@ -284,10 +270,6 @@ namespace Terms.Windows.Tools
             return handled;
         }
 
-        #endregion
-
-        #region Private "ListView" Events
-
         private void ConnectionServiceStatuses_ColumnHeader_Click(object sender, RoutedEventArgs e)
         {
             ListViewOrdering listViewOrdering = new(lstvConnectionServiceStatuses, e);
@@ -298,10 +280,6 @@ namespace Terms.Windows.Tools
         {
             ListViewAction.FindOnKeydown(e.Key.ToString(), lstvConnectionServiceStatuses);
         }
-
-        #endregion
-
-        #region Private "Button" Events
 
         private void Button_Start_Click(object sender, RoutedEventArgs e)
         {
@@ -344,10 +322,6 @@ namespace Terms.Windows.Tools
             bStatus.IsEnabled = true;
         }
 
-        #endregion
-
-        #region Private "CheckBox" Events
-
         private void CheckBox_OnlyShowTheUnsuccessfulServiceStatuses_CheckedChanged(object sender, RoutedEventArgs e)
         {
             foreach (object serviceStatusItem in lstvConnectionServiceStatuses.Items)
@@ -371,7 +345,5 @@ namespace Terms.Windows.Tools
                 }
             }
         }
-
-        #endregion
     }
 }

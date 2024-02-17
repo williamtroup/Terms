@@ -10,11 +10,7 @@ namespace Terms.UI.Tools.Shell
 {
     public class MstscProcesses(ListView listView) : ObservableCollection<MstscProcess>
     {
-        #region Private Read-Only Variables
-
         private readonly ListView m_listView = listView;
-
-        #endregion
 
         public bool AreProcessesRunning
         {

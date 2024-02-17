@@ -6,8 +6,6 @@ namespace Terms.UI.Tools.Shell
 {
     public class MstscProcess : Observable
     {
-        #region Property Name
-
         private string m_name = string.Empty;
 
         public string Name
@@ -19,10 +17,6 @@ namespace Terms.UI.Tools.Shell
                 OnPropertyChanged(nameof(Name));
             }
         }
-
-        #endregion
-
-        #region Property Process
 
         private Process m_process;
 
@@ -36,10 +30,6 @@ namespace Terms.UI.Tools.Shell
             }
         }
 
-        #endregion
-
-        #region Property Started
-
         private DateTime m_started;
 
         public DateTime Started
@@ -51,7 +41,5 @@ namespace Terms.UI.Tools.Shell
                 OnPropertyChanged(nameof(Started));
             }
         }
-
-        #endregion
     }
 }

@@ -11,12 +11,8 @@ namespace Terms.Windows.Management
 {
     public partial class MoveConnections
     {
-        #region Private Read-Only Variables
-
         private readonly ItemCollection m_itemCollection;
         private readonly Group m_selectedGroupViewModel;
-
-        #endregion
 
         public MoveConnections(ItemCollection itemCollection, Group selectedGroupViewModel)
         {
@@ -49,14 +45,8 @@ namespace Terms.Windows.Management
             }
         }
 
-        #region Public Properties
-
         public string SelectedGroupName { get; set; }
         public bool CopyTheConnections { get; set; }
-
-        #endregion
-
-        #region Private "Pick" Events
 
         private void Groups_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
@@ -80,7 +70,5 @@ namespace Terms.Windows.Management
 
             DialogResult = true;
         }
-
-        #endregion
     }
 }

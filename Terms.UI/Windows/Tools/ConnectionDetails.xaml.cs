@@ -20,8 +20,6 @@ namespace Terms.Windows.Tools
 {
     public partial class ConnectionDetails
     {
-        #region Private Read-Only Variables
-
         private readonly IXmlSettings m_settings;
         private readonly Connection m_connection;
         private readonly Credential m_credential;
@@ -30,16 +28,10 @@ namespace Terms.Windows.Tools
         private readonly ListViewSettings m_listViewProcessesSettings;
         private readonly ListViewSettings m_listViewDrivesSettings;
 
-        #endregion
-
-        #region Private Variables
-
         private bool m_updateWindowThreadRunning = true;
         private bool m_updateWindowDisdplayThreadRunning = true;
         private bool m_updateOnlyServices;
         private ManagementScope m_managementScope;
-
-        #endregion
 
         public ConnectionDetails(IXmlSettings settings, Connection connection, Credential credential)
         {
@@ -100,8 +92,6 @@ namespace Terms.Windows.Tools
             lblTitle.Text = string.Format(UIMessages.CollectingDetails, m_connection.Name, m_connection.Address);
         }
 
-        #region Private "Window" Events
-
         private void Window_OnClosing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             m_updateWindowThreadRunning = false;
@@ -118,10 +108,6 @@ namespace Terms.Windows.Tools
 
             m_settings.SaveDocument(xmlDocument);
         }
-
-        #endregion
-
-        #region Private "Update Window Thread" Helpers
 
         private void SetupWindowUpdateThread()
         {
@@ -163,10 +149,6 @@ namespace Terms.Windows.Tools
                 Thread.Sleep(50);
             }
         }
-
-        #endregion
-
-        #region Private "Update Window Display Thread" Helpers
 
         private void SetupWindowDisplayThread()
         {
@@ -411,10 +393,6 @@ namespace Terms.Windows.Tools
             return managementObjectSearcher.Get();
         }
 
-        #endregion
-
-        #region Private "ListView" Events
-
         private void Details_ColumnHeader_Click(object sender, RoutedEventArgs e)
         {
             ListViewOrdering listViewOrdering = new(lstvDetails, e);
@@ -459,10 +437,6 @@ namespace Terms.Windows.Tools
             ListViewAction.FindOnKeydown(e.Key.ToString(), lstvPhysicalDrives);
         }
 
-        #endregion
-
-        #region Private "Tab Display" Events
-
         private void Tab_OnChecked(object sender, RoutedEventArgs e)
         {
             UpdateTabDisplay();
@@ -496,18 +470,10 @@ namespace Terms.Windows.Tools
             }
         }
 
-        #endregion
-
-        #region Private "Button" Events
-
         private void Button_Refresh_OnClick(object sender, RoutedEventArgs e)
         {
             SetupCollectionMode();
         }
-
-        #endregion
-
-        #region Private "CheckBox" Events
 
         private void CheckBox_ShowOnlyTheStoppedServices_OnCheckedChanged(object sender, RoutedEventArgs e)
         {
@@ -532,10 +498,6 @@ namespace Terms.Windows.Tools
                 }
             }
         }
-
-        #endregion
-
-        #region Private "Services" Area
 
         private void MenuItem_StartService_OnClick(object sender, RoutedEventArgs e)
         {
@@ -604,7 +566,5 @@ namespace Terms.Windows.Tools
             thread.SetApartmentState(ApartmentState.STA);
             thread.Start();
         }
-
-        #endregion
     }
 }

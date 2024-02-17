@@ -8,12 +8,8 @@ namespace Terms.UI.Tools.Data
 {
     public class TerminalsXml
     {
-        #region Private Variables
-
         private string m_filename;
         private Group m_ungroupedEntriesGroupViewModel;
-
-        #endregion
 
         public bool Read(string filter, string title, List<Group> groups)
         {

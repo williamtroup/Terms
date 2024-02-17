@@ -4,8 +4,6 @@ namespace Terms.UI.Tools.ViewModels
 {
     public class WmiDrive : Observable, IDataModel
     {
-        #region Property Name
-
         private string m_name = string.Empty;
 
         public string Name
@@ -17,10 +15,6 @@ namespace Terms.UI.Tools.ViewModels
                 OnPropertyChanged(nameof(Name));
             }
         }
-
-        #endregion
-
-        #region Property VolumeName
 
         private string m_volumeName = string.Empty;
 
@@ -34,10 +28,6 @@ namespace Terms.UI.Tools.ViewModels
             }
         }
 
-        #endregion
-
-        #region Property Size
-
         private string m_size = string.Empty;
 
         public string Size
@@ -50,10 +40,6 @@ namespace Terms.UI.Tools.ViewModels
             }
         }
 
-        #endregion
-
-        #region Property FreeSpace
-
         private string m_freespace = string.Empty;
 
         public string FreeSpace
@@ -65,7 +51,5 @@ namespace Terms.UI.Tools.ViewModels
                 OnPropertyChanged(nameof(FreeSpace));
             }
         }
-
-        #endregion
     }
 }

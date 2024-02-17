@@ -7,8 +7,6 @@ namespace Terms.UI.Tools.ViewModels
 {
     public class ConnectionStatus : Observable, IDataModel
     {
-        #region Property Name
-
         private string m_name = string.Empty;
 
         public string Name
@@ -20,10 +18,6 @@ namespace Terms.UI.Tools.ViewModels
                 OnPropertyChanged(nameof(Name));
             }
         }
-
-        #endregion
-
-        #region Property Address
 
         private string m_address = string.Empty;
 
@@ -37,10 +31,6 @@ namespace Terms.UI.Tools.ViewModels
             }
         }
 
-        #endregion
-
-        #region Property Status
-
         private string m_status = string.Empty;
 
         public string Status
@@ -52,10 +42,6 @@ namespace Terms.UI.Tools.ViewModels
                 OnPropertyChanged(nameof(Status));
             }
         }
-
-        #endregion
-
-        #region Property DateTime
 
         private string m_dateTime = System.DateTime.Now.ToString(CultureInfo.InvariantCulture);
 
@@ -69,10 +55,6 @@ namespace Terms.UI.Tools.ViewModels
             }
         }
 
-        #endregion
-
-        #region Property Visibility
-
         private Visibility m_visibility = Visibility.Visible;
 
         public Visibility Visibility
@@ -84,10 +66,6 @@ namespace Terms.UI.Tools.ViewModels
                 OnPropertyChanged(nameof(Visibility));
             }
         }
-
-        #endregion
-
-        #region Property ForeColor
 
         private SolidColorBrush m_foreColor = Brushes.Black;
 
@@ -101,10 +79,6 @@ namespace Terms.UI.Tools.ViewModels
             }
         }
 
-        #endregion
-
-        #region Property FontStyle
-
         private FontStyle m_fontStyle = FontStyles.Normal;
 
         public FontStyle FontStyle
@@ -116,7 +90,5 @@ namespace Terms.UI.Tools.ViewModels
                 OnPropertyChanged(nameof(FontStyle));
             }
         }
-
-        #endregion
     }
 }

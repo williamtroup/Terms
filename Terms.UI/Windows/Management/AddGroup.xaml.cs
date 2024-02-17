@@ -11,14 +11,10 @@ namespace Terms.Windows.Management
 {
     public partial class AddGroup
     {
-        #region Private Read-Only Variables
-
         private readonly IXmlSettings m_settings;
         private readonly Main m_main;
         private readonly int m_selectedIndex;
         private readonly Group m_groupViewModel;
-
-        #endregion
 
         public AddGroup(IXmlSettings settings, Main main, int selectedIndex = -1, Group group = null)
         {
@@ -65,8 +61,6 @@ namespace Terms.Windows.Management
             txtName.SelectAll();
         }
 
-        #region Private "Window" Events
-
         private void Window_OnClosing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             if (chkCloseWindowAfterAdding.IsVisible)
@@ -74,10 +68,6 @@ namespace Terms.Windows.Management
                 m_settings.Write(Settings.AddNewGroupWindow.AddNewGroupOptions, nameof(Settings.AddNewGroupWindow.CloseWindowAfterAdding), chkCloseWindowAfterAdding.IsReallyChecked().ToNumericString());
             }
         }
-
-        #endregion
-
-        #region Private "Add" Events
 
         private void Button_Add_OnClick(object sender, RoutedEventArgs e)
         {
@@ -143,10 +133,6 @@ namespace Terms.Windows.Management
             chkAllowAllPasswordsToBeChanged.IsChecked = blankGroupViewModel.AllowAllPasswordsToBeChanged;
         }
 
-        #endregion
-
-        #region Private "Tab Display" Events
-
         private void Tab_OnChecked(object sender, RoutedEventArgs e)
         {
             if (gGroup != null)
@@ -168,7 +154,5 @@ namespace Terms.Windows.Management
                 }
             }
         }
-
-        #endregion
     }
 }

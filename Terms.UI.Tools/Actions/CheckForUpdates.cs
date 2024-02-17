@@ -10,12 +10,8 @@ namespace Terms.UI.Tools.Actions
 {
     public class CheckForUpdates(string updateXmlFilename, int waitBeforeCheckingTimeout = 1000)
     {
-        #region Private Read-Only Variables
-
         private readonly string m_updateXmlFilename = updateXmlFilename;
         private readonly int m_waitBeforeCheckingTimeout = waitBeforeCheckingTimeout;
-
-        #endregion
 
         public void Start()
         {
@@ -89,20 +85,12 @@ namespace Terms.UI.Tools.Actions
             }
         }
 
-        #region Public Properties
-
         public Action UpdateFound { set; get; }
         public Action UpdateNotFound { set; get; }
         public string DownloadLink { get; private set; }
         public string Released { get; private set; }
         public string NewVersion { get; private set; }
 
-        #endregion
-
-        #region Private "Assembly Attribute Accessors" Helpers
-
         private static string AssemblyVersion => Assembly.GetExecutingAssembly().GetName().Version.ToString();
-
-        #endregion
     }
 }

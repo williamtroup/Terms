@@ -7,21 +7,13 @@ namespace Terms.Tools.Settings
 {
     public class XmlSettings(string filename = "settings.xml", string root = "Configuration", string entryName = "Setting") : IXmlSettings
     {
-        #region Private Constants
-
         private const string EntryName = "Name";
         private const string EntryValue = "Value";
         private const string EntryFormat = "/{0}/{1}/{2}[@{3}=\"{4}\"]";
 
-        #endregion
-
-        #region Private ReadOnly Variables
-
         private readonly string m_filename = filename;
         private readonly string m_root = root;
         private readonly string m_entryName = entryName;
-
-        #endregion
 
         public XmlDocument GetDocument()
         {
@@ -150,8 +142,6 @@ namespace Terms.Tools.Settings
             return items;
         }
 
-        #region Private Helpers
-
         private XmlDocument LoadDocument(XmlDocument xmlOverrideDocument)
         {
             XmlDocument xmlDocument = xmlOverrideDocument ?? new XmlDocument();
@@ -180,7 +170,5 @@ namespace Terms.Tools.Settings
                 }
             }
         }
-
-        #endregion
     }
 }

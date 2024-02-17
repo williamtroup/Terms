@@ -9,13 +9,9 @@ namespace Terms.Windows.Display
 {
     public partial class MessageQuestion
     {
-        #region Private Read-Only Variables
-
         private readonly IXmlSettings m_settings;
         private readonly string m_settingSection;
         private readonly string m_settingName;
-
-        #endregion
 
         public MessageQuestion(IXmlSettings settings, string message, string settingSection = null, string settingName = null)
         {
@@ -42,8 +38,6 @@ namespace Terms.Windows.Display
 
         public MessageQuestionResult Result { get; } = new MessageQuestionResult();
 
-        #region Private "Button" Events
-
         private void Button_Yes_OnClick(object sender, RoutedEventArgs e)
         {
             DialogResult = true;
@@ -60,10 +54,6 @@ namespace Terms.Windows.Display
             Close();
         }
 
-        #endregion
-
-        #region Private "Window" Events
-
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             if (!string.IsNullOrEmpty(m_settingSection) && !string.IsNullOrEmpty(m_settingName))
@@ -72,15 +62,9 @@ namespace Terms.Windows.Display
             }
         }
 
-        #endregion
-
-        #region Private "CheckBox" Events
-
         private void CheckBox_AlwaysShowThisMessage_OnCheckedChanged(object sender, RoutedEventArgs e)
         {
             Result.SettingResult = chkAlwaysShowThisMessage.IsReallyChecked();
         }
-
-        #endregion
     }
 }

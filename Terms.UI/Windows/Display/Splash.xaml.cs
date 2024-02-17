@@ -12,19 +12,11 @@ namespace Terms.Windows.Display
 {
     public partial class Splash : IDisposable
     {
-        #region Private Read-Only Variables
-
         private readonly IXmlSettings m_settings;
         private readonly XmlDocument m_xmlDocument;
         private readonly bool m_fadeMainWindowInOutOnStartupShutdown;
 
-        #endregion
-
-        #region Private Variables
-
         private Timer m_timer;
-
-        #endregion
 
         public Splash()
         {

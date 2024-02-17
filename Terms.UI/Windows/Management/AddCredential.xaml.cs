@@ -12,14 +12,10 @@ namespace Terms.Windows.Management
 {
     public partial class AddCredential
     {
-        #region Private Read-Only Variables
-
         private readonly IXmlSettings m_settings;
         private readonly EditCredentials m_credentials;
         private readonly int m_selectedIndex;
         private readonly Credential m_userCredentialViewModel;
-
-        #endregion
 
         public AddCredential(IXmlSettings settings, EditCredentials credentials, int selectedIndex = -1, Credential credential = null)
         {
@@ -63,8 +59,6 @@ namespace Terms.Windows.Management
             txtName.SelectAll();
         }
 
-        #region Private "Window" Events
-
         private void Window_OnClosing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             if (chkCloseWindowAfterAdding.IsVisible)
@@ -72,10 +66,6 @@ namespace Terms.Windows.Management
                 m_settings.Write(Settings.AddNewUserCredentialWindow.AddNewUserCredentialOptions, nameof(Settings.AddNewUserCredentialWindow.CloseWindowAfterAdding), chkCloseWindowAfterAdding.IsReallyChecked().ToNumericString());
             }
         }
-
-        #endregion
-
-        #region Private "Add" Events
 
         private void Button_Add_OnClick(object sender, RoutedEventArgs e)
         {
@@ -152,10 +142,6 @@ namespace Terms.Windows.Management
             lblErrorMessage.Visibility = Visibility.Visible;
         }
 
-        #endregion
-
-        #region Private "Tab Display" Events
-
         private void Tab_OnChecked(object sender, RoutedEventArgs e)
         {
             if (gCredentials != null)
@@ -177,7 +163,5 @@ namespace Terms.Windows.Management
                 }
             }
         }
-
-        #endregion
     }
 }

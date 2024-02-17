@@ -10,20 +10,12 @@ namespace Terms.UI.Tools.Views
 {
     public class WindowLayout
     {
-        #region Private Read-Only Variables
-
         private readonly Window m_window;
         private readonly Border m_windowBorder;
         private readonly bool m_handlePreviewKeyDown;
 
-        #endregion
-
-        #region Public Constants
-
         public static readonly Brush BorderActivatedColor = Brushes.Gray;
         public static readonly Brush BorderDeactivatedColor = Brushes.DarkGray;
-
-        #endregion
 
         public WindowLayout(Window window, Border windowBorder = null, bool handlePreviewKeyDown = true)
         {
@@ -62,8 +54,6 @@ namespace Terms.UI.Tools.Views
 
         public List<Border> SideBorders { private get; set; } = new List<Border>();
 
-        #region Private Events
-
         private void Window_OnActivated(object sender, EventArgs e)
         {
             m_windowBorder.BorderBrush = BorderActivatedColor;
@@ -91,7 +81,5 @@ namespace Terms.UI.Tools.Views
                 e.Handled = true;
             }
         }
-
-        #endregion
     }
 }

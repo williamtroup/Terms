@@ -17,28 +17,16 @@ namespace Terms.Windows.Management
 {
     public partial class Options
     {
-        #region Private Constants
-
         private const string AssemblyProductName = "Terms";
         private const int MinimumPingSettingAllowed = 500;
         private const int MaximumPingSettingAllowed = 60000;
 
-        #endregion
-
-        #region Private Variables
-
         private bool m_clearLastAccessHistoryForAllConnections;
         private bool m_clearPortsForAllConnections;
-
-        #endregion
-
-        #region Private Read-Only Variables
 
         private readonly IXmlSettings m_settings;
         private readonly Main m_main;
         private readonly RegistryKey m_startUpRegistryKey;
-
-        #endregion
 
         public Options(IXmlSettings settings, Main main)
         {
@@ -121,8 +109,6 @@ namespace Terms.Windows.Management
 
             UpdateTabDisplay();
         }
-
-        #region Private "Button" Events
 
         private void Button_Apply_Click(object sender, RoutedEventArgs e)
         {
@@ -207,10 +193,6 @@ namespace Terms.Windows.Management
             return checkbox.IsReallyChecked().ToNumericString();
         }
 
-        #endregion
-
-        #region Private "Tab Display" Events
-
         private void Tab_OnChecked(object sender, RoutedEventArgs e)
         {
             UpdateTabDisplay();
@@ -250,7 +232,5 @@ namespace Terms.Windows.Management
                 }
             }
         }
-
-        #endregion
     }
 }

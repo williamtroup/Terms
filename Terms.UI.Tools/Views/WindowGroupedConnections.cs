@@ -8,12 +8,8 @@ namespace Terms.UI.Tools.Views
 {
     public class WindowGroupedConnections(ListView groupList, ListView connectionsList)
     {
-        #region Private Read-Only Variables
-
         private readonly ListView m_groupList = groupList;
         private readonly ListView m_connectionsList = connectionsList;
-
-        #endregion
 
         public void Load(string filename = Connections.DefaultFilename, bool clearItems = true, Action afterLoadingAction = null)
         {

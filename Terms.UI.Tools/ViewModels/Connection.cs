@@ -9,14 +9,8 @@ namespace Terms.UI.Tools.ViewModels
     [Serializable]
     public class Connection : Observable, IDataModel
     {
-        #region Private Constants
-
         private const int DefaultPort = 3389;
         private const string DefaultLastAccessed = "Unknown";
-
-        #endregion
-
-        #region Property Name
 
         private string m_name = string.Empty;
 
@@ -30,10 +24,6 @@ namespace Terms.UI.Tools.ViewModels
             } 
         }
 
-        #endregion
-
-        #region Property Address
-
         private string m_address = string.Empty;
 
         public string Address
@@ -45,10 +35,6 @@ namespace Terms.UI.Tools.ViewModels
                 OnPropertyChanged(nameof(Address));
             }
         }
-
-        #endregion
-
-        #region Property Port
 
         private int m_port = DefaultPort;
 
@@ -62,10 +48,6 @@ namespace Terms.UI.Tools.ViewModels
             }
         }
 
-        #endregion
-
-        #region Property Username
-
         private string m_username = string.Empty;
 
         public string Username
@@ -78,10 +60,6 @@ namespace Terms.UI.Tools.ViewModels
             }
         }
 
-        #endregion
-
-        #region Property Password
-
         private string m_password = string.Empty;
 
         public string Password
@@ -93,10 +71,6 @@ namespace Terms.UI.Tools.ViewModels
                 OnPropertyChanged(nameof(Password));
             }
         }
-
-        #endregion
-
-        #region Property AskForCredentials
 
         private bool m_askForCredentials;
 
@@ -111,16 +85,8 @@ namespace Terms.UI.Tools.ViewModels
             }
         }
 
-        #endregion
-
-        #region Property AskForCredentialsYesNo
-
         [XmlIgnore]
         public string AskForCredentialsYesNo => m_askForCredentials ? "Yes" : "No";
-
-        #endregion
-
-        #region Property StartUsingLastKnownPosition
 
         private bool m_startUsingLastPosition;
 
@@ -134,10 +100,6 @@ namespace Terms.UI.Tools.ViewModels
             }
         }
 
-        #endregion
-
-        #region Property StartInFullScreenMode
-
         private bool m_startInFullScreenMode = true;
 
         public bool StartInFullScreenMode
@@ -149,10 +111,6 @@ namespace Terms.UI.Tools.ViewModels
                 OnPropertyChanged(nameof(StartInFullScreenMode));
             }
         }
-
-        #endregion
-
-        #region Property SpanAcrossMultipleMonitors
 
         private bool m_spanAcrossMultipleMonitors;
 
@@ -166,10 +124,6 @@ namespace Terms.UI.Tools.ViewModels
             }
         }
 
-        #endregion
-
-        #region Property LoginUsingAdminMode
-
         private bool m_loginUsingAdminMode;
 
         public bool LoginUsingAdminMode
@@ -181,10 +135,6 @@ namespace Terms.UI.Tools.ViewModels
                 OnPropertyChanged(nameof(LoginUsingAdminMode));
             }
         }
-
-        #endregion
-
-        #region Property UseSpecificWidthAndHeight
 
         private bool m_useSpecificWidthAndHeight;
 
@@ -198,10 +148,6 @@ namespace Terms.UI.Tools.ViewModels
             }
         }
 
-        #endregion
-
-        #region Property Width
-
         private int m_width = 700;
 
         public int Width
@@ -214,10 +160,6 @@ namespace Terms.UI.Tools.ViewModels
             }
         }
 
-        #endregion
-
-        #region Property Height
-
         private int m_height = 700;
 
         public int Height
@@ -229,10 +171,6 @@ namespace Terms.UI.Tools.ViewModels
                 OnPropertyChanged(nameof(Height));
             }
         }
-
-        #endregion
-
-        #region Property Visibility
 
         private Visibility m_visibility = Visibility.Visible;
 
@@ -247,10 +185,6 @@ namespace Terms.UI.Tools.ViewModels
             }
         }
 
-        #endregion
-
-        #region Property LastAccessed
-
         private string m_lastAccessed;
 
         public string LastAccessed
@@ -262,10 +196,6 @@ namespace Terms.UI.Tools.ViewModels
                 OnPropertyChanged(nameof(LastAccessed));
             }
         }
-
-        #endregion
-
-        #region Property Notes
 
         private string m_notes;
 
@@ -279,10 +209,6 @@ namespace Terms.UI.Tools.ViewModels
             }
         }
 
-        #endregion
-
-        #region Property BeforeOpeningProgram
-
         private string m_beforeOpeningProgram = string.Empty;
 
         public string BeforeOpeningProgram
@@ -294,10 +220,6 @@ namespace Terms.UI.Tools.ViewModels
                 OnPropertyChanged(nameof(BeforeOpeningProgram));
             }
         }
-
-        #endregion
-
-        #region Property BeforeOpeningArguments
 
         private string m_beforeOpeningArguments = string.Empty;
 
@@ -311,10 +233,6 @@ namespace Terms.UI.Tools.ViewModels
             }
         }
 
-        #endregion
-
-        #region Property BeforeOpeningWorkingDirectory
-
         private string m_beforeOpeningWorkingDirectory = string.Empty;
 
         public string BeforeOpeningWorkingDirectory
@@ -326,10 +244,6 @@ namespace Terms.UI.Tools.ViewModels
                 OnPropertyChanged(nameof(BeforeOpeningWorkingDirectory));
             }
         }
-
-        #endregion
-
-        #region Property BeforeOpeningWaitForProgramToBeClosed
 
         private bool m_beforeOpeningWaitForProgramToBeClosed;
 
@@ -343,10 +257,6 @@ namespace Terms.UI.Tools.ViewModels
             }
         }
 
-        #endregion
-
-        #region Property BeforeOpeningAlwaysRunProgramBeforeConnecting
-
         private bool m_beforeOpeningAlwaysRunProgramBeforeConnecting;
 
         public bool BeforeOpeningAlwaysRunProgramBeforeConnecting
@@ -358,10 +268,6 @@ namespace Terms.UI.Tools.ViewModels
                 OnPropertyChanged(nameof(BeforeOpeningAlwaysRunProgramBeforeConnecting));
             }
         }
-
-        #endregion
-
-        #region Property BeforeOpeningWaitSecondsForProgramToBeClosed
 
         private int m_beforeOpeningWaitMillisecondsForProgramToBeClosed;
 
@@ -375,10 +281,6 @@ namespace Terms.UI.Tools.ViewModels
             }
         }
 
-        #endregion
-
-        #region Property LastUserCredentialNameUsed
-
         private string m_lastUserCredentialNameUsed = string.Empty;
 
         public string LastUserCredentialNameUsed
@@ -391,10 +293,6 @@ namespace Terms.UI.Tools.ViewModels
             }
         }
 
-        #endregion
-
-        #region Property DeleteCachedCredentialsAfterConnecting
-
         private bool m_deleteCachedCredentialsAfterConnecting;
 
         public bool DeleteCachedCredentialsAfterConnecting
@@ -406,10 +304,6 @@ namespace Terms.UI.Tools.ViewModels
                 OnPropertyChanged(nameof(DeleteCachedCredentialsAfterConnecting));
             }
         }
-
-        #endregion
-
-        #region Property Enabled
 
         private bool m_enabled = true;
 
@@ -424,10 +318,6 @@ namespace Terms.UI.Tools.ViewModels
                 OnPropertyChanged(nameof(FontStyle));
             }
         }
-
-        #endregion
-
-        #region Property ForeColor
 
         [XmlIgnore]
         public SolidColorBrush ForeColor
@@ -445,10 +335,6 @@ namespace Terms.UI.Tools.ViewModels
             }
         }
 
-        #endregion
-
-        #region Property FontStyle
-
         [XmlIgnore]
         public FontStyle FontStyle
         {
@@ -464,8 +350,6 @@ namespace Terms.UI.Tools.ViewModels
                 return fontStyle;
             }
         }
-
-        #endregion
 
         public void Update(Connection model)
         {
